@@ -60,5 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MobileTasks.Server.Database.publish.xml" />
+    <None Include="MobileTasks.Server.Database.local.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Task.sql" />
   </ItemGroup>
 </Project>
