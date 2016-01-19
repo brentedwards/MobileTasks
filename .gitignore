@@ -234,3 +234,6 @@ _Pvt_Extensions
 
 # SQL Server Publish Files
 Source/Server/MobileTasks.Server.Database/*.publish.xml
+
+# Private Config files
+*.private
