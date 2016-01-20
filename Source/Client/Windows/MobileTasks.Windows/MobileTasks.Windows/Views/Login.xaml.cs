@@ -17,9 +17,13 @@ namespace MobileTasks.Windows.Views
         {
             this.InitializeComponent();
             this.ViewModel = new LoginViewModel();
-            this.DataContext = this.ViewModel;
 
 			this.WireUpViewModel(this.ViewModel);
+
+			this.Loaded += delegate
+			{
+				this.ViewModel.CheckPreviousAuthentication();
+			};
         }
 
         private async void Facebook_Click(object sender, RoutedEventArgs e)

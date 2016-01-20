@@ -10,6 +10,8 @@ namespace MobileTasks.Windows.Views
 	{
 		protected void WireUpViewModel(ViewModelBase viewModel)
 		{
+			this.DataContext = viewModel;
+
 			viewModel.OnShowErrorAsync = this.ShowErrorAsync;
 			viewModel.OnNavigate = this.Navigate;
 		}
@@ -23,6 +25,15 @@ namespace MobileTasks.Windows.Views
 
 		private void Navigate(string pageName)
 		{
+			Type pageType = null;
+			switch (pageName)
+			{
+				case "Tasks":
+					pageType = typeof(Tasks);
+					break;
+			}
+
+			this.Frame.Navigate(pageType);
 		}
 	}
 }
