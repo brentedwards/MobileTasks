@@ -237,3 +237,6 @@ Source/Server/MobileTasks.Server.Database/*.publish.xml
 
 # Private Config files
 *.private
+
+# Private Code files
+*.Private.cs

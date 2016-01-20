@@ -1,0 +1,18 @@
+﻿<local:MobileTasksPage
+    x:Class="MobileTasks.Windows.Views.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MobileTasks.Windows.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Facebook" Click="Facebook_Click" />
+            <Button Content="Microsoft" Click="Microsoft_Click" Margin="0,10,0,0" />
+            <Button Content="Twitter" Click="Twitter_Click" Margin="0,10,0,0" />
+            <Button Content="Google" Click="Google_Click" Margin="0,10,0,0" />
+        </StackPanel>
+    </Grid>
+</local:MobileTasksPage>
