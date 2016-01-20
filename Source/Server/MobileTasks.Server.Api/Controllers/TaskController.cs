@@ -11,7 +11,7 @@ namespace MobileTasks.Server.Api.Controllers
 {
     [Authorize]
     [MobileAppController]
-    public class TaskControllerController : ApiController
+    public class TaskController : ApiController
     {
         public string Sid
         {
@@ -22,7 +22,7 @@ namespace MobileTasks.Server.Api.Controllers
             }
         }
 
-        // GET api/TaskController
+        // GET api/Task
         public IEnumerable<Task> Get()
         {
             var context = new MobileTasksEntities();
