@@ -3,11 +3,24 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MobileTasks.Windows.Views"
+	xmlns:conv="using:MobileTasks.Windows.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+	<local:MobileTasksPage.Resources>
+		<SolidColorBrush x:Key="CompletedBrush" Color="#FFADADAD" />
+		<SolidColorBrush x:Key="UncompletedBrush" Color="Black" />
+		<conv:BoolToBrushConverter x:Key="BoolToBrushConverter" TrueBrush="{StaticResource CompletedBrush}" FalseBrush="{StaticResource UncompletedBrush}" />
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<TextBlock Text="Tasks page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<DataTemplate x:Key="TaskItemTemplate">
+			<Grid>
+				<CheckBox x:Name="checkBox" Foreground="{Binding IsCompleted, Converter={StaticResource BoolToBrushConverter}}" Content="{Binding Description}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" />
+			</Grid>
+		</DataTemplate>
+	</local:MobileTasksPage.Resources>
+
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<ListView ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}" />
+		<ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Top" />
 	</Grid>
 </local:MobileTasksPage>

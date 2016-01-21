@@ -9,13 +9,23 @@ namespace MobileTasks.Windows.ViewModels
 {
 	public class LoginViewModel : ViewModelBase
     {
+		private const string LastUsedProvider = "LastUsedProvider";
+		private const string Tasks = "Tasks";
+
+		public override Task OnLoaded()
+		{
+			this.CheckPreviousAuthentication();
+
+			return base.OnLoaded();
+		}
+
 		public void CheckPreviousAuthentication()
 		{
 			PasswordCredential credential = null;
 
 			var settings = ApplicationData.Current.RoamingSettings;
 
-			var lastUsedProvider = settings.Values["LastUsedProvider"] as string;
+			var lastUsedProvider = settings.Values[LastUsedProvider] as string;
 			if (lastUsedProvider != null)
 			{
 				try
@@ -37,7 +47,7 @@ namespace MobileTasks.Windows.ViewModels
 				credential.RetrievePassword();
 				this.MobileService.User.MobileServiceAuthenticationToken = credential.Password;
 
-				this.OnNavigate?.Invoke("Tasks");
+				this.OnNavigate?.Invoke(Tasks);
 			}
 		}
 
@@ -54,9 +64,9 @@ namespace MobileTasks.Windows.ViewModels
 				credential = new PasswordCredential(provider.ToString(), this.MobileService.User.UserId, this.MobileService.User.MobileServiceAuthenticationToken);
 				passwordVault.Add(credential);
 
-				settings.Values["LastUsedProvider"] = provider.ToString();
+				settings.Values[LastUsedProvider] = provider.ToString();
 
-				this.OnNavigate?.Invoke("Tasks");
+				this.OnNavigate?.Invoke(Tasks);
 			}
 			catch (InvalidOperationException)
 			{

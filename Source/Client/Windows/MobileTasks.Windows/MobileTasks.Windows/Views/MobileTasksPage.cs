@@ -12,6 +12,10 @@ namespace MobileTasks.Windows.Views
 		{
 			this.DataContext = viewModel;
 
+			this.Loaded += async delegate
+			{
+				await viewModel.OnLoaded();
+			};
 			viewModel.OnShowErrorAsync = this.ShowErrorAsync;
 			viewModel.OnNavigate = this.Navigate;
 		}
