@@ -43,36 +43,35 @@ namespace MobileTasks.Server.Api.Controllers
             return task;
         }
 
-        public bool Post([FromBody]Task task)
+        public Task Post([FromBody]Task task)
         {
-            var existed = false;
             var context = new MobileTasksEntities();
 
-            var existingTask = context.Tasks.SingleOrDefault(_ => _.Id == task.Id);
-            if (existingTask != null)
+            var resultTask = context.Tasks.SingleOrDefault(_ => _.Id == task.Id);
+            if (resultTask != null)
             {
-                if (existingTask.Sid != this.Sid)
+                if (resultTask.Sid != this.Sid)
                 {
                     throw new HttpResponseException(HttpStatusCode.Unauthorized);
                 }
 
-                existingTask.Description = task.Description = task.Description;
-                existingTask.DateDue = task.DateDue;
-                existingTask.DateCompleted = task.DateCompleted;
-                existingTask.IsCompleted = task.IsCompleted;
-
-                existed = true;
+                resultTask.Description = task.Description = task.Description;
+                resultTask.DateDue = task.DateDue;
+                resultTask.DateCompleted = task.DateCompleted;
+                resultTask.IsCompleted = task.IsCompleted;
             }
             else
             {
-                task.Sid = this.Sid;
-                task.DateCreated = DateTime.UtcNow;
+				resultTask = task;
 
-                context.Tasks.Add(task);
+				resultTask.Sid = this.Sid;
+				resultTask.DateCreated = DateTime.UtcNow;
+
+                context.Tasks.Add(resultTask);
             }
 
             context.SaveChanges();
-            return existed;
+            return resultTask;
         }
     }
 }

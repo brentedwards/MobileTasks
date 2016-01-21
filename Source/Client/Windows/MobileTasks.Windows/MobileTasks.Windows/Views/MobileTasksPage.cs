@@ -35,6 +35,16 @@ namespace MobileTasks.Windows.Views
 				case "Tasks":
 					pageType = typeof(Tasks);
 					break;
+
+				case "Login":
+					if (this.Frame.CanGoBack)
+					{
+						for (var idx = 1; idx < this.Frame.BackStack.Count - 1; idx++)
+						{
+							this.Frame.BackStack.RemoveAt(idx);
+						}
+					}
+					return;
 			}
 
 			this.Frame.Navigate(pageType);

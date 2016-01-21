@@ -1,5 +1,9 @@
-﻿using MobileTasks.Windows.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using MobileTasks.Windows.Models;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace MobileTasks.Windows.ViewModels
@@ -16,13 +20,37 @@ namespace MobileTasks.Windows.ViewModels
 		public override async Task OnLoaded()
 		{
 			this.IsBusy = true;
-			var tasks = await this.MobileService.GetTasks();
 
-			foreach (var task in tasks)
+			try
 			{
-				this.Tasks.Add(task);
+				var tasks = await this.MobileService.GetTasks();
+
+				foreach (var task in tasks)
+				{
+					this.Tasks.Add(task);
+					task.PropertyChanged += this.OnTaskPropertyChanged;
+				}
+				this.IsBusy = false;
 			}
-			this.IsBusy = false;
+			catch (MobileServiceInvalidOperationException ex)
+			{
+				if (ex.Response.StatusCode == HttpStatusCode.Unauthorized)
+				{
+					await this.Logout();
+				}
+			}
+		}
+
+		private async void OnTaskPropertyChanged(object sender, PropertyChangedEventArgs args)
+		{
+			if (args.PropertyName == "IsCompleted")
+			{
+				var task = (MobileTask)sender;
+
+				this.IsBusy = true;
+				await this.MobileService.UpsertTask(task);
+				this.IsBusy = false;
+			}
 		}
 	}
 }

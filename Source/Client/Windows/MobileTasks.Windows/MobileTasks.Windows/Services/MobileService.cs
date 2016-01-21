@@ -42,5 +42,15 @@ namespace MobileTasks.Windows.Services
 		{
 			return await this.Client.InvokeApiAsync<IEnumerable<MobileTask>>(TaskAction, HttpMethod.Get, null);
 		}
+
+		public async Task<MobileTask> UpsertTask(MobileTask task)
+		{
+			return await this.Client.InvokeApiAsync<MobileTask, MobileTask>("task", task);
+		}
+
+		public async Task LogoutAsync()
+		{
+			await this.Client.LogoutAsync();
+		}
 	}
 }

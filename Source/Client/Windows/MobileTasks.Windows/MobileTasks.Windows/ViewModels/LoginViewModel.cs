@@ -9,7 +9,6 @@ namespace MobileTasks.Windows.ViewModels
 {
 	public class LoginViewModel : ViewModelBase
     {
-		private const string LastUsedProvider = "LastUsedProvider";
 		private const string Tasks = "Tasks";
 
 		public override Task OnLoaded()
