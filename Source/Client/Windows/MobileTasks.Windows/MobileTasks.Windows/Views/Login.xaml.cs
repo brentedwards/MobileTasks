@@ -11,34 +11,31 @@ namespace MobileTasks.Windows.Views
 	/// </summary>
 	public sealed partial class Login : MobileTasksPage
     {
-        private LoginViewModel ViewModel { get; set; }
-
         public Login()
         {
             this.InitializeComponent();
-            this.ViewModel = new LoginViewModel();
 
-			this.WireUpViewModel(this.ViewModel);
+			this.WireUpViewModel(new LoginViewModel());
         }
 
         private async void Facebook_Click(object sender, RoutedEventArgs e)
         {
-            await this.ViewModel.AuthenticateAsync(MobileServiceAuthenticationProvider.Facebook);
+            await ((LoginViewModel)this.ViewModel).AuthenticateAsync(MobileServiceAuthenticationProvider.Facebook);
         }
 
         private async void Microsoft_Click(object sender, RoutedEventArgs e)
         {
-            await this.ViewModel.AuthenticateAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+            await ((LoginViewModel)this.ViewModel).AuthenticateAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
         }
 
         private async void Twitter_Click(object sender, RoutedEventArgs e)
         {
-            await this.ViewModel.AuthenticateAsync(MobileServiceAuthenticationProvider.Twitter);
+            await ((LoginViewModel)this.ViewModel).AuthenticateAsync(MobileServiceAuthenticationProvider.Twitter);
         }
 
         private async void Google_Click(object sender, RoutedEventArgs e)
         {
-            await this.ViewModel.AuthenticateAsync(MobileServiceAuthenticationProvider.Google);
+            await ((LoginViewModel)this.ViewModel).AuthenticateAsync(MobileServiceAuthenticationProvider.Google);
         }
     }
 }

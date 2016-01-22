@@ -19,6 +19,8 @@ namespace MobileTasks.Windows.ViewModels
 		
 		public Action<string> OnNavigate { get; set; }
 
+		public Action OnGoBack { get; set; }
+
 		private bool isBusy;
 		public bool IsBusy
 		{
@@ -30,7 +32,7 @@ namespace MobileTasks.Windows.ViewModels
 			}
 		}
 
-		protected async Task Logout()
+		public async Task Logout()
 		{
 			ApplicationData.Current.RoamingSettings.Values.Remove(LastUsedProvider);
 			await this.MobileService.LogoutAsync();

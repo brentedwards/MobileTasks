@@ -18,6 +18,16 @@
 			</Grid>
 		</DataTemplate>
 	</local:MobileTasksPage.Resources>
+	<local:MobileTasksPage.BottomAppBar>
+		<CommandBar>
+			<CommandBar.Content>
+				<Grid/>
+			</CommandBar.Content>
+			<!--<AppBarButton Icon="Accept" Label="appbarbutton"/>
+			<AppBarButton Icon="Cancel" Label="appbarbutton"/>-->
+			<AppBarButton Icon="Add" Label="Add Task" Click="AddButton_Click"/>
+		</CommandBar>
+	</local:MobileTasksPage.BottomAppBar>
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<ListView ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}" />

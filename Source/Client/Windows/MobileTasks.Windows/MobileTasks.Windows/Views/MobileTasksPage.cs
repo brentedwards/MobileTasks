@@ -1,6 +1,7 @@
 ﻿using MobileTasks.Windows.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
@@ -8,8 +9,12 @@ namespace MobileTasks.Windows.Views
 {
 	public class MobileTasksPage : Page
 	{
+		protected bool LogOutOnGoBack { get; set; }
+		protected ViewModelBase ViewModel { get; set; }
+
 		protected void WireUpViewModel(ViewModelBase viewModel)
 		{
+			this.ViewModel = viewModel;
 			this.DataContext = viewModel;
 
 			this.Loaded += async delegate
@@ -18,6 +23,7 @@ namespace MobileTasks.Windows.Views
 			};
 			viewModel.OnShowErrorAsync = this.ShowErrorAsync;
 			viewModel.OnNavigate = this.Navigate;
+			viewModel.OnGoBack = this.GoBack;
 		}
 
 		private async Task ShowErrorAsync(string message)
@@ -27,13 +33,22 @@ namespace MobileTasks.Windows.Views
 			await dialog.ShowAsync();
 		}
 
-		private void Navigate(string pageName)
+		protected void GoBack()
+		{
+			this.Frame.GoBack();
+		}
+
+		protected void Navigate(string pageName)
 		{
 			Type pageType = null;
 			switch (pageName)
 			{
 				case "Tasks":
 					pageType = typeof(Tasks);
+					break;
+
+				case "TaskDetail":
+					pageType = typeof(TaskDetail);
 					break;
 
 				case "Login":
