@@ -1,10 +1,13 @@
 package com.magenic.mobiletasks.mobiletasksandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -12,10 +15,12 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.magenic.mobiletasks.mobiletasksandroid.R;
+import com.magenic.mobiletasks.mobiletasksandroid.adapters.TaskAdapter;
 import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
 import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TasksActivity extends AppCompatActivity {
@@ -26,6 +31,7 @@ public class TasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks);
+        final AppCompatActivity context = this;
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -33,10 +39,16 @@ public class TasksActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(context, TaskDetailActivity.class));
             }
         });
+
+        RecyclerView lstTasks = (RecyclerView)this.findViewById(R.id.lstTasks);
+        lstTasks.setLayoutManager(new LinearLayoutManager(this));
+
+        INetworkService networkSerice = new NetworkService();
+        networkSerice.setContext(this);
+        lstTasks.setAdapter(new TaskAdapter(this, new ArrayList<MobileTask>(), networkSerice));
     }
 
     @Override
@@ -51,7 +63,13 @@ public class TasksActivity extends AppCompatActivity {
             Futures.addCallback(tasksFuture, new FutureCallback<List<MobileTask>>() {
                 @Override
                 public void onSuccess(List<MobileTask> returnedTasks) {
-                    tasks = returnedTasks;
+                    final List<MobileTask> tasks = returnedTasks;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            resetList(tasks);
+                        }
+                    });
                 }
 
                 @Override
@@ -64,6 +82,14 @@ public class TasksActivity extends AppCompatActivity {
                     dlgAlert.create().show();
                 }
             });
+        }
+    }
+
+    private void resetList(List<MobileTask> tasks) {
+        RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.lstTasks);
+        if (lstRegistrations != null) {
+            ((TaskAdapter)lstRegistrations.getAdapter()).setTasks(tasks);
+            ((TaskAdapter) lstRegistrations.getAdapter()).notifyDataSetChanged();
         }
     }
 }

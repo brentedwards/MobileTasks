@@ -15,4 +15,5 @@ public interface INetworkService {
     MobileServiceClient getClient();
     void setContext(Activity context);
     ListenableFuture<List<MobileTask>> getTasks();
+    ListenableFuture<MobileTask> upsertTask(MobileTask task);
 }

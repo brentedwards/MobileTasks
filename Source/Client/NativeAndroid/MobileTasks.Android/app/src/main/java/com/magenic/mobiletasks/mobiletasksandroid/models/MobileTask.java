@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by kevinf on 3/22/2016.
  */
 public class MobileTask {
-    @SerializedName("Id")
+    @SerializedName("id")
     public int id;
 
     public int getId() {
@@ -19,7 +19,7 @@ public class MobileTask {
         this.id = id;
     }
 
-    @SerializedName("Sid")
+    @SerializedName("sid")
     public String sid;
 
     public String getSid() {
@@ -30,7 +30,7 @@ public class MobileTask {
         this.sid = sid;
     }
 
-    @SerializedName("DateCreated")
+    @SerializedName("dateCreated")
     public Date dateCreated;
 
     public Date getDateCreated() {
@@ -41,7 +41,7 @@ public class MobileTask {
         this.dateCreated = dateCreated;
     }
 
-    @SerializedName("DateCompleted")
+    @SerializedName("dateCompleted")
     public Date dateCompleted;
 
     public Date getDateCompleted() {
@@ -52,7 +52,7 @@ public class MobileTask {
         this.dateCompleted = dateCompleted;
     }
 
-    @SerializedName("Description")
+    @SerializedName("description")
     public String description;
 
     public String getDescription() {
@@ -63,7 +63,7 @@ public class MobileTask {
         this.description = description;
     }
 
-    @SerializedName("IsCompleted")
+    @SerializedName("isCompleted")
     public boolean isCompleted;
 
     public boolean getIsCompleted() {
@@ -74,7 +74,7 @@ public class MobileTask {
         this.isCompleted = isCompleted;
     }
 
-    @SerializedName("DateDue")
+    @SerializedName("dateDue")
     public Date dateDue;
 
     public Date getDateDue() {
