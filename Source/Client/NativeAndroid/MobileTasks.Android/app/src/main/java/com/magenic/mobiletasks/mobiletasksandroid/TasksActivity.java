@@ -1,6 +1,7 @@
 package com.magenic.mobiletasks.mobiletasksandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,11 +15,20 @@ import android.view.View;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSerializer;
+import com.google.gson.stream.JsonReader;
 import com.magenic.mobiletasks.mobiletasksandroid.R;
 import com.magenic.mobiletasks.mobiletasksandroid.adapters.TaskAdapter;
+import com.magenic.mobiletasks.mobiletasksandroid.constants.IntentConstants;
+import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
 import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
+import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +36,7 @@ import java.util.List;
 public class TasksActivity extends AppCompatActivity {
 
     private List<MobileTask> tasks;
+    INetworkService networkSerice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +46,19 @@ public class TasksActivity extends AppCompatActivity {
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCreateTask);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, TaskDetailActivity.class));
+                startActivityForResult(new Intent(context, TaskDetailActivity.class), IntentConstants.NewTaskResult);
             }
         });
 
         RecyclerView lstTasks = (RecyclerView)this.findViewById(R.id.lstTasks);
+
         lstTasks.setLayoutManager(new LinearLayoutManager(this));
 
-        INetworkService networkSerice = new NetworkService();
+        networkSerice = new NetworkService();
         networkSerice.setContext(this);
         lstTasks.setAdapter(new TaskAdapter(this, new ArrayList<MobileTask>(), networkSerice));
     }
@@ -55,8 +67,9 @@ public class TasksActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (tasks == null) {
-            INetworkService networkSerice = new NetworkService();
+            final INetworkService networkSerice = new NetworkService();
             networkSerice.setContext(this);
+            ListenableFuture afd = networkSerice.delete("4");
             ListenableFuture<List<MobileTask>> tasksFuture = networkSerice.getTasks();
             final AppCompatActivity context = this;
 
@@ -74,16 +87,66 @@ public class TasksActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(context);
+                    if (t instanceof MobileServiceException && ((MobileServiceException) t).getResponse().getStatus().message.equals("Unauthorized")) {
+                        ListenableFuture tasksFuture = networkSerice.logout();
+                        Futures.addCallback(tasksFuture, new FutureCallback() {
+                            @Override
+                            public void onSuccess(Object result) {
+                                SharedPreferences prefs = context.getSharedPreferences(context.getApplicationContext().getPackageName(), 0);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.remove(NetworkConstants.LastUserProvider);
+                                editor.commit();
+
+                                Intent intent = new Intent(context, LoginActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                            }
+                        });
+
+
+                    }
+
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
                     dlgAlert.setTitle("Tasks Failure");
-                    dlgAlert.setMessage("The following error occurred returning the task list: " + t.getMessage());
-                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setMessage("The following error occurred returning the task list: "+t.getMessage());
+                    dlgAlert.setPositiveButton("OK",null);
                     dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
+                    dlgAlert.create().
+
+                    show();
                 }
             });
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == IntentConstants.NewTaskResult) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                if (this.tasks != null) {
+                    String newTask = data.getStringExtra(IntentConstants.NewTaskKey);
+                    JsonParser parser = new JsonParser();
+                    JsonObject tasko = parser.parse(newTask).getAsJsonObject();
+
+                    GsonBuilder gsonb = new GsonBuilder();
+                    gsonb.setDateFormat(NetworkConstants.DateFormat);
+                    Gson gson = gsonb.create();
+
+                    MobileTask task = this.networkSerice.deserializeTask(gson, tasko);
+
+                    tasks.add(task);
+                }
+            }
+        }
+    }
+
 
     private void resetList(List<MobileTask> tasks) {
         RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.lstTasks);

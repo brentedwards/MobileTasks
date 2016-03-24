@@ -8,6 +8,10 @@ import java.util.Date;
  * Created by kevinf on 3/22/2016.
  */
 public class MobileTask {
+    public MobileTask() {
+        this.dateCreated = new Date();
+    }
+    
     @SerializedName("id")
     public int id;
 

@@ -59,7 +59,7 @@ public class NetworkService implements INetworkService {
     public ListenableFuture<List<MobileTask>> getTasks() {
         final SettableFuture<List<MobileTask>> result = SettableFuture.create();
         List<Pair<String, String>> parameters = new ArrayList<Pair<String, String>>();
-        ListenableFuture<JsonElement> tasksFuture = client.invokeApi("task","GET", parameters);
+        ListenableFuture<JsonElement> tasksFuture = client.invokeApi("task",HttpConstants.GetMethod, parameters);
         Futures.addCallback(tasksFuture, new FutureCallback<JsonElement>() {
             @Override
             public void onSuccess(JsonElement tasks) {
@@ -87,7 +87,24 @@ public class NetworkService implements INetworkService {
         return result;
     }
 
-    private MobileTask deserializeTask(Gson gson, JsonObject element) {
+    public ListenableFuture logout() {
+        final SettableFuture result = SettableFuture.create();
+        ListenableFuture logoutFuture = client.logout();
+        Futures.addCallback(logoutFuture, new FutureCallback() {
+            @Override
+            public void onSuccess(Object v) {
+                result.set(null);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                result.setException(t);
+            }
+        });
+        return logoutFuture;
+    }
+
+    public MobileTask deserializeTask(Gson gson, JsonObject element) {
         element = reformatDateString(element, "dateCreated");
         element = reformatDateString(element, "dateDue");
         element = reformatDateString(element, "dateCompleted");
@@ -96,7 +113,7 @@ public class NetworkService implements INetworkService {
         return gson.fromJson(element.toString(), MobileTask.class);
     }
 
-    private JsonObject serializeTask(Gson gson, MobileTask task) {
+    public JsonObject serializeTask(Gson gson, MobileTask task) {
         JsonObject element = gson.toJsonTree(task).getAsJsonObject();
 
         element = formatDateString(element, "dateCreated", gson);
@@ -130,6 +147,26 @@ public class NetworkService implements INetworkService {
             }
         });
 
+        return result;
+    }
+
+    public ListenableFuture delete(String id) {
+        final SettableFuture result = SettableFuture.create();
+        List<Pair<String, String>> parameters = new ArrayList<Pair<String, String>>();
+        parameters.add(new Pair<String, String>("id", id));
+        ListenableFuture tasksFuture = client.invokeApi("task",HttpConstants.DeleteMethod, parameters);
+        Futures.addCallback(tasksFuture, new FutureCallback<JsonElement>() {
+            @Override
+            public void onSuccess(JsonElement tasks) {
+
+                result.set(null);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                result.setException(t);
+            }
+        });
         return result;
     }
 

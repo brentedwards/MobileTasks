@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
+import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
@@ -21,7 +22,6 @@ public class Login {
 
     private INetworkService networkSerice;
     private Activity currentContext;
-    protected String lastUserProvider = "LastUsedProvider";
     protected String userId = "|UserId";
     protected String token = "|Token";
 
@@ -35,7 +35,7 @@ public class Login {
     {
         SharedPreferences prefs = currentContext.getSharedPreferences(currentContext.getApplicationContext().getPackageName(), 0);
 
-        String userProviderType = prefs.getString(lastUserProvider, "");
+        String userProviderType = prefs.getString(NetworkConstants.LastUserProvider, "");
 
         if (!userProviderType.equals("")) {
             String currentUserId = prefs.getString(userProviderType + userId, "");
@@ -61,9 +61,11 @@ public class Login {
                 String currentUserId = networkSerice.getClient().getCurrentUser().getUserId();
 
                 SharedPreferences prefs = currentContext.getSharedPreferences(currentContext.getApplicationContext().getPackageName(), 0);
-                prefs.edit().putString(lastUserProvider, requestedProvider.toString());
-                prefs.edit().putString(requestedProvider.toString() + userId, currentUserId);
-                prefs.edit().putString(requestedProvider.toString() + token, currentToken).commit();
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(NetworkConstants.LastUserProvider, requestedProvider.toString());
+                editor.putString(requestedProvider.toString() + userId, currentUserId);
+                editor.putString(requestedProvider.toString() + token, currentToken);
+                editor.commit();
 
                 result.set(null);
             }
