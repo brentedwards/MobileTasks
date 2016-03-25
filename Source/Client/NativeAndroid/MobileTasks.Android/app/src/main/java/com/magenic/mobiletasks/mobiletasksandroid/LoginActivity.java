@@ -1,8 +1,6 @@
 package com.magenic.mobiletasks.mobiletasksandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +8,12 @@ import android.widget.Button;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.Login;
-import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends ActivityBase implements View.OnClickListener {
 
     private Login login;
 
@@ -25,9 +21,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-        INetworkService networkService = new NetworkService();
-        networkService.setContext(this);
 
         login = new Login(this, networkService);
 
@@ -52,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         MobileServiceAuthenticationProvider provider = MobileServiceAuthenticationProvider.MicrosoftAccount;
-        final AppCompatActivity context = this;
+        final ActivityBase context = this;
         switch (v.getId()) {
             case R.id.btnFacebook:
                 provider = MobileServiceAuthenticationProvider.Facebook;
@@ -82,12 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
-                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(context);
-                dlgAlert.setTitle("Login Failure");
-                dlgAlert.setMessage("The following error occurred logging in: " + t.getMessage());
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
+                context.showMessage("Login Failure", "The following error occurred logging in: " + t.getMessage());
             }
         });
     }

@@ -34,11 +34,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TaskDetailActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class TaskDetailActivity extends ActivityBase implements View.OnClickListener {
 
     private MobileTask task;
-    private INetworkService networkService = new NetworkService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +44,6 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.task_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        networkService = new NetworkService();
-        networkService.setContext(this);
 
         task = new MobileTask();
 
@@ -68,7 +63,7 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void saveTask() {
-        final AppCompatActivity context = this;
+        final ActivityBase context = this;
         CheckBox completed = (CheckBox)findViewById(R.id.completed);
         EditText description = (EditText)findViewById(R.id.taskDescription);
         task.isCompleted = completed.isChecked();
@@ -91,12 +86,7 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onFailure(Throwable t) {
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
-                dlgAlert.setTitle("Task update Failure");
-                dlgAlert.setMessage("The following error occurred updating the task: " + t.getMessage());
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
+                context.handleNetworkCallError(t);
             }
         });
     }

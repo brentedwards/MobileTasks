@@ -33,10 +33,9 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TasksActivity extends AppCompatActivity {
+public class TasksActivity extends ActivityBase {
 
     private List<MobileTask> tasks;
-    INetworkService networkSerice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +57,15 @@ public class TasksActivity extends AppCompatActivity {
 
         lstTasks.setLayoutManager(new LinearLayoutManager(this));
 
-        networkSerice = new NetworkService();
-        networkSerice.setContext(this);
-        lstTasks.setAdapter(new TaskAdapter(this, new ArrayList<MobileTask>(), networkSerice));
+        lstTasks.setAdapter(new TaskAdapter(this, new ArrayList<MobileTask>(), networkService));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (tasks == null) {
-            final INetworkService networkSerice = new NetworkService();
-            networkSerice.setContext(this);
-            ListenableFuture afd = networkSerice.delete("4");
-            ListenableFuture<List<MobileTask>> tasksFuture = networkSerice.getTasks();
-            final AppCompatActivity context = this;
+            final ActivityBase context = this;
+            ListenableFuture<List<MobileTask>> tasksFuture = networkService.getTasks();
 
             Futures.addCallback(tasksFuture, new FutureCallback<List<MobileTask>>() {
                 @Override
@@ -87,38 +81,7 @@ public class TasksActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    if (t instanceof MobileServiceException && ((MobileServiceException) t).getResponse().getStatus().message.equals("Unauthorized")) {
-                        ListenableFuture tasksFuture = networkSerice.logout();
-                        Futures.addCallback(tasksFuture, new FutureCallback() {
-                            @Override
-                            public void onSuccess(Object result) {
-                                SharedPreferences prefs = context.getSharedPreferences(context.getApplicationContext().getPackageName(), 0);
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.remove(NetworkConstants.LastUserProvider);
-                                editor.commit();
-
-                                Intent intent = new Intent(context, LoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onFailure(Throwable t) {
-                            }
-                        });
-
-
-                    }
-
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(context);
-                    dlgAlert.setTitle("Tasks Failure");
-                    dlgAlert.setMessage("The following error occurred returning the task list: "+t.getMessage());
-                    dlgAlert.setPositiveButton("OK",null);
-                    dlgAlert.setCancelable(true);
-                    dlgAlert.create().
-
-                    show();
+                    context.handleNetworkCallError(t);
                 }
             });
         }
@@ -139,14 +102,13 @@ public class TasksActivity extends AppCompatActivity {
                     gsonb.setDateFormat(NetworkConstants.DateFormat);
                     Gson gson = gsonb.create();
 
-                    MobileTask task = this.networkSerice.deserializeTask(gson, tasko);
+                    MobileTask task = this.networkService.deserializeTask(gson, tasko);
 
                     tasks.add(task);
                 }
             }
         }
     }
-
 
     private void resetList(List<MobileTask> tasks) {
         RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.lstTasks);
