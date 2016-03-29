@@ -28,9 +28,11 @@ import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
 import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
+import com.magenic.mobiletasks.mobiletasksandroid.utilities.DateDeserializer;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TasksActivity extends ActivityBase {
@@ -65,6 +67,7 @@ public class TasksActivity extends ActivityBase {
         super.onResume();
         if (tasks == null) {
             final ActivityBase context = this;
+            //ListenableFuture deleteFuture =networkService.delete("4");
             ListenableFuture<List<MobileTask>> tasksFuture = networkService.getTasks();
 
             Futures.addCallback(tasksFuture, new FutureCallback<List<MobileTask>>() {
@@ -99,7 +102,7 @@ public class TasksActivity extends ActivityBase {
                     JsonObject tasko = parser.parse(newTask).getAsJsonObject();
 
                     GsonBuilder gsonb = new GsonBuilder();
-                    gsonb.setDateFormat(NetworkConstants.DateFormat);
+                    gsonb.registerTypeAdapter(Date.class, new DateDeserializer(NetworkConstants.DateFormats));
                     Gson gson = gsonb.create();
 
                     MobileTask task = this.networkService.deserializeTask(gson, tasko);
@@ -114,7 +117,7 @@ public class TasksActivity extends ActivityBase {
         RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.lstTasks);
         if (lstRegistrations != null) {
             ((TaskAdapter)lstRegistrations.getAdapter()).setTasks(tasks);
-            ((TaskAdapter) lstRegistrations.getAdapter()).notifyDataSetChanged();
+            ((TaskAdapter)lstRegistrations.getAdapter()).notifyDataSetChanged();
         }
     }
 }

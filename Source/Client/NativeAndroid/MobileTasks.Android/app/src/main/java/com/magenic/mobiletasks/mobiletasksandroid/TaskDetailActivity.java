@@ -78,8 +78,9 @@ public class TaskDetailActivity extends ActivityBase implements View.OnClickList
                 Gson gson = gsonb.create();
 
                 JsonObject task = networkService.serializeTask(gson, returnedTask);
+
                 Intent myIntent = new Intent(context, TasksActivity.class);
-                myIntent.putExtra(IntentConstants.NewTaskKey, task.getAsString());
+                myIntent.putExtra(IntentConstants.NewTaskKey, gson.toJson(task));
                 context.setResult(RESULT_OK, myIntent);
                 context.finish();
             }

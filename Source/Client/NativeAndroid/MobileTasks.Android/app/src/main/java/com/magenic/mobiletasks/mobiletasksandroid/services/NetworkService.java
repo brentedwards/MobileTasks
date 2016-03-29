@@ -1,6 +1,7 @@
 package com.magenic.mobiletasks.mobiletasksandroid.services;
 
 import android.app.Activity;
+import android.provider.SyncStateContract;
 import android.util.Pair;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -15,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
+import com.magenic.mobiletasks.mobiletasksandroid.utilities.DateDeserializer;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.http.HttpConstants;
 
@@ -64,7 +66,7 @@ public class NetworkService implements INetworkService {
             @Override
             public void onSuccess(JsonElement tasks) {
                 GsonBuilder gsonb = new GsonBuilder();
-                gsonb.setDateFormat(NetworkConstants.DateFormat);
+                gsonb.registerTypeAdapter(Date.class, new DateDeserializer(NetworkConstants.DateFormats));
                 Gson gson = gsonb.create();
 
                 JsonArray array = tasks.getAsJsonArray();
@@ -138,6 +140,9 @@ public class NetworkService implements INetworkService {
         Futures.addCallback(tasksFuture, new FutureCallback<JsonElement>() {
             @Override
             public void onSuccess(JsonElement task) {
+                GsonBuilder gsonb = new GsonBuilder();
+                gsonb.registerTypeAdapter(Date.class, new DateDeserializer(NetworkConstants.DateFormats));
+                Gson gson = gsonb.create();
                 result.set(deserializeTask(gson, task.getAsJsonObject()));
             }
 
