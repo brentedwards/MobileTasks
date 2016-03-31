@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MobileTasks.Android</string>
+    <string name="title_activity_tasks">TasksActivity</string>
+    <string name="title_activity_task_detail">Task Detail</string>
+</resources>
