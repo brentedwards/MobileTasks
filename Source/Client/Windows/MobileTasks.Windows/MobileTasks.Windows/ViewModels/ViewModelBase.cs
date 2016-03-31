@@ -17,7 +17,7 @@ namespace MobileTasks.Windows.ViewModels
 
 		public Func<string, Task> OnShowErrorAsync { get; set; }
 		
-		public Action<string> OnNavigate { get; set; }
+		public Action<string, object> OnNavigate { get; set; }
 
 		public Action OnGoBack { get; set; }
 
@@ -36,7 +36,7 @@ namespace MobileTasks.Windows.ViewModels
 		{
 			ApplicationData.Current.RoamingSettings.Values.Remove(LastUsedProvider);
 			await this.MobileService.LogoutAsync();
-			OnNavigate?.Invoke("Login");
+			OnNavigate?.Invoke("Login", null);
 		}
 
 		public virtual Task OnLoaded()

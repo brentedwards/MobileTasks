@@ -23,7 +23,7 @@ namespace MobileTasks.Windows.ViewModels
 
 			try
 			{
-				var tasks = await this.MobileService.GetTasks();
+				var tasks = await this.MobileService.GetTasksAsync();
 
 				foreach (var task in tasks)
 				{
@@ -48,7 +48,7 @@ namespace MobileTasks.Windows.ViewModels
 				var task = (MobileTask)sender;
 
 				this.IsBusy = true;
-				await this.MobileService.UpsertTask(task);
+				await this.MobileService.UpsertTaskAsync(task);
 				this.IsBusy = false;
 			}
 		}

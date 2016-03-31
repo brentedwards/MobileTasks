@@ -17,6 +17,7 @@
 			</CommandBar.Content>
 			<AppBarButton Icon="Accept" Label="Save" Click="Save_Click"/>
 			<AppBarButton Icon="Cancel" Label="Cancel" Click="Cancel_Click"/>
+			<AppBarButton Icon="Delete" Label="Delete" Click="Delete_Click" Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}}"/>
 		</CommandBar>
 	</local:MobileTasksPage.BottomAppBar>
 
