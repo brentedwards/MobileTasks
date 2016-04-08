@@ -8,4 +8,5 @@
 
 import Foundation
 
-typealias ServiceResponse = (Bool, NSDictionary?, NSError?) -> Void
+typealias ServiceResponse = (NSError?) -> Void
+typealias TaskResponse = (Array<MobileTask>?, NSError?) -> Void

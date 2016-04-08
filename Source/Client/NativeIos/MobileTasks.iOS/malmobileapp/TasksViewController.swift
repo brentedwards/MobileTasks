@@ -17,12 +17,11 @@ import Foundation
 import UIKit
 import CoreData
 
-class ToDoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, ToDoItemDelegate {
+class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDelegate, TaskDelegate {
     
-    var table : MSSyncTable?
-    var store : MSCoreDataStore?
+    var Tasks : [MobileTask] = []
     
-    lazy var fetchedResultController: NSFetchedResultsController = {
+    lazy var TasksViewController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "TodoItem")
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         
@@ -44,6 +43,14 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        networkService?.getTasks({ (results: [MobileTask]?, error: NSError?) -> Void in
+            if (error == nil) {
+                self.Tasks = results!
+                self.tableView.reloadData()
+            } else {
+                self.handleNetworkCallError(error!)
+            }
+        })
 
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -72,44 +79,46 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let navigationController = appDelegate.window?.rootViewController as! UINavigationController
         
-        navigationController.viewControllers.removeAll()
-        navigationController.viewControllers.append(self)
+        if (navigationController.viewControllers.count > 1 ) {
+            navigationController.viewControllers.removeAll()
+            navigationController.viewControllers.append(self)
+        }
         
         navigationController.navigationBarHidden = false
     }
     
     
-    func onRefresh(sender: UIRefreshControl!) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        self.table!.pullWithQuery(self.table?.query(), queryId: "AllRecords") {
-            (error) -> Void in
-            
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            
-            if error != nil {
-                // A real application would handle various errors like network conditions,
-                // server conflicts, etc via the MSSyncContextDelegate
-                print("Error: \(error!.description)")
-                
-                // We will just discard our changes and keep the servers copy for simplicity                
-                if let opErrors = error!.userInfo[MSErrorPushResultKey] as? Array<MSTableOperationError> {
-                    for opError in opErrors {
-                        print("Attempted operation to item \(opError.itemId)")
-                        if (opError.operation == .Insert || opError.operation == .Delete) {
-                            print("Insert/Delete, failed discarding changes")
-                            opError.cancelOperationAndDiscardItemWithCompletion(nil)
-                        } else {
-                            print("Update failed, reverting to server's copy")
-                            opError.cancelOperationAndUpdateItem(opError.serverItem!, completion: nil)
-                        }
-                    }
-                }
-            }
-            
-            self.refreshControl?.endRefreshing()
-        }
-    }
+//    func onRefresh(sender: UIRefreshControl!) {
+//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+//        
+//        self.table!.pullWithQuery(self.table?.query(), queryId: "AllRecords") {
+//            (error) -> Void in
+//            
+//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//            
+//            if error != nil {
+//                // A real application would handle various errors like network conditions,
+//                // server conflicts, etc via the MSSyncContextDelegate
+//                print("Error: \(error!.description)")
+//                
+//                // We will just discard our changes and keep the servers copy for simplicity                
+//                if let opErrors = error!.userInfo[MSErrorPushResultKey] as? Array<MSTableOperationError> {
+//                    for opError in opErrors {
+//                        print("Attempted operation to item \(opError.itemId)")
+//                        if (opError.operation == .Insert || opError.operation == .Delete) {
+//                            print("Insert/Delete, failed discarding changes")
+//                            opError.cancelOperationAndDiscardItemWithCompletion(nil)
+//                        } else {
+//                            print("Update failed, reverting to server's copy")
+//                            opError.cancelOperationAndUpdateItem(opError.serverItem!, completion: nil)
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            self.refreshControl?.endRefreshing()
+//        }
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,34 +141,30 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
         return "Complete"
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        let record = self.fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
-        var item = self.store!.tableItemFromManagedObject(record)
-        item["complete"] = true
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        
-        self.table!.update(item) { (error) -> Void in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            if error != nil {
-                print("Error: \(error!.description)")
-                return
-            }
-        }
-    }
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+//    {
+//        let record = self.fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
+//        var item = self.store!.tableItemFromManagedObject(record)
+//        item["complete"] = true
+//        
+//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+//        
+//        self.table!.update(item) { (error) -> Void in
+//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//            if error != nil {
+//                print("Error: \(error!.description)")
+//                return
+//            }
+//        }
+//    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if let sections = self.fetchedResultController.sections {
-            return sections[section].numberOfObjects
-        }
-        
-        return 0;
+        return Tasks.count;
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let CellIdentifier = "Cell"
+        let CellIdentifier = "TaskItemCell"
         
         var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath) 
         cell = configureCell(cell, indexPath: indexPath)
@@ -168,18 +173,14 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) -> UITableViewCell {
-        let item = self.fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
+        let item : MobileTask = Tasks[indexPath.item]
         
         // Set the label on the cell and make sure the label color is black (in case this cell
         // has been reused and was previously greyed out
-        if let text = item.valueForKey("text") as? String {
-            cell.textLabel!.text = text
-        } else {
-            cell.textLabel!.text = "?"
-        }
-        
-        cell.textLabel!.textColor = UIColor.blackColor()
-        
+
+        let taskCell = cell as! TaskItemCell
+        taskCell.lblTaskTitle.text = item.taskDescription
+        taskCell.swTaskComplete.on = item.isCompleted
         return cell
     }
     
@@ -188,13 +189,13 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
     
     
     @IBAction func addItem(sender : AnyObject) {
-        self.performSegueWithIdentifier("addItem", sender: self)
+        self.performSegueWithIdentifier("sguToItemDetail", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if segue.identifier == "addItem" {
-            let todoController = segue.destinationViewController as! ToDoItemViewController
+            let todoController = segue.destinationViewController as! TaskViewController
             todoController.delegate = self
         }
     }
@@ -205,21 +206,21 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
     
     func didSaveItem(text: String)
     {
-        if text.isEmpty {
-            return
-        }
-        
-        // We set created at to now, so it will sort as we expect it to post the push/pull
-        let itemToInsert = ["text": text, "complete": false, "__createdAt": NSDate()]
-        
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        self.table!.insert(itemToInsert) {
-            (item, error) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            if error != nil {
-                print("Error: " + error!.description)
-            }
-        }
+//        if text.isEmpty {
+//            return
+//        }
+//        
+//        // We set created at to now, so it will sort as we expect it to post the push/pull
+//        let itemToInsert = ["text": text, "complete": false, "__createdAt": NSDate()]
+//        
+//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+//        self.table!.insert(itemToInsert) {
+//            (item, error) in
+//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//            if error != nil {
+//                print("Error: " + error!.description)
+//            }
+//        }
     }
     
     
@@ -269,4 +270,5 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
             self.tableView.endUpdates()
         });
     }
+    
 }

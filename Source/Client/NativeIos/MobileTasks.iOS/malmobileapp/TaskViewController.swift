@@ -17,15 +17,15 @@
 import Foundation
 import UIKit
 
-protocol ToDoItemDelegate {
+protocol TaskDelegate {
     func didSaveItem(text : String)
 }
 
-class ToDoItemViewController: UIViewController,  UIBarPositioningDelegate, UITextFieldDelegate {
+class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var text: UITextField!
     
-    var delegate : ToDoItemDelegate?
+    var delegate : TaskDelegate?
     
     override func viewDidLoad()
     {

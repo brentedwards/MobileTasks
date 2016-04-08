@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8st-Q2-1ux">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8st-Q2-1ux">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="bpP-B4-5hL">
             <objects>
-                <viewController id="J2i-zc-JJA" customClass="LoginViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="J2i-zc-JJA" customClass="LoginViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xuv-pf-Hi8"/>
                         <viewControllerLayoutGuide type="bottom" id="NRi-zy-8bt"/>
@@ -85,33 +85,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28s-zO-WNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2229" y="718"/>
+            <point key="canvasLocation" x="2333" y="800"/>
         </scene>
         <!--Azure Mobile Services-->
         <scene sceneID="v2j-ei-0Wt">
             <objects>
-                <tableViewController id="V6T-ri-3qt" customClass="ToDoTableViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="V6T-ri-3qt" customClass="TasksViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iGd-nx-Ay5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="xtB-im-W7s" style="IBUITableViewCellStyleDefault" id="nsK-Da-6ym">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TaskItemCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="TaskItemCell" id="QhC-rX-6tq" customClass="TaskItemCell" customModule="MobileTasks_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nsK-Da-6ym" id="WJg-MQ-TxZ">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QhC-rX-6tq" id="hH1-sR-iU5">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xtB-im-W7s">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3mP-mA-yzG">
+                                            <rect key="frame" x="529" y="6" width="51" height="31"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="swTaskComplete"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="kdF-uq-YkV"/>
+                                                <constraint firstAttribute="height" constant="31" id="wrU-7N-bEX"/>
+                                            </constraints>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV0-mL-7Yn">
+                                            <rect key="frame" x="22" y="11" width="499" height="21"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="lblTaskTitle"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="VsD-Zr-5b1"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZV0-mL-7Yn" firstAttribute="centerY" secondItem="hH1-sR-iU5" secondAttribute="centerY" id="7Vt-YX-nTX"/>
+                                        <constraint firstItem="ZV0-mL-7Yn" firstAttribute="leading" secondItem="hH1-sR-iU5" secondAttribute="leadingMargin" constant="14" id="9pM-dJ-TGr"/>
+                                        <constraint firstItem="3mP-mA-yzG" firstAttribute="leading" secondItem="ZV0-mL-7Yn" secondAttribute="trailing" constant="8" id="No9-d3-vmv"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3mP-mA-yzG" secondAttribute="trailing" constant="14" id="OBD-z1-hEL"/>
+                                        <constraint firstItem="3mP-mA-yzG" firstAttribute="centerY" secondItem="hH1-sR-iU5" secondAttribute="centerY" id="rU1-m2-DOr"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="TaskItemCell"/>
+                                <connections>
+                                    <outlet property="lblTaskTitle" destination="ZV0-mL-7Yn" id="Lfx-I8-TjW"/>
+                                    <outlet property="swTaskComplete" destination="3mP-mA-yzG" id="kGL-0M-qFs"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -135,12 +158,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sn7-zH-IVo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2931" y="318"/>
+            <point key="canvasLocation" x="3049" y="561"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="RI1-O5-vZS">
             <objects>
-                <viewController id="jv0-OX-F4r" customClass="ToDoItemViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jv0-OX-F4r" customClass="TaskViewController" customModule="MobileTasks_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eKr-eJ-C44"/>
                         <viewControllerLayoutGuide type="bottom" id="Y3o-yZ-mzd"/>
@@ -204,7 +227,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRr-xT-xwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895" y="190"/>
+            <point key="canvasLocation" x="1625" y="22"/>
         </scene>
     </scenes>
 </document>

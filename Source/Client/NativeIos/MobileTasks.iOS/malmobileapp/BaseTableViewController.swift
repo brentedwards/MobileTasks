@@ -1,14 +1,14 @@
 //
-//  BaseViewController.swift
+//  BaseTableViewController.swift
 //  MobileTasks.iOS
 //
-//  Created by kevin Ford on 3/30/16.
+//  Created by kevin Ford on 4/4/16.
 //  Copyright © 2016 Microsoft. All rights reserved.
 //
 
 import Foundation
 
-class BaseViewController: UIViewController {
+class BaseTableViewController: UITableViewController {
     
     var networkService : NetworkProtocol?
     
