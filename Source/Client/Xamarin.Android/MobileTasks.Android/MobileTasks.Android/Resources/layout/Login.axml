@@ -4,22 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/Facebook"
+        android:id="@+id/facebook"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Facebook" />
     <Button
-        android:id="@+id/Microsoft"
+        android:id="@+id/microsoft"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Microsoft" />
     <Button
-        android:id="@+id/Twitter"
+        android:id="@+id/twitter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Twitter" />
     <Button
-        android:id="@+id/Google"
+        android:id="@+id/google"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/Google" />

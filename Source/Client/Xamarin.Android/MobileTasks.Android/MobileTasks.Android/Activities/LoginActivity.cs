@@ -24,16 +24,16 @@ namespace MobileTasks.Android.Activities
 
 			SetContentView(Resource.Layout.Login);
 
-			var facebook = FindViewById<Button>(Resource.Id.Facebook);
+			var facebook = FindViewById<Button>(Resource.Id.facebook);
 			facebook.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Facebook); };
 
-			var microsoft = FindViewById<Button>(Resource.Id.Microsoft);
+			var microsoft = FindViewById<Button>(Resource.Id.microsoft);
 			microsoft.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.MicrosoftAccount); };
 
-			var twitter = FindViewById<Button>(Resource.Id.Twitter);
+			var twitter = FindViewById<Button>(Resource.Id.twitter);
 			twitter.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Twitter); };
 
-			var google = FindViewById<Button>(Resource.Id.Google);
+			var google = FindViewById<Button>(Resource.Id.google);
 			google.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Google); };
 		}
 
