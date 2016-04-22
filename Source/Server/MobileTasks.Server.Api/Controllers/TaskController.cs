@@ -73,5 +73,19 @@ namespace MobileTasks.Server.Api.Controllers
             context.SaveChanges();
             return resultTask;
         }
+
+		public void Delete(int id)
+		{
+			var context = new MobileTasksEntities();
+
+			var task = context.Tasks.SingleOrDefault(_ => _.Id == id);
+			if (task != null && task.Sid != this.Sid)
+			{
+				throw new HttpResponseException(HttpStatusCode.Unauthorized);
+			}
+
+			context.Tasks.Remove(task);
+			context.SaveChanges();
+		}
     }
 }

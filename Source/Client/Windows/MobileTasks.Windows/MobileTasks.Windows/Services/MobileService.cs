@@ -38,14 +38,30 @@ namespace MobileTasks.Windows.Services
 			await this.Client.LoginAsync(provider);
 		}
 
-		public async Task<IEnumerable<MobileTask>> GetTasks()
+		public async Task<IEnumerable<MobileTask>> GetTasksAsync()
 		{
 			return await this.Client.InvokeApiAsync<IEnumerable<MobileTask>>(TaskAction, HttpMethod.Get, null);
 		}
 
-		public async Task<MobileTask> UpsertTask(MobileTask task)
+		public async Task<MobileTask> LoadTaskAsync(int id)
+		{
+			var parameters = new Dictionary<string, string>();
+			parameters["id"] = id.ToString();
+
+			return await this.Client.InvokeApiAsync<MobileTask>(TaskAction, HttpMethod.Get, parameters);
+		}
+
+		public async Task<MobileTask> UpsertTaskAsync(MobileTask task)
 		{
 			return await this.Client.InvokeApiAsync<MobileTask, MobileTask>("task", task);
+		}
+
+		public async Task DeleteTaskAsync(int id)
+		{
+			var parameters = new Dictionary<string, string>();
+			parameters["id"] = id.ToString();
+
+			await this.Client.InvokeApiAsync(TaskAction, HttpMethod.Delete, parameters);
 		}
 
 		public async Task LogoutAsync()

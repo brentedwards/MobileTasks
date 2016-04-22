@@ -30,7 +30,9 @@
 	</local:MobileTasksPage.BottomAppBar>
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<ListView ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}" />
+		<ListView ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}"
+				  SelectionChanged="ListView_SelectionChanged">
+		</ListView>
 		<ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Top" />
 	</Grid>
 </local:MobileTasksPage>
