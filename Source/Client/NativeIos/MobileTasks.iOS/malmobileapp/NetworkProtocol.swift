@@ -12,4 +12,7 @@ protocol NetworkProtocol {
     func login(serviceProvider : String, controller : UIViewController, completion : ServiceResponse) -> Void
     func hasPreviousAuthentication() -> Bool
     func getClient() -> MSClient
+    func getTasks(completion: TaskResponse) -> Void
+    func logout(completion: ServiceResponse) -> Void
+    func upsertTask(task: MobileTask, completion: TaskSaveResponse) -> Void
 }

@@ -15,13 +15,9 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var btnGoogle: UIButton!
     @IBOutlet weak var btnTwitter: UIButton!
     
-    var networkService : NetworkProtocol?
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        networkService = NetworkService()
         
         if (networkService!.hasPreviousAuthentication()) {
             self.performSegueWithIdentifier("sguToList", sender: self)
@@ -50,10 +46,20 @@ class LoginViewController: BaseViewController {
     
     func processLogin(provider: String) {
 
-        networkService!.login(provider, controller: self, completion: { (success: Bool, results: NSDictionary?, error: NSError?) -> Void in
-            if (success) {
+        networkService!.login(provider, controller: self, completion: { (error: NSError?) -> Void in
+            if (error == nil) {
                 self.performSegueWithIdentifier("sguToList", sender: self)
             }
         })
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let navigationController = appDelegate.window?.rootViewController as! UINavigationController
+        
+        if (navigationController.viewControllers.count > 1) {
+            navigationController.viewControllers.removeAll()
+            navigationController.viewControllers.append(self)
+        }
     }
 }
