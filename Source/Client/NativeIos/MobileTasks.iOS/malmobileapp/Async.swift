@@ -10,3 +10,4 @@ import Foundation
 
 typealias ServiceResponse = (NSError?) -> Void
 typealias TaskResponse = (Array<MobileTask>?, NSError?) -> Void
+typealias TaskSaveResponse = (MobileTask?, NSError?) -> Void

@@ -18,30 +18,32 @@ import Foundation
 import UIKit
 
 protocol TaskDelegate {
-    func didSaveItem(text : String)
+    func didSaveItem(task : MobileTask)
 }
 
 class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var text: UITextField!
-    
+    @IBOutlet weak var lblTaskDescription: UITextField!
+    @IBOutlet weak var pkDateDue: UIDatePicker!
+    @IBOutlet weak var swTaskComplete: UISwitch!
+
     var delegate : TaskDelegate?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.text.delegate = self
-        self.text.becomeFirstResponder()
+        self.lblTaskDescription.delegate = self
+        self.lblTaskDescription.becomeFirstResponder()
     }
     
     @IBAction func cancelPressed(sender : UIBarButtonItem) {
-        self.text.resignFirstResponder()
+        self.lblTaskDescription.resignFirstResponder()
     }
     
     @IBAction func savePressed(sender : UIBarButtonItem) {
         saveItem()
-        self.text.resignFirstResponder()
+        self.lblTaskDescription.resignFirstResponder()
     }
     
     // Textfield
@@ -68,8 +70,12 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
     
     func saveItem()
     {
-        if let text = self.text.text {
-            self.delegate?.didSaveItem(text)
+        if let text = self.lblTaskDescription.text {
+            let task : MobileTask = MobileTask()
+            task.taskDescription = text
+            task.isCompleted = swTaskComplete.on
+            task.dateDue = self.pkDateDue.date
+            self.delegate?.didSaveItem(task)
         }
     }
 }

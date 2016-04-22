@@ -17,7 +17,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDelegate, TaskDelegate {
+class TasksViewController: BaseTableViewController, TaskDelegate {
     
     var Tasks : [MobileTask] = []
     
@@ -35,8 +35,6 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
         // for more information, see Apple's documentation: http://go.microsoft.com/fwlink/?LinkId=524591&clcid=0x409
         let resultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        resultsController.delegate = self;
-        
         return resultsController
     }()
     
@@ -51,28 +49,6 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
                 self.handleNetworkCallError(error!)
             }
         })
-
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        let client = MSClient(applicationURLString: "https://malmobileapp.azurewebsites.net")
-//        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-//        self.store = MSCoreDataStore(managedObjectContext: managedObjectContext)
-//        client.syncContext = MSSyncContext(delegate: nil, dataSource: self.store, callback: nil)
-//        self.table = client.syncTableWithName("TodoItem")
-//        self.refreshControl?.addTarget(self, action: "onRefresh:", forControlEvents: UIControlEvents.ValueChanged)
-//        
-//        var error : NSError? = nil
-//        do {
-//            try self.fetchedResultController.performFetch()
-//        } catch let error1 as NSError {
-//            error = error1
-//            print("Unresolved error \(error), \(error?.userInfo)")
-//            abort()
-//        }
-//
-//        // Refresh data on load
-//        self.refreshControl?.beginRefreshing()
-//        self.onRefresh(self.refreshControl)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,39 +62,6 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
         
         navigationController.navigationBarHidden = false
     }
-    
-    
-//    func onRefresh(sender: UIRefreshControl!) {
-//        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-//        
-//        self.table!.pullWithQuery(self.table?.query(), queryId: "AllRecords") {
-//            (error) -> Void in
-//            
-//            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-//            
-//            if error != nil {
-//                // A real application would handle various errors like network conditions,
-//                // server conflicts, etc via the MSSyncContextDelegate
-//                print("Error: \(error!.description)")
-//                
-//                // We will just discard our changes and keep the servers copy for simplicity                
-//                if let opErrors = error!.userInfo[MSErrorPushResultKey] as? Array<MSTableOperationError> {
-//                    for opError in opErrors {
-//                        print("Attempted operation to item \(opError.itemId)")
-//                        if (opError.operation == .Insert || opError.operation == .Delete) {
-//                            print("Insert/Delete, failed discarding changes")
-//                            opError.cancelOperationAndDiscardItemWithCompletion(nil)
-//                        } else {
-//                            print("Update failed, reverting to server's copy")
-//                            opError.cancelOperationAndUpdateItem(opError.serverItem!, completion: nil)
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            self.refreshControl?.endRefreshing()
-//        }
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -167,9 +110,26 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
         let CellIdentifier = "TaskItemCell"
         
         var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath) 
+        
+        let taskCell : TaskItemCell = cell as! TaskItemCell
+        taskCell.swTaskComplete.addTarget(self, action: #selector (self.switchIsChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         cell = configureCell(cell, indexPath: indexPath)
         
+        
         return cell
+    }
+    
+    func switchIsChanged(mySwitch: UISwitch) {
+        let task : MobileTask = Tasks[mySwitch.tag]
+        
+        task.isCompleted = mySwitch.on
+        networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: NSError?) in
+            if (error == nil) {
+                self.Tasks[mySwitch.tag] = mobileTask!
+            } else {
+                self.handleNetworkCallError(error!)
+            }
+        })
     }
     
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) -> UITableViewCell {
@@ -181,6 +141,7 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
         let taskCell = cell as! TaskItemCell
         taskCell.lblTaskTitle.text = item.taskDescription
         taskCell.swTaskComplete.on = item.isCompleted
+        taskCell.swTaskComplete.tag = indexPath.item
         return cell
     }
     
@@ -195,8 +156,8 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         if segue.identifier == "addItem" {
-            let todoController = segue.destinationViewController as! TaskViewController
-            todoController.delegate = self
+            let taskController = segue.destinationViewController as! TaskViewController
+            taskController.delegate = self
         }
     }
     
@@ -221,54 +182,6 @@ class TasksViewController: BaseTableViewController, NSFetchedResultsControllerDe
 //                print("Error: " + error!.description)
 //            }
 //        }
-    }
-    
-    
-    // MARK: - NSFetchedResultsDelegate
-    
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.beginUpdates()
-        });
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            let indexSectionSet = NSIndexSet(index: sectionIndex)
-            if type == .Insert {
-                self.tableView.insertSections(indexSectionSet, withRowAnimation: .Fade)
-            } else if type == .Delete {
-                self.tableView.deleteSections(indexSectionSet, withRowAnimation: .Fade)
-            }
-        })
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            switch type {
-            case .Insert:
-                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            case .Delete:
-                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            case .Move:
-                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            case .Update:
-                // note: Apple samples show a call to configureCell here; this is incorrect--it can result in retrieving the
-                // wrong index when rows are reordered. For more information, see:
-                // http://go.microsoft.com/fwlink/?LinkID=524590&clcid=0x409
-                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-            }
-        })
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.endUpdates()
-        });
     }
     
 }
