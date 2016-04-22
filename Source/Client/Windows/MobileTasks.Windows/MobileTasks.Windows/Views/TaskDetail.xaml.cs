@@ -39,6 +39,16 @@ namespace MobileTasks.Windows.Views
 				this.Frame.GoBack();
 			};
 		}
+		protected override async void OnNavigatedTo(NavigationEventArgs e)
+		{
+			base.OnNavigatedTo(e);
+
+			if (e.Parameter != null)
+			{
+				var id = int.Parse((string)e.Parameter);
+				await ((TaskDetailViewModel)this.ViewModel).LoadTaskAsync(id);
+			}
+		}
 
 		private async void Save_Click(object sender, RoutedEventArgs e)
 		{
@@ -48,6 +58,11 @@ namespace MobileTasks.Windows.Views
 		private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
 			this.Frame.GoBack();
+		}
+
+		private async void Delete_Click(object sender, RoutedEventArgs e)
+		{
+			await ((TaskDetailViewModel)this.ViewModel).DeleteTaskAsync();
 		}
 	}
 }

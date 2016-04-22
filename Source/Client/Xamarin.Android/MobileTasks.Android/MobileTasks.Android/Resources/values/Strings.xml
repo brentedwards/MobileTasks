@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">MobileTasks.Android</string>
+	<string name="Facebook">Facebook</string>
+	<string name="Microsoft">Microsoft</string>
+	<string name="Twitter">Twitter</string>
+	<string name="Google">Google</string>
+	<string name="Edit">Edit</string>
+	<string name="Delete">Delete</string>
+	<string name="Yes">Yes</string>
+	<string name="No">No</string>
+	<string name="Task">Task</string>
+	<string name="DateDue">Date Due</string>
+	<string name="Completed">Completed</string>
+	<string name="Save">Save</string>
+	<string name="Delete">Delete</string>
+	<string name="Ok">Ok</string>
+	<string name="NewTask">New Task</string>
+</resources>

@@ -38,7 +38,7 @@ namespace MobileTasks.Windows.Views
 			this.Frame.GoBack();
 		}
 
-		protected void Navigate(string pageName)
+		protected void Navigate(string pageName, object parameter = null)
 		{
 			Type pageType = null;
 			switch (pageName)
@@ -62,7 +62,7 @@ namespace MobileTasks.Windows.Views
 					return;
 			}
 
-			this.Frame.Navigate(pageType);
+			this.Frame.Navigate(pageType, parameter);
 		}
 	}
 }

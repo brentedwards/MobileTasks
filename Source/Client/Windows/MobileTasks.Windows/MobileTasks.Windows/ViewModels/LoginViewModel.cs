@@ -46,7 +46,7 @@ namespace MobileTasks.Windows.ViewModels
 				credential.RetrievePassword();
 				this.MobileService.User.MobileServiceAuthenticationToken = credential.Password;
 
-				this.OnNavigate?.Invoke(Tasks);
+				this.OnNavigate?.Invoke(Tasks, null);
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace MobileTasks.Windows.ViewModels
 
 				settings.Values[LastUsedProvider] = provider.ToString();
 
-				this.OnNavigate?.Invoke(Tasks);
+				this.OnNavigate?.Invoke(Tasks, null);
 			}
 			catch (InvalidOperationException)
 			{
