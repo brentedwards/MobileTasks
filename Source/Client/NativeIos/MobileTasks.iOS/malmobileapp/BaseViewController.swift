@@ -9,4 +9,17 @@
 import Foundation
 
 class BaseViewController: UIViewController {
+    
+    var networkService : NetworkProtocol?
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        networkService = NetworkService()
+    }
+    
+    func handleNetworkCallError(error : NSError) -> Void {
+        ViewControllerShared.handleNetworkCallError(error, networkService: networkService!, viewController: self)
+    }
 }
