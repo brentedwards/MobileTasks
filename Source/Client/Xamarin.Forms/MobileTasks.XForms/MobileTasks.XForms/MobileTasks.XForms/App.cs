@@ -13,7 +13,7 @@ namespace MobileTasks.XForms
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new Login();
+			MainPage = new Tasks();
 		}
 
 		protected override void OnStart ()
