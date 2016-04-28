@@ -6,7 +6,25 @@
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
-					<Label Text="{Binding Description}" />
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+
+						<Switch IsToggled="{Binding IsCompleted}" />
+
+						<Grid Grid.Column="1">
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+
+							<Label Text="{Binding Description}" />
+
+							<Label Text="{Binding DateDue}" Grid.Row="1" />
+						</Grid>
+					</Grid>
 				</ViewCell>
 			</DataTemplate>
 		</ListView.ItemTemplate>
