@@ -25,7 +25,13 @@ namespace MobileTasks.XForms.Views
 			TaskList.ItemTapped += async (sender, args) =>
 			{
 				var task = (MobileTask)args.Item;
-				await Navigation.PushAsync(new Detail(task));
+				await Navigation.PushAsync(new Detail(new MobileTask
+				{
+					Id = task.Id,
+					Description = task.Description,
+					DateDue = task.DateDue,
+					IsCompleted = task.IsCompleted
+				}));
 			};
 
 			ShowLoginDialog();

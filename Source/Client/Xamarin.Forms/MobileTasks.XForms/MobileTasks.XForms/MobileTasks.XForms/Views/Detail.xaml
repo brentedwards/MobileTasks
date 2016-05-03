@@ -25,5 +25,7 @@
 		</Grid>
 
 		<Button Text="Save" Command="{Binding SaveCommand}" />
+	
+		<Button Text="Delete" Command="{Binding DeleteCommand}" />
 	</StackLayout>
 </ContentPage>

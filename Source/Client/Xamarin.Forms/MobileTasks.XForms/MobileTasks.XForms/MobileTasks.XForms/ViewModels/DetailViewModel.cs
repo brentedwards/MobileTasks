@@ -59,12 +59,29 @@ namespace MobileTasks.XForms.ViewModels
 			}
 		}
 
+		public ICommand DeleteCommand
+		{
+			get
+			{
+				return new Command(async () => { await this.DeleteTaskAsync(); });
+			}
+		}
+
 		public async Task SaveTaskAsync()
 		{
 			this.Task.DateDue = this.SpecifyDueDate ? this.DateDue : (DateTime?)null;
 
 			this.IsBusy = true;
 			await this.MobileService.UpsertTaskAsync(this.Task);
+			this.IsBusy = false;
+
+			await this.navigation.PopAsync();
+		}
+
+		public async Task DeleteTaskAsync()
+		{
+			this.IsBusy = true;
+			await this.MobileService.DeleteTaskAsync(this.Task.Id);
 			this.IsBusy = false;
 
 			await this.navigation.PopAsync();
