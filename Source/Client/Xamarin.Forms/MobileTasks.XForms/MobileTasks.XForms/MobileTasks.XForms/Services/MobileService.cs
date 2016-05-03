@@ -39,29 +39,22 @@ namespace MobileTasks.XForms.Services
 
 		public async Task LoginAsync(MobileServiceAuthenticationProvider provider)
 		{
-			try
-			{
 #if ANDROID
 			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider);
 #else
 #if IOS
-				var rootController = UIKit.UIApplication.SharedApplication.KeyWindow.RootViewController.PresentedViewController;
-				var navcontroller = rootController as UINavigationController;
-				if (navcontroller != null)
-				{
-					rootController = navcontroller.VisibleViewController;
-				}
+			var rootController = UIKit.UIApplication.SharedApplication.KeyWindow.RootViewController.PresentedViewController;
+			var navcontroller = rootController as UINavigationController;
+			if (navcontroller != null)
+			{
+				rootController = navcontroller.VisibleViewController;
+			}
 
-				await this.Client.LoginAsync(rootController, provider);
+			await this.Client.LoginAsync(rootController, provider);
 #else
 			await this.Client.LoginAsync(provider);
 #endif // IOS
 #endif // ANDROID
-			}
-			catch (Exception ex)
-			{
-				var blah = ex.Message;
-			}
 
 			this.OnUserLoggedIn?.Invoke(this, new EventArgs());
 		}
