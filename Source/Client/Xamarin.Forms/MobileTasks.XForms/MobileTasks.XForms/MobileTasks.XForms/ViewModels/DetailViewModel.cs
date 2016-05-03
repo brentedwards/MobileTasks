@@ -12,7 +12,6 @@ namespace MobileTasks.XForms.ViewModels
 
 		public DetailViewModel(INavigation navigation)
 		{
-			this.Task = new MobileTask();
 			this.DateDue = DateTime.Today;
 
 			this.navigation = navigation;
@@ -25,6 +24,17 @@ namespace MobileTasks.XForms.ViewModels
 			set
 			{
 				this.task = value;
+				this.OnPropertyChanged();
+			}
+		}
+
+		private bool isExistingTask;
+		public bool IsExistingTask
+		{
+			get { return this.isExistingTask; }
+			set
+			{
+				this.isExistingTask = value;
 				this.OnPropertyChanged();
 			}
 		}

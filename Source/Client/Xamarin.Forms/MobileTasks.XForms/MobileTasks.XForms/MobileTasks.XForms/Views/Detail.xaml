@@ -26,6 +26,6 @@
 
 		<Button Text="Save" Command="{Binding SaveCommand}" />
 	
-		<Button Text="Delete" Command="{Binding DeleteCommand}" />
+		<Button Text="Delete" Command="{Binding DeleteCommand}" IsVisible="{Binding IsExistingTask}" />
 	</StackLayout>
 </ContentPage>

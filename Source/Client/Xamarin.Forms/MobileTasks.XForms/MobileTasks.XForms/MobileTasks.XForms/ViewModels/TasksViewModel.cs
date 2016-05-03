@@ -32,6 +32,7 @@ namespace MobileTasks.XForms.ViewModels
 			{
 				var tasks = await this.MobileService.GetTasksAsync();
 
+				this.Tasks.Clear();
 				foreach (var task in tasks)
 				{
 					this.Tasks.Add(task);

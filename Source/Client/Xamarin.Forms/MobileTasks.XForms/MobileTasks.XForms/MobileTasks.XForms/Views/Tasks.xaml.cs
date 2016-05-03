@@ -25,13 +25,20 @@ namespace MobileTasks.XForms.Views
 			TaskList.ItemTapped += async (sender, args) =>
 			{
 				var task = (MobileTask)args.Item;
-				await Navigation.PushAsync(new Detail(new MobileTask
+				var detail = new Detail(new MobileTask
 				{
 					Id = task.Id,
 					Description = task.Description,
 					DateDue = task.DateDue,
 					IsCompleted = task.IsCompleted
-				}));
+				});
+				detail.ViewModel.IsExistingTask = true;
+				await Navigation.PushAsync(detail);
+			};
+
+			Add.Clicked += async (sender, args) =>
+			{
+				await Navigation.PushAsync(new Detail(new MobileTask()));
 			};
 
 			ShowLoginDialog();
@@ -40,6 +47,16 @@ namespace MobileTasks.XForms.Views
 		public async Task ShowLoginDialog()
 		{
 			await Navigation.PushModalAsync(new Login());
+		}
+
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+
+			if (MobileService.Instance.User != null)
+			{
+				await this.ViewModel.LoadTasksAsync();
+			}
 		}
 	}
 }
