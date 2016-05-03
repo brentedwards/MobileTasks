@@ -1,4 +1,5 @@
-﻿using MobileTasks.XForms.Services;
+﻿using MobileTasks.XForms.Models;
+using MobileTasks.XForms.Services;
 using MobileTasks.XForms.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace MobileTasks.XForms.Views
 
 			this.ViewModel = new TasksViewModel();
 			this.BindingContext = this.ViewModel;
+
+			TaskList.ItemTapped += async (sender, args) =>
+			{
+				var task = (MobileTask)args.Item;
+				await Navigation.PushAsync(new Detail(task));
+			};
 
 			ShowLoginDialog();
 		}

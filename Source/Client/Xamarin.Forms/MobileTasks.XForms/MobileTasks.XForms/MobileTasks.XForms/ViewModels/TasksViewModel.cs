@@ -20,11 +20,11 @@ namespace MobileTasks.XForms.ViewModels
 
 			MobileService.OnUserLoggedIn += async delegate
 			{
-				await this.LoadTasks();
+				await this.LoadTasksAsync();
 			};
 		}
 
-		public async Task LoadTasks()
+		public async Task LoadTasksAsync()
 		{
 			this.IsBusy = true;
 
