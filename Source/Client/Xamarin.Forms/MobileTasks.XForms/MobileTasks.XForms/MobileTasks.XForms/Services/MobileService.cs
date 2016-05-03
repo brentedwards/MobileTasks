@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
+#if IOS
 using UIKit;
+#endif // IOS
 
 namespace MobileTasks.XForms.Services
 {
@@ -43,6 +46,8 @@ namespace MobileTasks.XForms.Services
 			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider);
 #else
 #if IOS
+			// Launching from a modal window takes some finesse.
+			// http://stackoverflow.com/questions/24136464/access-viewcontroller-in-dependencyservice-to-present-mfmailcomposeviewcontrolle
 			var rootController = UIKit.UIApplication.SharedApplication.KeyWindow.RootViewController.PresentedViewController;
 			var navcontroller = rootController as UINavigationController;
 			if (navcontroller != null)
