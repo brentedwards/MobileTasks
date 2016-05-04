@@ -1,11 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:controls="clr-namespace:MobileTasks.XForms.Controls"
              x:Class="MobileTasks.XForms.Views.Login">
-	<StackLayout Orientation="Vertical">
-		<Button Text="Facebook" Command="{Binding FacebookCommand}" />
-		<Button Text="Microsoft" Command="{Binding MicrosoftCommand}" />
-		<Button Text="Twitter" Command="{Binding TwitterCommand}" />
-		<Button Text="Google" Command="{Binding GoogleCommand}" />
-	</StackLayout>
+	<controls:GradientContentView StartColor="#B4EC51" EndColor="#429321">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<StackLayout Orientation="Horizontal" Grid.Row="1">
+				<BoxView HorizontalOptions="FillAndExpand" />
+				<Image Source="Logo" HorizontalOptions="Center" Aspect="AspectFit" WidthRequest="200" />
+				<BoxView HorizontalOptions="FillAndExpand" />
+			</StackLayout>
+
+			<Label Text="Sign In:" Grid.Row="3" XAlign="Center" TextColor="White" FontSize="30" />
+			<StackLayout Orientation="Horizontal" Grid.Row="4" HorizontalOptions="CenterAndExpand">
+				<StackLayout Orientation="Vertical" Spacing="5">
+					<Image Source="IconTwitter" HorizontalOptions="CenterAndExpand">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding TwitterCommand}" />
+						</Image.GestureRecognizers>
+					</Image>
+					<Label Text="Twitter" XAlign="Center" TextColor="White" FontSize="20" />
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="5">
+					<Image Source="IconFacebook" HorizontalOptions="CenterAndExpand">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding FacebookCommand}" />
+						</Image.GestureRecognizers>
+					</Image>
+					<Label Text="Facebook" XAlign="Center" TextColor="White" FontSize="20" />
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="5">
+					<Image Source="IconMicrosoft" HorizontalOptions="CenterAndExpand">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding MicrosoftCommand}" />
+						</Image.GestureRecognizers>
+					</Image>
+					<Label Text="Microsoft" XAlign="Center" TextColor="White" FontSize="20" />
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="5">
+					<Image Source="IconGoogle" HorizontalOptions="CenterAndExpand">
+						<Image.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding GoogleCommand}" />
+						</Image.GestureRecognizers>
+					</Image>
+					<Label Text="Google" XAlign="Center" TextColor="White" FontSize="20" />
+				</StackLayout>
+			</StackLayout>
+		</Grid>
+	</controls:GradientContentView>
 </ContentPage>
