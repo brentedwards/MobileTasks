@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:controls="clr-namespace:MobileTasks.XForms.Controls"
              x:Class="MobileTasks.XForms.Views.Login">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style x:Key="OptionTextStyle" TargetType="Label">
+				<Setter Property="TextColor" Value="White" />
+				<Setter Property="FontSize" Value="20" />
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
 	<controls:GradientContentView StartColor="#B4EC51" EndColor="#429321">
 		<Grid>
 			<Grid.RowDefinitions>
@@ -28,7 +36,7 @@
 							<TapGestureRecognizer Command="{Binding TwitterCommand}" />
 						</Image.GestureRecognizers>
 					</Image>
-					<Label Text="Twitter" XAlign="Center" TextColor="White" FontSize="20" />
+					<Label Text="Twitter" XAlign="Center" Style="{StaticResource OptionTextStyle}" />
 				</StackLayout>
 				<StackLayout Orientation="Vertical" Spacing="5">
 					<Image Source="IconFacebook" HorizontalOptions="CenterAndExpand">
@@ -36,7 +44,7 @@
 							<TapGestureRecognizer Command="{Binding FacebookCommand}" />
 						</Image.GestureRecognizers>
 					</Image>
-					<Label Text="Facebook" XAlign="Center" TextColor="White" FontSize="20" />
+					<Label Text="Facebook" XAlign="Center" Style="{StaticResource OptionTextStyle}" />
 				</StackLayout>
 				<StackLayout Orientation="Vertical" Spacing="5">
 					<Image Source="IconMicrosoft" HorizontalOptions="CenterAndExpand">
@@ -44,7 +52,7 @@
 							<TapGestureRecognizer Command="{Binding MicrosoftCommand}" />
 						</Image.GestureRecognizers>
 					</Image>
-					<Label Text="Microsoft" XAlign="Center" TextColor="White" FontSize="20" />
+					<Label Text="Microsoft" XAlign="Center" Style="{StaticResource OptionTextStyle}" />
 				</StackLayout>
 				<StackLayout Orientation="Vertical" Spacing="5">
 					<Image Source="IconGoogle" HorizontalOptions="CenterAndExpand">
@@ -52,7 +60,7 @@
 							<TapGestureRecognizer Command="{Binding GoogleCommand}" />
 						</Image.GestureRecognizers>
 					</Image>
-					<Label Text="Google" XAlign="Center" TextColor="White" FontSize="20" />
+					<Label Text="Google" XAlign="Center" Style="{StaticResource OptionTextStyle}" />
 				</StackLayout>
 			</StackLayout>
 		</Grid>
