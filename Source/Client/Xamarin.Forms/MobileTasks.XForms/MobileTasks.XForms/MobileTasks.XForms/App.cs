@@ -13,7 +13,7 @@ namespace MobileTasks.XForms
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new NavigationPage(new Tasks());
+			MainPage = new NavigationPage(new Tasks()) { BarBackgroundColor = Color.FromHex("#429321") };
 		}
 
 		protected override void OnStart ()

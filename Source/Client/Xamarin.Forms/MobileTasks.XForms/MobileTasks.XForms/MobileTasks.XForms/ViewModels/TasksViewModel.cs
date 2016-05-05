@@ -7,12 +7,22 @@ using System.ComponentModel;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MobileTasks.XForms.ViewModels
 {
     public class TasksViewModel : ViewModelBase
     {
 		public ObservableCollection<MobileTask> Tasks { get; private set; }
+
+		public ICommand UpdateTaskCommand
+		{
+			get
+			{
+				return new Command<MobileTask>(async (task) => { await this.UpdateIsCompleted(task); });
+			}
+		}
 
 		public TasksViewModel()
 		{
@@ -60,6 +70,15 @@ namespace MobileTasks.XForms.ViewModels
 				await this.MobileService.UpsertTaskAsync(task);
 				this.IsBusy = false;
 			}
+		}
+
+		private async Task UpdateIsCompleted(MobileTask task)
+		{
+			task.IsCompleted = !task.IsCompleted;
+
+			this.IsBusy = true;
+			await this.MobileService.UpsertTaskAsync(task);
+			this.IsBusy = false;
 		}
 	}
 }

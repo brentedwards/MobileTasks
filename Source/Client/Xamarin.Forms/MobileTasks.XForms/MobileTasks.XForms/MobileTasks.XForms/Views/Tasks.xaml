@@ -1,7 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileTasks.XForms.Views.Tasks">
+						 xmlns:converters="clr-namespace:MobileTasks.XForms.Converters"
+             x:Class="MobileTasks.XForms.Views.Tasks"
+						 BackgroundColor="White">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<converters:TaskImageSourceConverter
+				x:Key="TaskImageSourceConverter"
+				CompletedSource="IconCompleted.png"
+				IncompleteSource="IconIncomplete.png"
+				PastDueSource="IconPastDue.png" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" x:Name="Add" />
 	</ContentPage.ToolbarItems>
@@ -15,7 +26,12 @@
 							<ColumnDefinition />
 						</Grid.ColumnDefinitions>
 
-						<Switch IsToggled="{Binding IsCompleted}" />
+						<!--<Switch IsToggled="{Binding IsCompleted}" />-->
+						<Image Source="{Binding Converter={StaticResource TaskImageSourceConverter}}" HorizontalOptions="CenterAndExpand">
+							<Image.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding UpdateTaskCommand}" CommandParameter="{Binding}" />
+							</Image.GestureRecognizers>
+						</Image>
 
 						<Grid Grid.Column="1">
 							<Grid.RowDefinitions>
@@ -23,9 +39,9 @@
 								<RowDefinition />
 							</Grid.RowDefinitions>
 
-							<Label Text="{Binding Description}" />
+							<Label Text="{Binding Description}" FontSize="20" TextColor="Black" />
 
-							<Label Text="{Binding DateDue}" Grid.Row="1" />
+							<Label Text="{Binding DateDue}" Grid.Row="1" FontSize="16" TextColor="Gray" />
 						</Grid>
 					</Grid>
 				</ViewCell>
