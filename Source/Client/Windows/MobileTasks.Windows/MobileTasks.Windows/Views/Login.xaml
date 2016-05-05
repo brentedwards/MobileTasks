@@ -6,13 +6,64 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+	<local:MobileTasksPage.Resources>
+		<Style x:Key="OptionTextStyle" TargetType="TextBlock">
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="FontSize" Value="10" />
+		</Style>
+	</local:MobileTasksPage.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Facebook" Click="Facebook_Click" />
-            <Button Content="Microsoft" Click="Microsoft_Click" Margin="0,10,0,0" />
-            <Button Content="Twitter" Click="Twitter_Click" Margin="0,10,0,0" />
-            <Button Content="Google" Click="Google_Click" Margin="0,10,0,0" />
-        </StackPanel>
-    </Grid>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="2*" />
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.Background>
+			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="#FFB4EC51" Offset="0"/>
+				<GradientStop Color="#FF429321" Offset="1"/>
+			</LinearGradientBrush>
+		</Grid.Background>
+
+		<Image Grid.Row="1" Source="ms-appx:///Images/Logo@4x.png" Margin="60,0"/>
+
+		<TextBlock Text="Sign In:" Grid.Row="3" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10" FontSize="16" />
+		<Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Button Click="Twitter_Click" Background="{x:Null}" Margin="5,0" BorderBrush="{x:Null}">
+				<StackPanel Orientation="Vertical">
+					<Image Source="ms-appx:///Images/IconTwitter@4x.png" MaxWidth="100"/>
+					<TextBlock Text="Twitter" Style="{StaticResource OptionTextStyle}" />
+				</StackPanel>
+			</Button>
+			<Button Click="Facebook_Click" Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="5,0">
+				<StackPanel Orientation="Vertical">
+					<Image Source="ms-appx:///Images/IconFacebook@4x.png" MaxWidth="100"/>
+					<TextBlock Text="Facebook" Style="{StaticResource OptionTextStyle}" />
+				</StackPanel>
+			</Button>
+			<Button Click="Microsoft_Click" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Margin="5,0">
+				<StackPanel Orientation="Vertical">
+					<Image Source="ms-appx:///Images/IconMicrosoft@4x.png" MaxWidth="100"/>
+					<TextBlock Text="Microsoft" Style="{StaticResource OptionTextStyle}" />
+				</StackPanel>
+			</Button>
+			<Button Click="Google_Click" Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}" Margin="5,0">
+				<StackPanel Orientation="Vertical">
+					<Image Source="ms-appx:///Images/IconGoogle@4x.png" MaxWidth="100"/>
+					<TextBlock Text="Google" Style="{StaticResource OptionTextStyle}" />
+				</StackPanel>
+			</Button>
+		</Grid>
+	</Grid>
 </local:MobileTasksPage>
