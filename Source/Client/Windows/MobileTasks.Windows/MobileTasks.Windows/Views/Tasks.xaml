@@ -10,11 +10,39 @@
 	<local:MobileTasksPage.Resources>
 		<SolidColorBrush x:Key="CompletedBrush" Color="#FFADADAD" />
 		<SolidColorBrush x:Key="UncompletedBrush" Color="Black" />
-		<conv:BoolToBrushConverter x:Key="BoolToBrushConverter" TrueBrush="{StaticResource CompletedBrush}" FalseBrush="{StaticResource UncompletedBrush}" />
+		
+		<conv:BoolToBrushConverter
+			x:Key="BoolToBrushConverter"
+			TrueBrush="{StaticResource CompletedBrush}"
+			FalseBrush="{StaticResource UncompletedBrush}" />
+
+		<conv:TaskImageSourceConverter
+			x:Key="TaskImageSourceConverter"
+			CompletedSource="ms-appx:///Images/IconCompleted@4x.png"
+			IncompleteSource="ms-appx:///Images/IconIncomplete@4x.png"
+			PastDueSource="ms-appx:///Images/IconPastDue@4x.png" />
+
+		<conv:DateDueConverter
+			x:Key="DateDueConverter"
+			NoDateDueText="No Due Date" />
 
 		<DataTemplate x:Key="TaskItemTemplate">
-			<Grid>
-				<CheckBox x:Name="checkBox" Foreground="{Binding IsCompleted, Converter={StaticResource BoolToBrushConverter}}" Content="{Binding Description}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:LayoutOverrides="Width, Height" IsChecked="{Binding IsCompleted, Mode=TwoWay}" />
+			<Grid Padding="0,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="11" />
+				</Grid.RowDefinitions>
+				
+				<Image Source="{Binding Converter={StaticResource TaskImageSourceConverter}}" Width="20" Height="20" Grid.RowSpan="2" Margin="0,0,10,0"/>
+				<TextBlock Text="{Binding Description}" Grid.Column="1" Margin="0,0,0,5" FontSize="18.667" />
+				<TextBlock Text="{Binding DateDue, Converter={StaticResource DateDueConverter}}" Foreground="#FFB3B3B3" Grid.Column="1" Grid.Row="1" />
+				
+				<Rectangle Height="1" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Fill="#FFB3B3B3" />
 			</Grid>
 		</DataTemplate>
 	</local:MobileTasksPage.Resources>
@@ -31,7 +59,12 @@
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<ListView ItemsSource="{Binding Tasks}" ItemTemplate="{StaticResource TaskItemTemplate}"
-				  SelectionChanged="ListView_SelectionChanged">
+				  SelectionChanged="ListView_SelectionChanged" HorizontalContentAlignment="Stretch">
+			<ListView.ItemContainerStyle>
+				<Style TargetType="ListViewItem">
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				</Style>
+			</ListView.ItemContainerStyle>
 		</ListView>
 		<ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Top" />
 	</Grid>

@@ -91,7 +91,9 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateDueConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
+    <Compile Include="Converters\TaskImageSourceConverter.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="ViewModels\TaskDetailViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />

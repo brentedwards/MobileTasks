@@ -1,8 +1,6 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using MobileTasks.Windows.Models;
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -28,7 +26,6 @@ namespace MobileTasks.Windows.ViewModels
 				foreach (var task in tasks)
 				{
 					this.Tasks.Add(task);
-					task.PropertyChanged += this.OnTaskPropertyChanged;
 				}
 				this.IsBusy = false;
 			}
@@ -38,18 +35,12 @@ namespace MobileTasks.Windows.ViewModels
 				{
 					await this.Logout();
 				}
-			}
-		}
-
-		private async void OnTaskPropertyChanged(object sender, PropertyChangedEventArgs args)
-		{
-			if (args.PropertyName == "IsCompleted")
-			{
-				var task = (MobileTask)sender;
-
-				this.IsBusy = true;
-				await this.MobileService.UpsertTaskAsync(task);
-				this.IsBusy = false;
+				else
+				{
+					this.IsBusy = false;
+					await this.OnShowErrorAsync?.Invoke("Error loading tasks.");
+					await this.Logout();
+				}
 			}
 		}
 	}
