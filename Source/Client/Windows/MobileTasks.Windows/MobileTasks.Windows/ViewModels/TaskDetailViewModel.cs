@@ -1,8 +1,5 @@
 ﻿using MobileTasks.Windows.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MobileTasks.Windows.ViewModels
@@ -16,6 +13,12 @@ namespace MobileTasks.Windows.ViewModels
 			set
 			{
 				this.task = value;
+				if (value != null && value.DateDue != null)
+				{
+					this.SpecifyDateDue = true;
+					this.DateDue = value.DateDue.Value;
+				}
+
 				this.OnPropertyChanged();
 			}
 		}
@@ -31,9 +34,32 @@ namespace MobileTasks.Windows.ViewModels
 			}
 		}
 
+		private bool specifyDateDue;
+		public bool SpecifyDateDue
+		{
+			get { return this.specifyDateDue; }
+			set
+			{
+				this.specifyDateDue = value;
+				this.OnPropertyChanged();
+			}
+		}
+
+		private DateTime dateDue;
+		public DateTime DateDue
+		{
+			get { return this.dateDue; }
+			set
+			{
+				this.dateDue = value;
+				this.OnPropertyChanged();
+			}
+		}
+
 		public TaskDetailViewModel()
 		{
 			this.Task = new MobileTask();
+			this.DateDue = DateTime.Today;
 		}
 
 		public async Task LoadTaskAsync(int id)
@@ -46,6 +72,8 @@ namespace MobileTasks.Windows.ViewModels
 
 		public async Task SaveTaskAsync()
 		{
+			this.Task.DateDue = this.SpecifyDateDue ? this.DateDue : (DateTime?)null;
+
 			this.IsBusy = true;
 			this.Task = await this.MobileService.UpsertTaskAsync(this.Task);
 			this.IsBusy = false;

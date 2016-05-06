@@ -47,13 +47,11 @@
 		</DataTemplate>
 	</local:MobileTasksPage.Resources>
 	<local:MobileTasksPage.BottomAppBar>
-		<CommandBar>
+		<CommandBar Background="#FF7ED321">
 			<CommandBar.Content>
 				<Grid/>
 			</CommandBar.Content>
-			<!--<AppBarButton Icon="Accept" Label="appbarbutton"/>
-			<AppBarButton Icon="Cancel" Label="appbarbutton"/>-->
-			<AppBarButton Icon="Add" Label="Add Task" Click="AddButton_Click"/>
+			<AppBarButton Icon="Add" Label="Add New" Click="AddButton_Click"/>
 		</CommandBar>
 	</local:MobileTasksPage.BottomAppBar>
 

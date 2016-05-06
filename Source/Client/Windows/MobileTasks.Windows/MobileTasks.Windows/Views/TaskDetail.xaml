@@ -9,9 +9,10 @@
     mc:Ignorable="d">
 	<Page.Resources>
 		<conv:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter" />
+		<conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 	</Page.Resources>
 	<local:MobileTasksPage.BottomAppBar>
-		<CommandBar>
+		<CommandBar Background="#FF7ED321">
 			<CommandBar.Content>
 				<Grid/>
 			</CommandBar.Content>
@@ -22,26 +23,34 @@
 	</local:MobileTasksPage.BottomAppBar>
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup">
+				<VisualState x:Name="Editing">
+					<VisualState.Setters>
+						<Setter Target="Header.(TextBlock.Text)" Value="Details"/>
+					</VisualState.Setters>
+					<VisualState.StateTriggers>
+						<StateTrigger IsActive="{Binding IsEdit}"/>
+					</VisualState.StateTriggers>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
 		<ScrollViewer>
-			<Grid DataContext="{Binding Task}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
+			<StackPanel Padding="20,0">
+				<TextBlock x:Name="Header" Text="Add New" Margin="0,20,0,30" HorizontalAlignment="Center" FontSize="24" />
+				
+				<TextBox Text="{Binding Task.Description, Mode=TwoWay}" />
 
-				<TextBlock Text="Task" />
-				<TextBox Text="{Binding Description, Mode=TwoWay}" Grid.Column="1" />
+				<Rectangle Height="1" Fill="#FFB3B3B3" Margin="0,20" />
 
-				<TextBlock Text="Date Due" Grid.Row="1" />
-				<DatePicker Date="{Binding DateDue, Mode=TwoWay, Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" Grid.Row="1" Grid.Column="1" />
+				<CheckBox Content="Specify a due date" IsChecked="{Binding SpecifyDateDue, Mode=TwoWay}" />
+				
+				<DatePicker Date="{Binding DateDue, Mode=TwoWay, Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" Visibility="{Binding SpecifyDateDue, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,10,0,0" />
 
-				<CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}" Content="Completed" Grid.Row="2" Grid.Column="2" />
-			</Grid>
+				<Rectangle Height="1" Fill="#FFB3B3B3" Margin="0,20" />
+
+				<CheckBox IsChecked="{Binding Task.IsCompleted, Mode=TwoWay}" Content="Mark as completed" />
+			</StackPanel>
 		</ScrollViewer>
 		<ProgressBar IsIndeterminate="True" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" VerticalAlignment="Top" />
 	</Grid>
