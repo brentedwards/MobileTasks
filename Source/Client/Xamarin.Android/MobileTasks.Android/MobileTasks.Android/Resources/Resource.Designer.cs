@@ -105,23 +105,23 @@ namespace MobileTasks.Droid
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060008
+			public const int changeDate = 2131099656;
+			
 			// aapt resource value: 0x7f060009
 			public const int completed = 2131099657;
 			
-			// aapt resource value: 0x7f060008
-			public const int date = 2131099656;
+			// aapt resource value: 0x7f060007
+			public const int date = 2131099655;
 			
 			// aapt resource value: 0x7f06000d
 			public const int dateDue = 2131099661;
 			
-			// aapt resource value: 0x7f060007
-			public const int dateLabel = 2131099655;
-			
 			// aapt resource value: 0x7f06000a
 			public const int delete = 2131099658;
 			
-			// aapt resource value: 0x7f060006
-			public const int description = 2131099654;
+			// aapt resource value: 0x7f060005
+			public const int description = 2131099653;
 			
 			// aapt resource value: 0x7f06000f
 			public const int edit = 2131099663;
@@ -144,11 +144,11 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f06000b
 			public const int save = 2131099659;
 			
+			// aapt resource value: 0x7f060006
+			public const int specifyDateDue = 2131099654;
+			
 			// aapt resource value: 0x7f06000c
 			public const int state = 2131099660;
-			
-			// aapt resource value: 0x7f060005
-			public const int taskLabel = 2131099653;
 			
 			// aapt resource value: 0x7f060001
 			public const int twitter = 2131099649;
@@ -210,6 +210,9 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f040000
 			public const int ApplicationName = 2130968576;
 			
+			// aapt resource value: 0x7f040010
+			public const int ChangeDate = 2130968592;
+			
 			// aapt resource value: 0x7f04000b
 			public const int Completed = 2130968587;
 			
@@ -242,6 +245,9 @@ namespace MobileTasks.Droid
 			
 			// aapt resource value: 0x7f04000c
 			public const int Save = 2130968588;
+			
+			// aapt resource value: 0x7f04000f
+			public const int SpecifyDueDate = 2130968591;
 			
 			// aapt resource value: 0x7f040009
 			public const int Task = 2130968585;

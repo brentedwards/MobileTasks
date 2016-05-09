@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Java.Util;
 using MobileTasks.Droid.Models;
 using MobileTasks.Droid.Services;
 using Newtonsoft.Json;
@@ -12,13 +13,15 @@ using System;
 namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Detail")]
-	public class TaskDetailActivity : Activity
+	public class TaskDetailActivity : Activity, DatePickerDialog.IOnDateSetListener
 	{
 		private MobileTask task;
 
 		private EditText description;
-		private EditText date;
+		private TextView date;
 		private CheckBox completed;
+		private CheckBox specifyDateDue;
+		private Button changeDate;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -35,21 +38,52 @@ namespace MobileTasks.Droid.Activities
 				this.task = new MobileTask();
 			}
 
-			description = FindViewById<EditText>(Resource.Id.description);
-			description.Text = this.task.Description;
+			this.description = this.FindViewById<EditText>(Resource.Id.description);
+			this.description.Text = this.task.Description;
 
-			date = FindViewById<EditText>(Resource.Id.date);
-			date.Text = this.task.DateDue != null ? this.task.DateDue.Value.ToString("d") : null;
+			this.date = this.FindViewById<TextView>(Resource.Id.date);
+			this.date.Text = this.task.DateDue != null ? this.task.DateDue.Value.ToString("ddd, M/d/yy h:mm tt") : null;
 
-			completed = FindViewById<CheckBox>(Resource.Id.completed);
-			completed.Checked = this.task.IsCompleted;
+			this.changeDate = this.FindViewById<Button>(Resource.Id.changeDate);
+			this.changeDate.Click += (sender, args) =>
+			{
+				// TODO: DatePicker
 
-			var saveButton = FindViewById<Button>(Resource.Id.save);
+				var calendar = Calendar.GetInstance(Java.Util.TimeZone.Default);
+				if (this.task.DateDue != null)
+				{
+					calendar.Time = new Date(this.task.DateDue.Value.Millisecond);
+				}
+
+				var picker = new DatePickerDialog(this, this, this.task.DateDue.Value.Year, this.task.DateDue.Value.Month - 1, this.task.DateDue.Value.Day);
+				picker.Show();
+			};
+
+			this.specifyDateDue = this.FindViewById<CheckBox>(Resource.Id.specifyDateDue);
+			this.specifyDateDue.CheckedChange += (sender, args) =>
+			{
+				if (args.IsChecked)
+				{
+					this.date.Visibility = ViewStates.Visible;
+					this.changeDate.Visibility = ViewStates.Visible;
+				}
+				else
+				{
+					this.date.Visibility = ViewStates.Gone;
+					this.changeDate.Visibility = ViewStates.Gone;
+				}
+			};
+			this.specifyDateDue.Checked = this.task.DateDue != null;
+
+			this.completed = this.FindViewById<CheckBox>(Resource.Id.completed);
+			this.completed.Checked = this.task.IsCompleted;
+
+			var saveButton = this.FindViewById<Button>(Resource.Id.save);
 			saveButton.Click += async delegate
 			{
 				this.task.Description = description.Text;
 				this.task.IsCompleted = completed.Checked;
-				if (!string.IsNullOrWhiteSpace(date.Text))
+				if (this.specifyDateDue.Checked && !string.IsNullOrWhiteSpace(date.Text))
 				{
 					DateTime parsedDate;
 					if (DateTime.TryParse(date.Text, out parsedDate))
@@ -75,7 +109,7 @@ namespace MobileTasks.Droid.Activities
 				this.Finish();
 			};
 
-			var deleteButton = FindViewById<Button>(Resource.Id.delete);
+			var deleteButton = this.FindViewById<Button>(Resource.Id.delete);
 			deleteButton.Click += delegate
 			{
 				var builder = new AlertDialog.Builder(this)
@@ -90,6 +124,12 @@ namespace MobileTasks.Droid.Activities
 
 				builder.Create().Show();
 			};
+		}
+
+		public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+		{
+			this.task.DateDue = new DateTime(year, monthOfYear + 1, dayOfMonth);
+			this.date.Text = this.task.DateDue.Value.ToString("ddd, M/d/yy h:mm tt");
 		}
 	}
 }
