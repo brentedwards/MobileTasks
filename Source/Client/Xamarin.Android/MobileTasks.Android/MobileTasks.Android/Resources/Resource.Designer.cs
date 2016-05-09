@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("MobileTasks.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("MobileTasks.Droid.Resource", IsApplication=true)]
 
-namespace MobileTasks.Android
+namespace MobileTasks.Droid
 {
 	
 	
@@ -111,6 +111,9 @@ namespace MobileTasks.Android
 			// aapt resource value: 0x7f060008
 			public const int date = 2131099656;
 			
+			// aapt resource value: 0x7f06000d
+			public const int dateDue = 2131099661;
+			
 			// aapt resource value: 0x7f060007
 			public const int dateLabel = 2131099655;
 			
@@ -120,8 +123,8 @@ namespace MobileTasks.Android
 			// aapt resource value: 0x7f060006
 			public const int description = 2131099654;
 			
-			// aapt resource value: 0x7f06000e
-			public const int edit = 2131099662;
+			// aapt resource value: 0x7f06000f
+			public const int edit = 2131099663;
 			
 			// aapt resource value: 0x7f060002
 			public const int facebook = 2131099650;
@@ -135,14 +138,14 @@ namespace MobileTasks.Android
 			// aapt resource value: 0x7f060003
 			public const int microsoft = 2131099651;
 			
-			// aapt resource value: 0x7f06000d
-			public const int newTask = 2131099661;
+			// aapt resource value: 0x7f06000e
+			public const int newTask = 2131099662;
 			
 			// aapt resource value: 0x7f06000b
 			public const int save = 2131099659;
 			
 			// aapt resource value: 0x7f06000c
-			public const int task = 2131099660;
+			public const int state = 2131099660;
 			
 			// aapt resource value: 0x7f060005
 			public const int taskLabel = 2131099653;

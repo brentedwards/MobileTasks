@@ -1,23 +1,41 @@
 using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
+using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
-using MobileTasks.Android.Adapters;
-using MobileTasks.Android.Services;
+using MobileTasks.Droid.Adapters;
+using MobileTasks.Droid.Models;
+using MobileTasks.Droid.Services;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MobileTasks.Android.Activities
+namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Tasks")]
 	public class MainActivity : ListActivity
 	{
+		private List<MobileTask> taskList;
+
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			RequestWindowFeature(WindowFeatures.ActionBar);
 
 			base.OnCreate(savedInstanceState);
+
+			this.FindViewById(Android.Resource.Id.Content).SetBackgroundColor(Color.White);
+
+			this.ListView.DividerHeight = 0;
+
+			this.ListView.ItemClick += (sender, args) =>
+			{
+				var task = this.taskList[args.Position];
+				this.Edit(task);
+			};
 		}
 
 		protected override async void OnResume()
@@ -29,7 +47,7 @@ namespace MobileTasks.Android.Activities
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
 		{
-			MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
+			this.MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
 			var newTaskMenuItem = menu.FindItem(Resource.Id.newTask);
 			newTaskMenuItem.SetIntent(new Intent(this, typeof(TaskDetailActivity)));
 
@@ -41,9 +59,9 @@ namespace MobileTasks.Android.Activities
 			try
 			{
 				var tasks = await MobileService.Instance.GetTasksAsync();
-				var taskList = tasks.ToList();
+				this.taskList = tasks.ToList();
 
-				ListAdapter = new TaskAdapter(this, taskList);
+				this.ListAdapter = new TaskAdapter(this, this.taskList);
 			}
 			catch (MobileServiceInvalidOperationException ex)
 			{
@@ -52,6 +70,16 @@ namespace MobileTasks.Android.Activities
 					this.Finish();
 				}
 			}
+		}
+
+		private void Edit(MobileTask task)
+		{
+			var json = JsonConvert.SerializeObject(task);
+
+			var intent = new Intent(this, typeof(TaskDetailActivity));
+			intent.PutExtra(Constants.Extras.Task, json);
+
+			this.StartActivity(intent);
 		}
 	}
 }

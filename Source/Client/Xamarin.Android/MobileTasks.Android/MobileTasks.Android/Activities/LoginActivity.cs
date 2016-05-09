@@ -9,11 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MobileTasks.Android.Services;
+using MobileTasks.Droid.Services;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
 
-namespace MobileTasks.Android.Activities
+namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Login", MainLauncher = true, Icon = "@drawable/icon")]
 	public class LoginActivity : Activity

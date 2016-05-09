@@ -4,12 +4,12 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using MobileTasks.Android.Models;
-using MobileTasks.Android.Services;
+using MobileTasks.Droid.Models;
+using MobileTasks.Droid.Services;
 using Newtonsoft.Json;
 using System;
 
-namespace MobileTasks.Android.Activities
+namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Detail")]
 	public class TaskDetailActivity : Activity
