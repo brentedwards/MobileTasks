@@ -17,36 +17,51 @@
 import Foundation
 import UIKit
 
-protocol TaskDelegate {
-    func didSaveItem(task : MobileTask)
-}
-
 class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var lblTaskDescription: UITextField!
-    @IBOutlet weak var pkDateDue: UIDatePicker!
-    @IBOutlet weak var swTaskComplete: UISwitch!
-
-    var delegate : TaskDelegate?
+    @IBOutlet weak var lblTaskDetails: UITextField!
+    @IBOutlet weak var swDueDate: UISwitch!
+    @IBOutlet weak var btnShowDueDate: UIButton!
+    @IBOutlet weak var swCompleted: UISwitch!
+    @IBOutlet weak var lblDateDue: UITextField!
+    
+    var delegate : TaskProtocol?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.lblTaskDescription.delegate = self
-        self.lblTaskDescription.becomeFirstResponder()
+        self.lblTaskDetails.becomeFirstResponder()
     }
     
     @IBAction func cancelPressed(sender : UIBarButtonItem) {
-        self.lblTaskDescription.resignFirstResponder()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func savePressed(sender : UIBarButtonItem) {
         saveItem()
-        self.lblTaskDescription.resignFirstResponder()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
-    // Textfield
+    @IBAction func showDatePickerPressed(sender: UIButton) {
+        if (self.swDueDate.on) {
+            let datePickerView  : UIDatePicker = UIDatePicker()
+            datePickerView.datePickerMode = UIDatePickerMode.Date
+            self.lblDateDue.inputView = datePickerView
+            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        }
+    }
+
+    @IBAction func startDateEditing(sender: AnyObject) {
+        if (self.swDueDate.on) {
+            let datePickerView  : UIDatePicker = UIDatePicker()
+            datePickerView.datePickerMode = UIDatePickerMode.Date
+            self.lblDateDue.inputView = datePickerView
+            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        } else {
+            self.lblDateDue.resignFirstResponder()
+        }
+    }
     
     func textFieldDidEndEditing(textField: UITextField)
     {
@@ -66,15 +81,27 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
         return true
     }
     
+    func handleDatePicker(sender: UIDatePicker) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        self.lblDateDue.text = dateFormatter.stringFromDate(sender.date)
+    }
+    
     // Delegate
     
     func saveItem()
     {
-        if let text = self.lblTaskDescription.text {
+        if let text = self.lblTaskDetails.text {
             let task : MobileTask = MobileTask()
             task.taskDescription = text
-            task.isCompleted = swTaskComplete.on
-            task.dateDue = self.pkDateDue.date
+            task.isCompleted = swCompleted.on
+            if (self.swDueDate.on) {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "dd MMM yyyy"
+                task.dateDue = dateFormatter.dateFromString(self.lblDateDue.text!)
+            } else {
+                task.dateDue = nil
+            }
             self.delegate?.didSaveItem(task)
         }
     }

@@ -11,12 +11,21 @@ import Foundation
 class TaskItemCell : UITableViewCell {
     
     @IBOutlet weak var lblTaskTitle: UILabel!
-    @IBOutlet weak var swTaskComplete: UISwitch!
+    @IBOutlet weak var lblDateDue: UILabel!
+    @IBOutlet weak var btnDetails: UIImageView!
+    @IBOutlet weak var btnStatus: UIButton!
     
+    var onButtonTapped : (() -> Void)? = nil
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+    }
+    
+    @IBAction func favoriteClicked(sender: UIButton) {
+        if let onButtonTapped = self.onButtonTapped {
+            onButtonTapped()
+        }
     }
     
 

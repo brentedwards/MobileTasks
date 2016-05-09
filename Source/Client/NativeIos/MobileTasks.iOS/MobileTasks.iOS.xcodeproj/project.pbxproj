@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083652101CDA912D0029FDF1 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836520E1CDA910A0029FDF1 /* TasksViewController.swift */; };
+		083652121CDA96730029FDF1 /* TaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083652111CDA96730029FDF1 /* TaskProtocol.swift */; };
 		085860A01CAC9C1300851731 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858609F1CAC9C1300851731 /* BaseViewController.swift */; };
 		08685FE11CB73F520063BEDD /* TaskItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08685FE01CB73F520063BEDD /* TaskItemCell.swift */; };
 		08BC7BEF1CB2EC18004E0690 /* MobleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC7BEE1CB2EC18004E0690 /* MobleTask.swift */; };
@@ -17,17 +19,17 @@
 		08E083301CAC12770086228E /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0832F1CAC12770086228E /* NetworkProtocol.swift */; };
 		08E083331CAC61F70086228E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E083321CAC61F70086228E /* Network.swift */; };
 		08E083361CAC7B250086228E /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E083351CAC7B250086228E /* Async.swift */; };
-		A2BD20971AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2BD20951AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld */; };
 		A2D9CBC41943C2540017F096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBC31943C2540017F096 /* AppDelegate.swift */; };
 		A2D9CBCC1943C2540017F096 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCA1943C2540017F096 /* Main.storyboard */; };
 		A2D9CBCE1943C2540017F096 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCD1943C2540017F096 /* Images.xcassets */; };
-		A2D9CBE41943C39D0017F096 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBE31943C39D0017F096 /* TasksViewController.swift */; };
 		A2E767C6194594DC00869113 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E767C5194594DC00869113 /* TaskViewController.swift */; };
 		A31A89F71BF3FDFA00C7B656 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */; };
 		A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0836520E1CDA910A0029FDF1 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		083652111CDA96730029FDF1 /* TaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskProtocol.swift; sourceTree = "<group>"; };
 		0858609F1CAC9C1300851731 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		08685FE01CB73F520063BEDD /* TaskItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskItemCell.swift; sourceTree = "<group>"; };
 		08BC7BEE1CB2EC18004E0690 /* MobleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobleTask.swift; sourceTree = "<group>"; };
@@ -38,13 +40,11 @@
 		08E0832F1CAC12770086228E /* NetworkProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkProtocol.swift; sourceTree = "<group>"; };
 		08E083321CAC61F70086228E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		08E083351CAC7B250086228E /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
-		A2BD20961AC8A731007F7181 /* QSTodoDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QSTodoDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A2D9CBBE1943C2540017F096 /* MobileTasks.iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileTasks.iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D9CBC21943C2540017F096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2D9CBC31943C2540017F096 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2D9CBCB1943C2540017F096 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A2D9CBCD1943C2540017F096 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A2D9CBE31943C39D0017F096 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		A2D9CBE81943D1340017F096 /* malmobileapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "malmobileapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E767C5194594DC00869113 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		08E083281CAC0A7C0086228E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A2D9CBE31943C39D0017F096 /* TasksViewController.swift */,
+				0836520E1CDA910A0029FDF1 /* TasksViewController.swift */,
 				A2E767C5194594DC00869113 /* TaskViewController.swift */,
 				08E083291CAC0DD00086228E /* LoginViewController.swift */,
 				0858609F1CAC9C1300851731 /* BaseViewController.swift */,
@@ -95,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				08E0832F1CAC12770086228E /* NetworkProtocol.swift */,
+				083652111CDA96730029FDF1 /* TaskProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -141,7 +142,6 @@
 				08E0832E1CAC12450086228E /* Protocols */,
 				08E0832B1CAC11790086228E /* Services */,
 				08E083281CAC0A7C0086228E /* ViewControllers */,
-				A2BD20951AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld */,
 				A2D9CBC31943C2540017F096 /* AppDelegate.swift */,
 				A2D9CBCA1943C2540017F096 /* Main.storyboard */,
 				A2D9CBCD1943C2540017F096 /* Images.xcassets */,
@@ -245,12 +245,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2E767C6194594DC00869113 /* TaskViewController.swift in Sources */,
-				A2BD20971AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld in Sources */,
 				08E083331CAC61F70086228E /* Network.swift in Sources */,
 				08685FE11CB73F520063BEDD /* TaskItemCell.swift in Sources */,
-				A2D9CBE41943C39D0017F096 /* TasksViewController.swift in Sources */,
 				08E083361CAC7B250086228E /* Async.swift in Sources */,
 				08BC7BF51CB2F64D004E0690 /* ViewControllerShared.swift in Sources */,
+				083652121CDA96730029FDF1 /* TaskProtocol.swift in Sources */,
+				083652101CDA912D0029FDF1 /* TasksViewController.swift in Sources */,
 				085860A01CAC9C1300851731 /* BaseViewController.swift in Sources */,
 				08BC7BF31CB2F61B004E0690 /* BaseTableViewController.swift in Sources */,
 				08E083301CAC12770086228E /* NetworkProtocol.swift in Sources */,
@@ -416,19 +416,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A2BD20951AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A2BD20961AC8A731007F7181 /* QSTodoDataModel.xcdatamodel */,
-			);
-			currentVersion = A2BD20961AC8A731007F7181 /* QSTodoDataModel.xcdatamodel */;
-			path = QSTodoDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A2D9CBB61943C2540017F096 /* Project object */;
 }
