@@ -52,12 +52,9 @@ namespace MobileTasks.Windows.Views
 					break;
 
 				case "Login":
-					if (this.Frame.CanGoBack)
+					while (this.Frame.CanGoBack)
 					{
-						for (var idx = 1; idx < this.Frame.BackStack.Count - 1; idx++)
-						{
-							this.Frame.BackStack.RemoveAt(idx);
-						}
+						this.Frame.GoBack();
 					}
 					return;
 			}
