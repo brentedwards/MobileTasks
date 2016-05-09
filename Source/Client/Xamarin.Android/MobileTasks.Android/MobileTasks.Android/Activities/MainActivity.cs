@@ -27,9 +27,7 @@ namespace MobileTasks.Droid.Activities
 
 			base.OnCreate(savedInstanceState);
 
-			this.FindViewById(Android.Resource.Id.Content).SetBackgroundColor(Color.White);
-
-			this.ListView.DividerHeight = 0;
+			SetContentView(Resource.Layout.Main);
 
 			this.ListView.ItemClick += (sender, args) =>
 			{

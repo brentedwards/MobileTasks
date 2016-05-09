@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Java.Util;
@@ -13,7 +14,7 @@ using System;
 namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Detail")]
-	public class TaskDetailActivity : Activity, DatePickerDialog.IOnDateSetListener
+	public class TaskDetailActivity : AppCompatActivity, DatePickerDialog.IOnDateSetListener
 	{
 		private MobileTask task;
 
@@ -28,6 +29,9 @@ namespace MobileTasks.Droid.Activities
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.TaskDetail);
+
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			this.SetSupportActionBar(toolbar);
 
 			if (Intent.HasExtra(Constants.Extras.Task))
 			{
@@ -47,8 +51,6 @@ namespace MobileTasks.Droid.Activities
 			this.changeDate = this.FindViewById<Button>(Resource.Id.changeDate);
 			this.changeDate.Click += (sender, args) =>
 			{
-				// TODO: DatePicker
-
 				var calendar = Calendar.GetInstance(Java.Util.TimeZone.Default);
 				if (this.task.DateDue != null)
 				{
@@ -92,7 +94,7 @@ namespace MobileTasks.Droid.Activities
 					}
 					else
 					{
-						var builder = new AlertDialog.Builder(this)
+						var builder = new Android.App.AlertDialog.Builder(this)
 							.SetTitle("Parse Error")
 							.SetMessage("Please enter a valid date.")
 							.SetPositiveButton(Resource.String.Ok, (sender, args) => { /* Do nothing */ });
@@ -112,7 +114,7 @@ namespace MobileTasks.Droid.Activities
 			var deleteButton = this.FindViewById<Button>(Resource.Id.delete);
 			deleteButton.Click += delegate
 			{
-				var builder = new AlertDialog.Builder(this)
+				var builder = new Android.App.AlertDialog.Builder(this)
 				.SetTitle("Are you sure?")
 				.SetMessage("Delete '" + task.Description + "'?")
 				.SetPositiveButton(Resource.String.Yes, async (sender, args) =>
