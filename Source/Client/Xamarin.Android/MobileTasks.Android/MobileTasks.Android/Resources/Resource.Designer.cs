@@ -60,7 +60,37 @@ namespace MobileTasks.Android
 			public const int ai_save = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int Icon = 2130837509;
+			public const int background = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int Icon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int IconCompleted = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int icondetail = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int IconFacebook = 2130837513;
+			
+			// aapt resource value: 0x7f02000a
+			public const int IconGoogle = 2130837514;
+			
+			// aapt resource value: 0x7f02000b
+			public const int IconIncomplete = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int IconMicrosoft = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int IconPastDue = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int IconTwitter = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int Logo = 2130837519;
 			
 			static Drawable()
 			{
@@ -75,47 +105,50 @@ namespace MobileTasks.Android
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060009
+			public const int completed = 2131099657;
+			
 			// aapt resource value: 0x7f060008
-			public const int completed = 2131099656;
+			public const int date = 2131099656;
 			
 			// aapt resource value: 0x7f060007
-			public const int date = 2131099655;
-			
-			// aapt resource value: 0x7f060006
-			public const int dateLabel = 2131099654;
-			
-			// aapt resource value: 0x7f060009
-			public const int delete = 2131099657;
-			
-			// aapt resource value: 0x7f060005
-			public const int description = 2131099653;
-			
-			// aapt resource value: 0x7f06000d
-			public const int edit = 2131099661;
-			
-			// aapt resource value: 0x7f060000
-			public const int facebook = 2131099648;
-			
-			// aapt resource value: 0x7f060003
-			public const int google = 2131099651;
-			
-			// aapt resource value: 0x7f060001
-			public const int microsoft = 2131099649;
-			
-			// aapt resource value: 0x7f06000c
-			public const int newTask = 2131099660;
+			public const int dateLabel = 2131099655;
 			
 			// aapt resource value: 0x7f06000a
-			public const int save = 2131099658;
+			public const int delete = 2131099658;
 			
-			// aapt resource value: 0x7f06000b
-			public const int task = 2131099659;
+			// aapt resource value: 0x7f060006
+			public const int description = 2131099654;
 			
-			// aapt resource value: 0x7f060004
-			public const int taskLabel = 2131099652;
+			// aapt resource value: 0x7f06000e
+			public const int edit = 2131099662;
 			
 			// aapt resource value: 0x7f060002
-			public const int twitter = 2131099650;
+			public const int facebook = 2131099650;
+			
+			// aapt resource value: 0x7f060004
+			public const int google = 2131099652;
+			
+			// aapt resource value: 0x7f060000
+			public const int logo = 2131099648;
+			
+			// aapt resource value: 0x7f060003
+			public const int microsoft = 2131099651;
+			
+			// aapt resource value: 0x7f06000d
+			public const int newTask = 2131099661;
+			
+			// aapt resource value: 0x7f06000b
+			public const int save = 2131099659;
+			
+			// aapt resource value: 0x7f06000c
+			public const int task = 2131099660;
+			
+			// aapt resource value: 0x7f060005
+			public const int taskLabel = 2131099653;
+			
+			// aapt resource value: 0x7f060001
+			public const int twitter = 2131099649;
 			
 			static Id()
 			{
