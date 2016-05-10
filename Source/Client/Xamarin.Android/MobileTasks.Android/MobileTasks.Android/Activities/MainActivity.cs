@@ -3,6 +3,8 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
@@ -17,22 +19,30 @@ using System.Threading.Tasks;
 namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Tasks")]
-	public class MainActivity : ListActivity
+	public class MainActivity : AppCompatActivity
 	{
+		private ListView listView;
 		private List<MobileTask> taskList;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			RequestWindowFeature(WindowFeatures.ActionBar);
-
+			SetTheme(Resource.Style.MobileTasks);
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.Main);
 
-			this.ListView.ItemClick += (sender, args) =>
+			this.listView = this.FindViewById<ListView>(Android.Resource.Id.List);
+
+			this.listView.ItemClick += (sender, args) =>
 			{
 				var task = this.taskList[args.Position];
 				this.Edit(task);
+			};
+
+			var addTaskButton = this.FindViewById<FloatingActionButton>(Resource.Id.addTask);
+			addTaskButton.Click += (sender, args) =>
+			{
+				this.StartActivity(new Intent(this, typeof(TaskDetailActivity)));
 			};
 		}
 
@@ -59,7 +69,7 @@ namespace MobileTasks.Droid.Activities
 				var tasks = await MobileService.Instance.GetTasksAsync();
 				this.taskList = tasks.ToList();
 
-				this.ListAdapter = new TaskAdapter(this, this.taskList);
+				this.listView.Adapter = new TaskAdapter(this, this.taskList);
 			}
 			catch (MobileServiceInvalidOperationException ex)
 			{
