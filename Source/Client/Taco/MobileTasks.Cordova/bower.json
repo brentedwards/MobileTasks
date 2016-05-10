@@ -1,0 +1,6 @@
+{
+  "name": "MobileTasks.Cordova",
+  "dependencies": {
+    "ionic": "~1.3.0"
+  }
+}
