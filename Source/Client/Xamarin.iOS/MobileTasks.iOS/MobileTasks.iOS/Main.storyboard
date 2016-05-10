@@ -44,7 +44,9 @@
                     </tableView>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections/>
+                    <connections>
+                        <segue id="1314" destination="555" kind="showDetail" identifier="ToDetail"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="503" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -295,6 +297,7 @@
                         <outlet property="Facebook" destination="667" id="name-outlet-667"/>
                         <outlet property="Microsoft" destination="668" id="name-outlet-668"/>
                         <outlet property="Google" destination="669" id="name-outlet-669"/>
+                        <segue id="1160" destination="497" kind="show" identifier="ToList"/>
                     </connections>
                     <navigationItem title="Login" id="856" key="navigationItem"/>
                 </viewController>

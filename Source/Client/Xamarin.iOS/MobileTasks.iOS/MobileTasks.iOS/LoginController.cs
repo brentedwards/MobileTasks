@@ -48,11 +48,7 @@ namespace MobileTasks.iOS
 			{
 				await MobileService.Instance.LoginAsync(this, provider);
 
-				var tasks = this.Storyboard.InstantiateViewController("TasksController") as TasksController;
-				if (tasks != null)
-				{
-					this.NavigationController.PushViewController(tasks, true);
-				}
+				this.PerformSegue("ToList", this);
 			}
 			catch (InvalidOperationException)
 			{
