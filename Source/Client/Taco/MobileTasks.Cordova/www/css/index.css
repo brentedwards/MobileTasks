@@ -53,3 +53,28 @@ body {
 
 @media screen and (orientation: landscape) {
 }
+
+.login {
+    background: linear-gradient(#B4EC51, #429321);
+    background: -webkit-linear-gradient(#B4EC51, #429321); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(#B4EC51, #429321); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login .wrapper {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login .scroll-content {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.login .scroll {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+

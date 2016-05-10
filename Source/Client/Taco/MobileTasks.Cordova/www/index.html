@@ -13,19 +13,24 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <title>Mobile Tasks</title>
 
-        <link href="libs/ionic/css/ionic.css" rel="stylesheet" />
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet" />
     </head>
-    <body>
-        <div class="bar bar-header bar-positive">
-            <h1 class="title">Mobile Tasks</h1>
-        </div>
+    <body ng-app="MobileTasks">
+        <ion-nav-view></ion-nav-view>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="scripts/platformOverrides.js"></script>
     
         <script type="text/javascript" src="scripts/index.js"></script>
-        <link href="libs/ionic/css/ionic.css" rel="stylesheet" />
-        <script src="libs/ionic/js/ionic.bundle.js"></script>
+    
+        <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+        <script src="lib/ngCordova/ng-cordova.min.js"></script>
+
+        <!-- your app's js -->
+        <script src="app/app.js"></script>
+
+        <!-- controllers -->
+        <script src="app/controllers/logincontroller.js"></script>
 
     </body>
 </html>

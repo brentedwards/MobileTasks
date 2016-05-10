@@ -6,29 +6,34 @@
             },
             ionic: {
                 files: {
-                    'www/libs/ionic/css': 'ionic/release/css/*.*',
-                    'www/libs/ionic/fonts': 'ionic/release/fonts/*.*',
-                    'www/libs/ionic/js': 'ionic/release/js/*.*'
+                    'www/lib/ionic/css': 'ionic/release/css/*.*',
+                    'www/lib/ionic/fonts': 'ionic/release/fonts/*.*',
+                    'www/lib/ionic/js': 'ionic/release/js/*.*'
                 }
             },
             angular: {
                 files: {
-                    'www/libs/angular': 'angular/angular.min.js'
+                    'www/lib/angular': 'angular/angular.min.js'
                 }
             },
             angularanimate: {
                 files: {
-                    'www/libs/angular-animate': 'angular-animate/angular-animate.min.js'
+                    'www/lib/angular-animate': 'angular-animate/angular-animate.min.js'
                 }
             },
             angularsanitize: {
                 files: {
-                    'www/libs/angular-sanitize': 'angular-sanitize/angular-sanitize.min.js'
+                    'www/lib/angular-sanitize': 'angular-sanitize/angular-sanitize.min.js'
                 }
             },
             angularuirouter: {
                 files: {
-                    'www/libs/angular-ui-router': 'angular-ui-router/release/angular-ui-router.min.js'
+                    'www/lib/angular-ui-router': 'angular-ui-router/release/angular-ui-router.min.js'
+                }
+            },
+            ngCordova: {
+                files: {
+                    'www/lib/ngcordova': 'ngCordova/dist/ng-Cordova.min.js'
                 }
             }
         }

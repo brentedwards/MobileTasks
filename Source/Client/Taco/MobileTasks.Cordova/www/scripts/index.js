@@ -13,9 +13,7 @@
         document.addEventListener( 'resume', onResume.bind( this ), false );
         
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        var element = document.getElementById("deviceready");
-        element.innerHTML = 'Device Ready';
-        element.className += ' ready';
+
     };
 
     function onPause() {
