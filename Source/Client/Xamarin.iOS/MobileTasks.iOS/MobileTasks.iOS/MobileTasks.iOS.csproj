@@ -143,6 +143,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
+    <BundleResource Include="Resources\IconCompleted%401x.png" />
+    <BundleResource Include="Resources\IconCompleted%402x.png" />
+    <BundleResource Include="Resources\IconCompleted%403x.png" />
+    <BundleResource Include="Resources\IconCompleted%404x.png" />
+    <BundleResource Include="Resources\icon-detail%401x.png" />
+    <BundleResource Include="Resources\icon-detail%402x.png" />
+    <BundleResource Include="Resources\icon-detail%403x.png" />
+    <BundleResource Include="Resources\icon-detail%404x.png" />
+    <BundleResource Include="Resources\IconFacebook%401x.png" />
+    <BundleResource Include="Resources\IconFacebook%402x.png" />
+    <BundleResource Include="Resources\IconFacebook%403x.png" />
+    <BundleResource Include="Resources\IconFacebook%404x.png" />
+    <BundleResource Include="Resources\IconGoogle%401x.png" />
+    <BundleResource Include="Resources\IconGoogle%402x.png" />
+    <BundleResource Include="Resources\IconGoogle%403x.png" />
+    <BundleResource Include="Resources\IconGoogle%404x.png" />
+    <BundleResource Include="Resources\IconIncomplete%401x.png" />
+    <BundleResource Include="Resources\IconIncomplete%402x.png" />
+    <BundleResource Include="Resources\IconIncomplete%403x.png" />
+    <BundleResource Include="Resources\IconIncomplete%404x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%401x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%402x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%403x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%404x.png" />
+    <BundleResource Include="Resources\IconPastDue%401x.png" />
+    <BundleResource Include="Resources\IconPastDue%402x.png" />
+    <BundleResource Include="Resources\IconPastDue%403x.png" />
+    <BundleResource Include="Resources\IconPastDue%404x.png" />
+    <BundleResource Include="Resources\IconTwitter%401x.png" />
+    <BundleResource Include="Resources\IconTwitter%402x.png" />
+    <BundleResource Include="Resources\IconTwitter%403x.png" />
+    <BundleResource Include="Resources\IconTwitter%404x.png" />
+    <BundleResource Include="Resources\Logo%401x.png" />
+    <BundleResource Include="Resources\Logo%402x.png" />
+    <BundleResource Include="Resources\Logo%403x.png" />
+    <BundleResource Include="Resources\Logo%404x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
