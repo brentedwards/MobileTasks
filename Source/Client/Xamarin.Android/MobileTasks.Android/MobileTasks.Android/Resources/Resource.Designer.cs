@@ -1951,8 +1951,8 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f06002d
 			public const int center_vertical = 2131099693;
 			
-			// aapt resource value: 0x7f060089
-			public const int changeDate = 2131099785;
+			// aapt resource value: 0x7f06008b
+			public const int changeDate = 2131099787;
 			
 			// aapt resource value: 0x7f060052
 			public const int checkbox = 2131099730;
@@ -1969,8 +1969,8 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f06001f
 			public const int collapseActionView = 2131099679;
 			
-			// aapt resource value: 0x7f06008a
-			public const int completed = 2131099786;
+			// aapt resource value: 0x7f06008c
+			public const int completed = 2131099788;
 			
 			// aapt resource value: 0x7f06004a
 			public const int contentPanel = 2131099722;
@@ -1981,8 +1981,8 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f06004f
 			public const int customPanel = 2131099727;
 			
-			// aapt resource value: 0x7f060088
-			public const int date = 2131099784;
+			// aapt resource value: 0x7f06008a
+			public const int date = 2131099786;
 			
 			// aapt resource value: 0x7f06008e
 			public const int dateDue = 2131099790;
@@ -1993,11 +1993,11 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f060040
 			public const int default_activity_button = 2131099712;
 			
-			// aapt resource value: 0x7f06008b
-			public const int delete = 2131099787;
+			// aapt resource value: 0x7f060087
+			public const int delete = 2131099783;
 			
-			// aapt resource value: 0x7f060086
-			public const int description = 2131099782;
+			// aapt resource value: 0x7f060088
+			public const int description = 2131099784;
 			
 			// aapt resource value: 0x7f06006a
 			public const int design_bottom_sheet = 2131099754;
@@ -2152,8 +2152,8 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f060030
 			public const int right = 2131099696;
 			
-			// aapt resource value: 0x7f06008c
-			public const int save = 2131099788;
+			// aapt resource value: 0x7f060086
+			public const int save = 2131099782;
 			
 			// aapt resource value: 0x7f060017
 			public const int screen = 2131099671;
@@ -2230,8 +2230,8 @@ namespace MobileTasks.Droid
 			// aapt resource value: 0x7f060045
 			public const int spacer = 2131099717;
 			
-			// aapt resource value: 0x7f060087
-			public const int specifyDateDue = 2131099783;
+			// aapt resource value: 0x7f060089
+			public const int specifyDateDue = 2131099785;
 			
 			// aapt resource value: 0x7f060008
 			public const int split_action_bar = 2131099656;

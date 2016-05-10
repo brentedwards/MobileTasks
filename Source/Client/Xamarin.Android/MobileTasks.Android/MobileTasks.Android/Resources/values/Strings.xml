@@ -13,7 +13,7 @@
 	<string name="DateDue">Date Due</string>
 	<string name="Completed">Mark as completed</string>
 	<string name="Save">Save</string>
-	<string name="Delete">Delete</string>
+	<string name="Delete">DELETE THIS TASK</string>
 	<string name="Ok">Ok</string>
 	<string name="NewTask">New Task</string>
 	<string name="SpecifyDueDate">Specify a due date</string>

@@ -1,6 +1,7 @@
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
@@ -33,8 +34,10 @@ namespace MobileTasks.Droid.Activities
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			this.SetSupportActionBar(toolbar);
 
+			var isEdit = false;
 			if (Intent.HasExtra(Constants.Extras.Task))
 			{
+				isEdit = true;
 				this.task = JsonConvert.DeserializeObject<MobileTask>(Intent.GetStringExtra(Constants.Extras.Task));
 			}
 			else
@@ -52,12 +55,14 @@ namespace MobileTasks.Droid.Activities
 			this.changeDate.Click += (sender, args) =>
 			{
 				var calendar = Calendar.GetInstance(Java.Util.TimeZone.Default);
+				var date = DateTime.Now;
 				if (this.task.DateDue != null)
 				{
 					calendar.Time = new Date(this.task.DateDue.Value.Millisecond);
+					date = this.task.DateDue.Value;
 				}
 
-				var picker = new DatePickerDialog(this, this, this.task.DateDue.Value.Year, this.task.DateDue.Value.Month - 1, this.task.DateDue.Value.Day);
+				var picker = new DatePickerDialog(this, this, date.Year, date.Month - 1, date.Day);
 				picker.Show();
 			};
 
@@ -73,6 +78,7 @@ namespace MobileTasks.Droid.Activities
 				{
 					this.date.Visibility = ViewStates.Gone;
 					this.changeDate.Visibility = ViewStates.Gone;
+					this.task.DateDue = null;
 				}
 			};
 			this.specifyDateDue.Checked = this.task.DateDue != null;
@@ -85,47 +91,33 @@ namespace MobileTasks.Droid.Activities
 			{
 				this.task.Description = description.Text;
 				this.task.IsCompleted = completed.Checked;
-				if (this.specifyDateDue.Checked && !string.IsNullOrWhiteSpace(date.Text))
-				{
-					DateTime parsedDate;
-					if (DateTime.TryParse(date.Text, out parsedDate))
-					{
-						this.task.DateDue = parsedDate;
-					}
-					else
-					{
-						var builder = new Android.App.AlertDialog.Builder(this)
-							.SetTitle("Parse Error")
-							.SetMessage("Please enter a valid date.")
-							.SetPositiveButton(Resource.String.Ok, (sender, args) => { /* Do nothing */ });
 
-						builder.Create().Show();
-						return;
-					}
-				}
-				else
-				{
-					this.task.DateDue = null;
-				}
 				await MobileService.Instance.UpsertTaskAsync(this.task);
 				this.Finish();
 			};
 
 			var deleteButton = this.FindViewById<Button>(Resource.Id.delete);
-			deleteButton.Click += delegate
+			if (isEdit)
 			{
-				var builder = new Android.App.AlertDialog.Builder(this)
-				.SetTitle("Are you sure?")
-				.SetMessage("Delete '" + task.Description + "'?")
-				.SetPositiveButton(Resource.String.Yes, async (sender, args) =>
+				deleteButton.Click += delegate
 				{
-					await MobileService.Instance.DeleteTaskAsync(task.Id);
-					this.Finish();
-				})
-				.SetNegativeButton(Resource.String.No, (sender, args) => { /* Do nothing */ });
+					var builder = new Android.App.AlertDialog.Builder(this)
+					.SetTitle("Are you sure?")
+					.SetMessage("Delete '" + task.Description + "'?")
+					.SetPositiveButton(Resource.String.Yes, async (sender, args) =>
+					{
+						await MobileService.Instance.DeleteTaskAsync(task.Id);
+						this.Finish();
+					})
+					.SetNegativeButton(Resource.String.No, (sender, args) => { /* Do nothing */ });
 
-				builder.Create().Show();
-			};
+					builder.Create().Show();
+				};
+			}
+			else
+			{
+				deleteButton.Visibility = ViewStates.Gone;
+			}
 		}
 
 		public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
