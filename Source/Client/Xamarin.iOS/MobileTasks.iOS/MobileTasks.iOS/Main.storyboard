@@ -168,10 +168,10 @@
                         <color key="backgroundColor" customColorSpace="calibratedWhite" colorSpace="calibratedRGB" red="0.70588235294117652" green="0.92549019607843142" blue="0.31764705882352939" alpha="1"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="651" translatesAutoresizingMaskIntoConstraints="NO" image="Logo.png">
-                                <rect key="frame" x="56" y="58" width="262" height="325"/>
+                                <rect key="frame" x="56" y="97" width="262" height="325"/>
                                 <constraints>
-                                    <constraint id="659" firstAttribute="width" constant="262"/>
-                                    <constraint id="660" firstAttribute="height" constant="325"/>
+                                    <constraint id="925" firstAttribute="width" constant="262"/>
+                                    <constraint id="926" firstAttribute="height" constant="325"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign In:" lineBreakMode="tailTruncation" minimumFontSize="10" id="662" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
@@ -181,7 +181,8 @@
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="665" firstItem="662" firstAttribute="width" constant="262"/>
+                                    <constraint id="930" firstAttribute="width" constant="262"/>
+                                    <constraint id="931" firstAttribute="height" constant="21"/>
                                 </constraints>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="666" translatesAutoresizingMaskIntoConstraints="NO">
@@ -190,8 +191,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <constraints>
-                                    <constraint id="675" firstItem="666" firstAttribute="width" constant="46"/>
-                                    <constraint id="872" firstAttribute="width" secondItem="666" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="939" firstAttribute="width" secondItem="666" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="940" firstItem="666" firstAttribute="width" constant="46"/>
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="667" translatesAutoresizingMaskIntoConstraints="NO">
@@ -200,8 +201,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <constraints>
-                                    <constraint id="672" firstItem="667" firstAttribute="width" constant="46"/>
-                                    <constraint id="873" firstAttribute="width" secondItem="667" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="943" firstAttribute="width" secondItem="667" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="944" firstItem="667" firstAttribute="width" constant="46"/>
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="668" translatesAutoresizingMaskIntoConstraints="NO">
@@ -210,8 +211,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <constraints>
-                                    <constraint id="678" firstItem="668" firstAttribute="width" constant="46"/>
-                                    <constraint id="874" firstAttribute="width" secondItem="668" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="947" firstAttribute="width" secondItem="668" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="948" firstItem="668" firstAttribute="width" constant="46"/>
                                 </constraints>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="669" translatesAutoresizingMaskIntoConstraints="NO">
@@ -220,72 +221,73 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <constraints>
-                                    <constraint id="681" firstItem="669" firstAttribute="width" constant="46"/>
-                                    <constraint id="875" firstAttribute="width" secondItem="669" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="952" firstAttribute="width" secondItem="669" secondAttribute="height" multiplier="23:24"/>
+                                    <constraint id="953" firstItem="669" firstAttribute="width" constant="46"/>
                                 </constraints>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Twitter" lineBreakMode="tailTruncation" minimumFontSize="10" id="682" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Twitter" lineBreakMode="tailTruncation" minimumFontSize="10" id="682" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="58" y="515" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="878" firstAttribute="width" secondItem="682" secondAttribute="height" multiplier="2:1"/>
+                                    <constraint id="965" firstItem="682" firstAttribute="width" constant="42"/>
                                 </constraints>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Facebook" lineBreakMode="tailTruncation" minimumFontSize="10" id="881" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Facebook" lineBreakMode="tailTruncation" minimumFontSize="10" id="881" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="119" y="515" width="63" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="882" firstAttribute="width" secondItem="881" secondAttribute="height" multiplier="2:1"/>
+                                    <constraint id="964" firstItem="881" firstAttribute="width" constant="63"/>
                                 </constraints>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Microsoft" lineBreakMode="tailTruncation" minimumFontSize="10" id="885" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Microsoft" lineBreakMode="tailTruncation" minimumFontSize="10" id="885" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="190" y="515" width="63" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="886" firstAttribute="width" secondItem="885" secondAttribute="height" multiplier="2:1"/>
+                                    <constraint id="969" firstItem="885" firstAttribute="width" constant="63"/>
                                 </constraints>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Google" lineBreakMode="tailTruncation" minimumFontSize="10" id="889" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center" misplaced="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Google" lineBreakMode="tailTruncation" minimumFontSize="10" id="889" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
                                 <rect key="frame" x="261" y="515" width="63" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="890" firstAttribute="width" secondItem="889" secondAttribute="height" multiplier="2:1"/>
+                                    <constraint id="962" firstItem="889" firstAttribute="width" constant="63"/>
                                 </constraints>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint id="658" firstItem="651" firstAttribute="top" secondItem="648" secondAttribute="top" constant="58"/>
-                            <constraint id="661" firstItem="651" firstAttribute="centerX" secondItem="648" secondAttribute="centerX"/>
-                            <constraint id="663" firstItem="662" firstAttribute="centerX" secondItem="648" secondAttribute="centerX"/>
-                            <constraint id="664" firstItem="662" firstAttribute="top" secondItem="651" secondAttribute="bottom" constant="47"/>
-                            <constraint id="670" firstItem="648" firstAttribute="centerX" secondItem="667" secondAttribute="centerX" constant="37"/>
-                            <constraint id="671" firstItem="667" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
-                            <constraint id="673" firstItem="648" firstAttribute="centerX" secondItem="666" secondAttribute="centerX" constant="108"/>
-                            <constraint id="674" firstItem="666" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
-                            <constraint id="676" firstItem="668" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="33"/>
-                            <constraint id="677" firstItem="668" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
-                            <constraint id="679" firstItem="669" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="107"/>
-                            <constraint id="680" firstItem="669" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
-                            <constraint id="876" firstItem="682" firstAttribute="centerX" secondItem="666" secondAttribute="centerX"/>
-                            <constraint id="877" firstItem="682" firstAttribute="top" secondItem="666" secondAttribute="bottom" constant="8"/>
-                            <constraint id="883" firstItem="881" firstAttribute="centerX" secondItem="667" secondAttribute="centerX"/>
-                            <constraint id="884" firstItem="881" firstAttribute="top" secondItem="667" secondAttribute="bottom" constant="8"/>
-                            <constraint id="887" firstItem="885" firstAttribute="centerX" secondItem="668" secondAttribute="centerX"/>
-                            <constraint id="888" firstItem="885" firstAttribute="top" secondItem="668" secondAttribute="bottom" constant="8"/>
-                            <constraint id="891" firstItem="669" firstAttribute="centerX" secondItem="889" secondAttribute="centerX" constant="2"/>
-                            <constraint id="892" firstItem="889" firstAttribute="top" secondItem="669" secondAttribute="bottom" constant="8"/>
+                            <constraint id="922" firstItem="651" firstAttribute="top" secondItem="648" secondAttribute="top" constant="97"/>
+                            <constraint id="924" firstItem="651" firstAttribute="centerX" secondItem="648" secondAttribute="centerX"/>
+                            <constraint id="928" firstItem="662" firstAttribute="centerX" secondItem="648" secondAttribute="centerX"/>
+                            <constraint id="929" firstItem="648" firstAttribute="bottom" secondItem="662" secondAttribute="bottom" constant="216"/>
+                            <constraint id="937" firstItem="648" firstAttribute="centerX" secondItem="666" secondAttribute="centerX" constant="108"/>
+                            <constraint id="938" firstItem="666" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
+                            <constraint id="941" firstItem="648" firstAttribute="centerX" secondItem="667" secondAttribute="centerX" constant="37"/>
+                            <constraint id="942" firstItem="667" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
+                            <constraint id="945" firstItem="668" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="33"/>
+                            <constraint id="946" firstItem="668" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
+                            <constraint id="949" firstItem="669" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="107"/>
+                            <constraint id="950" firstItem="669" firstAttribute="top" secondItem="662" secondAttribute="bottom" constant="8"/>
+                            <constraint id="951" firstItem="669" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="107"/>
+                            <constraint id="954" firstItem="682" firstAttribute="centerX" secondItem="666" secondAttribute="centerX"/>
+                            <constraint id="955" firstItem="682" firstAttribute="top" secondItem="666" secondAttribute="bottom" constant="8"/>
+                            <constraint id="956" firstItem="881" firstAttribute="centerX" secondItem="667" secondAttribute="centerX"/>
+                            <constraint id="957" firstItem="881" firstAttribute="top" secondItem="667" secondAttribute="bottom" constant="8"/>
+                            <constraint id="960" firstItem="669" firstAttribute="centerX" secondItem="889" secondAttribute="centerX" constant="2"/>
+                            <constraint id="961" firstItem="889" firstAttribute="top" secondItem="669" secondAttribute="bottom" constant="8"/>
+                            <constraint id="967" firstItem="885" firstAttribute="centerX" secondItem="648" secondAttribute="centerX" constant="34"/>
+                            <constraint id="968" firstItem="885" firstAttribute="top" secondItem="668" secondAttribute="bottom" constant="8"/>
                         </constraints>
                     </view>
                     <connections>
