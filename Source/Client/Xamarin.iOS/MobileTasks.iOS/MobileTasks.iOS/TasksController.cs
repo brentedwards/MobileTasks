@@ -20,6 +20,8 @@ namespace MobileTasks.iOS
 		{
 			base.ViewDidLoad();
 
+			TableView.RegisterNibForCellReuse(UINib.FromName("TaskCell", null), MobileTaskViewSource.CellIdentifier);
+
 			NavigationItem.SetLeftBarButtonItem(null, true);
 
 			NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, args) =>

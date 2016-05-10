@@ -10,7 +10,7 @@ namespace MobileTasks.iOS.ViewSources
 	public class MobileTaskViewSource : UITableViewSource
 	{
 		private List<MobileTask> tasks;
-		private const string CellIdentifier = "TaskCell";
+		public const string CellIdentifier = "TaskCell";
 		private UITableViewController controller;
 
 		public MobileTaskViewSource(UITableViewController controller, List<MobileTask> tasks)
@@ -21,23 +21,15 @@ namespace MobileTasks.iOS.ViewSources
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell(CellIdentifier);
+			var cell = tableView.DequeueReusableCell(CellIdentifier) as TaskCell;
 			var task = this.tasks[indexPath.Row];
 
 			if (cell == null)
 			{
-				cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
+				cell = new TaskCell(CellIdentifier);
 			}
 
-			cell.TextLabel.Text = task.Description;
-			if (task.IsCompleted)
-			{
-				cell.Accessory = UITableViewCellAccessory.Checkmark;
-			}
-			else
-			{
-				cell.Accessory = UITableViewCellAccessory.None;
-			}
+			cell.UpdateTask(task);
 
 			return cell;
 		}

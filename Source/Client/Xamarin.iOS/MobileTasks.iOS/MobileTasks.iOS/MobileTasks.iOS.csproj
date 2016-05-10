@@ -96,6 +96,10 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="TaskCell.cs" />
+    <Compile Include="TaskCell.designer.cs">
+      <DependentUpon>TaskCell.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewSources\MobileTaskViewSource.cs" />
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
@@ -103,6 +107,7 @@
     <Compile Include="Models\MobileTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="TaskCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\MobileService.cs" />
