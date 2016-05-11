@@ -12,9 +12,9 @@ namespace MobileTasks.iOS
 	{
 		private MobileTask task;
 
-		public DetailController (IntPtr handle) : base (handle)
+		public DetailController(IntPtr handle) : base(handle)
 		{
-			
+
 		}
 
 		public override void ViewDidLoad()
@@ -31,10 +31,10 @@ namespace MobileTasks.iOS
 				await this.Save();
 			}), true);
 
-			Busy.Hidden = true;
-			HasDueDate.ValueChanged += (sender, args) =>
+			//Busy.Hidden = true;
+			HasDateDue.ValueChanged += (sender, args) =>
 			{
-				Date.Hidden = !HasDueDate.On;
+				DateDue.Hidden = !HasDateDue.On;
 			};
 
 			if (task != null)
@@ -43,15 +43,21 @@ namespace MobileTasks.iOS
 				Completed.On = task.IsCompleted;
 				if (task.DateDue.HasValue)
 				{
-					HasDueDate.On = true;
-					//Date.Date = task.DateDue.Value;
+					HasDateDue.On = true;
+					DateDue.Date = (NSDate)task.DateDue.Value;
+				}
+				else
+				{
+					HasDateDue.On = false;
+					DateDue.Hidden = true;
 				}
 			}
 			else
 			{
 				task = new MobileTask();
 				Completed.On = false;
-				HasDueDate.On = false;
+				HasDateDue.On = false;
+				DateDue.Hidden = true;
 			}
 		}
 
@@ -63,9 +69,9 @@ namespace MobileTasks.iOS
 		private async Task Save()
 		{
 			task.Description = Description.Text;
-			if (HasDueDate.On)
+			if (HasDateDue.On)
 			{
-				//task.DateDue = Date.Date;
+				task.DateDue = (DateTime)DateDue.Date;
 			}
 			else
 			{
@@ -73,12 +79,12 @@ namespace MobileTasks.iOS
 			}
 			task.IsCompleted = Completed.On;
 
-			Busy.Hidden = false;
+			//Busy.Hidden = false;
 			await MobileService.Instance.UpsertTaskAsync(task);
 
 			InvokeOnMainThread(() =>
 			{
-				Busy.Hidden = true;
+				//Busy.Hidden = true;
 
 				NavigationController.PopViewController(true);
 			});

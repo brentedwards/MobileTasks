@@ -16,15 +16,11 @@ namespace MobileTasks.iOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIActivityIndicatorView Busy { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UISwitch Completed { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIDatePicker Date { get; set; }
+		UIDatePicker DateDue { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -32,29 +28,25 @@ namespace MobileTasks.iOS
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UISwitch HasDueDate { get; set; }
+		UISwitch HasDateDue { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (Busy != null) {
-				Busy.Dispose ();
-				Busy = null;
-			}
 			if (Completed != null) {
 				Completed.Dispose ();
 				Completed = null;
 			}
-			if (Date != null) {
-				Date.Dispose ();
-				Date = null;
+			if (DateDue != null) {
+				DateDue.Dispose ();
+				DateDue = null;
 			}
 			if (Description != null) {
 				Description.Dispose ();
 				Description = null;
 			}
-			if (HasDueDate != null) {
-				HasDueDate.Dispose ();
-				HasDueDate = null;
+			if (HasDateDue != null) {
+				HasDateDue.Dispose ();
+				HasDateDue = null;
 			}
 		}
 	}

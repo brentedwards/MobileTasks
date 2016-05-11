@@ -44,118 +44,11 @@
                     </tableView>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue id="1314" destination="555" kind="showDetail" identifier="ToDetail"/>
-                    </connections>
+                    <connections/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="503" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="260" y="3"/>
-        </scene>
-        <scene sceneID="554">
-            <objects>
-                <viewController id="555" sceneMemberID="viewController" customClass="DetailController" storyboardIdentifier="DetailController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="552"/>
-                        <viewControllerLayoutGuide type="bottom" id="553"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="556">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="589" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="26" y="312" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="95" width="335" height="30"/>
-                                </variation>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Specify due date" lineBreakMode="tailTruncation" minimumFontSize="10" id="591" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="20" y="35" width="42" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="133" width="258" height="31"/>
-                                </variation>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="592" fixedFrame="YES">
-                                <rect key="frame" x="197" y="60" width="79" height="27"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="297" y="417" width="51" height="31"/>
-                                </variation>
-                            </switch>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="593" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="28" y="169" width="320" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="332704801.65417802">
-                                    <!--2011-07-18 18:00:01 +0000-->
-                                </date>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="183" width="335" height="216"/>
-                                </variation>
-                            </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mark as completed" lineBreakMode="tailTruncation" minimumFontSize="10" id="595" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="35" y="51" width="42" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="417" width="269" height="31"/>
-                                </variation>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="596" fixedFrame="YES">
-                                <rect key="frame" x="254" y="341" width="79" height="27"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="297" y="133" width="51" height="31"/>
-                                </variation>
-                            </switch>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="633" hidden="YES" fixedFrame="YES">
-                                <rect key="frame" x="172" y="485" width="20" height="20"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="178" y="281" width="20" height="20"/>
-                                </variation>
-                            </activityIndicatorView>
-                        </subviews>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="589"/>
-                                <exclude reference="591"/>
-                                <exclude reference="592"/>
-                                <exclude reference="593"/>
-                                <exclude reference="595"/>
-                                <exclude reference="596"/>
-                                <exclude reference="633"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="589"/>
-                                <include reference="591"/>
-                                <include reference="592"/>
-                                <include reference="593"/>
-                                <include reference="595"/>
-                                <include reference="596"/>
-                                <include reference="633"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="Date" destination="593" id="name-outlet-593"/>
-                        <outlet property="Description" destination="589" id="name-outlet-589"/>
-                        <outlet property="HasDueDate" destination="596" id="name-outlet-596"/>
-                        <outlet property="Completed" destination="592" id="name-outlet-592"/>
-                        <outlet property="Busy" destination="633" id="name-outlet-633"/>
-                    </connections>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="557" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="693" y="2"/>
         </scene>
         <scene sceneID="646">
             <objects>
@@ -304,6 +197,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="649" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-235" y="9"/>
+        </scene>
+        <scene sceneID="1356">
+            <objects>
+                <viewController id="1357" sceneMemberID="viewController" storyboardIdentifier="DetailController" customClass="DetailController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1354"/>
+                        <viewControllerLayoutGuide type="bottom" id="1355"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1358">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1361" alignment="center" distribution="equalSpacing" spacing="6" axis="vertical">
+                                <rect key="frame" x="24" y="78" width="320" height="326"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1362" translatesAutoresizingMaskIntoConstraints="NO">
+                                        <rect key="frame" x="147.5" y="0.0" width="25" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1363" spacing="20" distribution="fillProportionally">
+                                        <rect key="frame" x="61" y="36" width="198.5" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Specify due date" lineBreakMode="tailTruncation" minimumFontSize="10" id="1364" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="129.5" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1365" fixedFrame="YES">
+                                                <rect key="frame" x="149.5" y="0.0" width="51" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="1378" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                        <rect key="frame" x="0.0" y="73" width="320" height="216"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="332704801.65417802">
+                                            <!--2011-07-18 18:00:01 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1367" spacing="20" distribution="fillProportionally">
+                                        <rect key="frame" x="52.5" y="295" width="215.5" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mark as completed" lineBreakMode="tailTruncation" minimumFontSize="10" id="1368" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                                <rect key="frame" x="0.5" y="0.0" width="146.5" height="31"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1369" fixedFrame="YES">
+                                                <rect key="frame" x="167" y="0.0" width="51" height="31"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint id="1403" firstItem="1362" firstAttribute="leading" secondItem="1361" secondAttribute="leading" constant="147"/>
+                                    <constraint id="1404" firstItem="1361" firstAttribute="trailing" secondItem="1362" secondAttribute="trailing" constant="147"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="Completed" destination="1369" id="name-outlet-1369"/>
+                        <outlet property="DateDue" destination="1378" id="name-outlet-1378"/>
+                        <outlet property="HasDateDue" destination="1365" id="name-outlet-1365"/>
+                        <outlet property="Description" destination="1362" id="name-outlet-1362"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1359" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="727" y="10"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
