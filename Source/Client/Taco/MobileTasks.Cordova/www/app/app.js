@@ -31,6 +31,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'LoginController'
         });
 
+    $stateProvider
+    .state('tasks', {
+        url: '/tasks',
+        templateUrl: 'templates/tasks.html',
+        controller: 'TasksController'
+    });
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 
