@@ -3,30 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileTasks.XForms.Views.Detail"
 						 BackgroundColor="White">
-	<StackLayout Orientation="Vertical">
-		<Editor Text="{Binding Task.Description}" />
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Label Text="Specify a due date" />
-			<Switch IsToggled="{Binding SpecifyDueDate}" Grid.Column="1" />
-		</Grid>
-		
-		<DatePicker Date="{Binding DateDue}" IsVisible="{Binding SpecifyDueDate}" />
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Save" x:Name="Save" Command="{Binding SaveCommand}" />
+	</ContentPage.ToolbarItems>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
-			<Label Text="Mark as completed" />
-			<Switch IsToggled="{Binding Task.IsCompleted}" Grid.Column="1" />
-		</Grid>
+		<ScrollView>
+			<StackLayout Orientation="Vertical" Margin="20,0">
+				<Editor Text="{Binding Task.Description}" TextColor="#7F7F7F" />
 
-		<Button Text="Save" Command="{Binding SaveCommand}" />
-	
-		<Button Text="Delete" Command="{Binding DeleteCommand}" IsVisible="{Binding IsExistingTask}" />
-	</StackLayout>
+				<BoxView HeightRequest="1" Color="#7F7F7F" Margin="0,20" />
+				
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Label Text="Specify a due date" TextColor="#333333" />
+					<Switch IsToggled="{Binding SpecifyDueDate}" Grid.Column="1" />
+				</Grid>
+
+				<DatePicker Date="{Binding DateDue}" IsVisible="{Binding SpecifyDueDate}" />
+
+				<BoxView HeightRequest="1" Color="#7F7F7F" Margin="0,20" />
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Label Text="Mark as completed" TextColor="#333333" />
+					<Switch IsToggled="{Binding Task.IsCompleted}" Grid.Column="1" />
+				</Grid>
+			</StackLayout>
+		</ScrollView>
+
+		<Button Text="Delete This Task" Grid.Row="1" Command="{Binding DeleteCommand}" Margin="20" IsVisible="{Binding IsExistingTask}" BackgroundColor="#D0021B" TextColor="White" />
+	</Grid>
 </ContentPage>
