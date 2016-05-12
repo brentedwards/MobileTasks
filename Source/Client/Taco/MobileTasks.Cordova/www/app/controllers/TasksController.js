@@ -12,7 +12,9 @@
     }
 
     $scope.getIconForTask = function (taskComplete, taskDateDue) {
-        if (taskComplete) {
+        if (taskComplete == null || taskDateDue == null) {
+            return "images/icon-incomplete.png";
+        } else if (taskComplete) {
             return "images/icon-completed.png";
         } else if (new Date(taskDateDue) < new Date()) {
             return "images/icon-pastdue.png";
@@ -42,23 +44,28 @@
         }
     }
 
-    $scope.addTask = function() {
-        alert("Sdfsd");
+    $scope.addTask = function () {
+        $ionicHistory.nextViewOptions({
+            historyRoot: false,
+            disableAnimate: false,
+            disableBack: false
+        });
+        $state.go('task');
     }
 
     $scope.logout = function() {
         network.logout().then(function (result) {
+            $ionicHistory.nextViewOptions({
+                historyRoot: true,
+                disableAnimate: false,
+                disableBack: true
+            });
             $state.go('login');
         });
     }
 
     $scope.$on("$ionicView.beforeEnter", function (event, data) {
         $ionicHistory.clearHistory();
-        $ionicHistory.nextViewOptions({
-            historyRoot: true,
-            disableAnimate: false,
-            disableBack: true
-        });
     });
 
     $scope.$on("$ionicView.enter", function (event, data) {
@@ -68,7 +75,12 @@
             }
         }).catch(function(error) {
             if (error === "Unauthorized") {
-                network.logout().then(function(result) {
+                network.logout().then(function (result) {
+                    $ionicHistory.nextViewOptions({
+                        historyRoot: true,
+                        disableAnimate: false,
+                        disableBack: true
+                    });
                     $state.go('login');
                 });
             } else {

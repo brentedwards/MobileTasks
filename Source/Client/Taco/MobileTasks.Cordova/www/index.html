@@ -16,29 +16,31 @@
         <link href="lib/ionic/css/ionic.css" rel="stylesheet" />
     </head>
 <body ng-app="MobileTasks">
-    <ion-nav-bar align-title="center" class="bar-light">
-        <ion-nav-back-button>
+    <ion-nav-bar class="bar-custom">
+        <ion-nav-back-button class="button-clear">
+            <i class="button button-icon ion-android-close"></i>
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
 
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
 
-<script type="text/javascript" src="scripts/index.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
 
-<script src="lib/ionic/js/ionic.bundle.min.js"></script>
-<script src="lib/ngcordova/ng-Cordova.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ngcordova/ng-Cordova.min.js"></script>
 
-<!-- your app's js -->
-<script src="app/app.js"></script>
+    <!-- your app's js -->
+    <script src="app/app.js"></script>
 
-<!-- services -->
-<script src="app/services/NetworkService.js"></script>
+    <!-- services -->
+    <script src="app/services/NetworkService.js"></script>
 
-<!-- controllers -->
-<script src="app/controllers/LoginController.js"></script>
-<script src="app/controllers/TasksController.js"></script>
+    <!-- controllers -->
+    <script src="app/controllers/LoginController.js"></script>
+    <script src="app/controllers/TasksController.js"></script>
+    <script src="app/controllers/TaskController.js"></script>
 
 </body>
 </html>

@@ -9,7 +9,6 @@
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="8.1" />
   <!-- Support for Cordova 5.0.0 plugin system -->
-  <plugin name="cordova-plugin-whitelist" version="1.0.0" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
   <allow-intent href="tel:*" />
@@ -105,4 +104,5 @@
   <preference name="android-minSdkVersion" value="17" />
   <preference name="android-targetSdkVersion" value="22" />
   <plugin name="cordova-plugin-app-preferences" version="0.7.7" src="https://github.com/apla/me.apla.cordova.app-preferences" />
+  <plugin name="cordova-plugin-whitelist" version="1.2.2" />
 </widget>

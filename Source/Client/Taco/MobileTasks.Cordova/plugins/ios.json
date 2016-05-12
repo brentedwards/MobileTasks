@@ -1,0 +1,28 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-app-preferences": {
+            "PACKAGE_NAME": "com.magenic.mobiletasks.cordova"
+        },
+        "cordova-plugin-ms-azure-mobile-apps": {
+            "PACKAGE_NAME": "com.magenic.mobiletasks.cordova"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.magenic.mobiletasks.cordova"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.magenic.mobiletasks.cordova"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.magenic.mobiletasks.cordova"
+        }
+    }
+}
