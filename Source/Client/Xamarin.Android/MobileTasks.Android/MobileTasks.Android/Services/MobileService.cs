@@ -11,10 +11,10 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
-using MobileTasks.Android.Models;
+using MobileTasks.Droid.Models;
 using System.Net.Http;
 
-namespace MobileTasks.Android.Services
+namespace MobileTasks.Droid.Services
 {
 	public partial class MobileService
 	{

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GradientContentView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateDueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TaskImageSourceConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MobileTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ObservableObject.cs" />

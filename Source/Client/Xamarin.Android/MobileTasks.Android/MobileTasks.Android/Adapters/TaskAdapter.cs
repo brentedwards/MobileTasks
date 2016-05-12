@@ -1,15 +1,12 @@
 using Android.App;
-using Android.Content;
 using Android.Views;
 using Android.Widget;
-using MobileTasks.Android.Activities;
-using MobileTasks.Android.Models;
-using MobileTasks.Android.Services;
-using Newtonsoft.Json;
+using MobileTasks.Droid.Models;
+using MobileTasks.Droid.Services;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace MobileTasks.Android.Adapters
+namespace MobileTasks.Droid.Adapters
 {
 	public class TaskAdapter : BaseAdapter<MobileTask>
 	{
@@ -47,64 +44,41 @@ namespace MobileTasks.Android.Adapters
 				view = context.LayoutInflater.Inflate(Resource.Layout.TaskView, null);
 			}
 
-			var taskCheckBox = view.FindViewById<CheckBox>(Resource.Id.task);
-			taskCheckBox.Text = task.Description;
-			taskCheckBox.Checked = task.IsCompleted;
-			taskCheckBox.CheckedChange += async (sender, args) =>
+			var stateImage = view.FindViewById<ImageView>(Resource.Id.state);
+			SetStateImage(task, stateImage);
+
+			var description = view.FindViewById<TextView>(Resource.Id.description);
+			description.Text = task.Description;
+
+			var dateDue = view.FindViewById<TextView>(Resource.Id.dateDue);
+			dateDue.Text = task.DateDue != null ? task.DateDue.Value.ToString("ddd, M/d/yy h:mm tt") : "No Due Date";
+
+			stateImage.Click += async (sender, args) =>
 			{
-				task.IsCompleted = args.IsChecked;
+				task.IsCompleted = !task.IsCompleted;
+				SetStateImage(task, stateImage);
 
 				// TODO: Look busy
 				await MobileService.Instance.UpsertTaskAsync(task);
 			};
 
-			taskCheckBox.LongClick += delegate
-			{
-				var menu = new PopupMenu(context, taskCheckBox);
-				menu.Inflate(Resource.Menu.TaskMenu);
-				menu.MenuItemClick += (sender, args) =>
-				{
-					switch (args.Item.ItemId)
-					{
-						case Resource.Id.edit:
-							this.Edit(task);
-							break;
-
-						case Resource.Id.delete:
-							this.Delete(task);
-							break;
-					}
-				};
-				menu.Show();
-			};
-
 			return view;
 		}
 
-		private void Edit(MobileTask task)
+		private static void SetStateImage(MobileTask task, ImageView stateImage)
 		{
-			var json = JsonConvert.SerializeObject(task);
-
-			var intent = new Intent(context, typeof(TaskDetailActivity));
-			intent.PutExtra(Constants.Extras.Task, json);
-
-			context.StartActivity(intent);
-		}
-
-		private void Delete(MobileTask task)
-		{
-			var builder = new AlertDialog.Builder(context)
-				.SetTitle("Are you sure?")
-				.SetMessage("Delete '" + task.Description + "'?")
-				.SetPositiveButton(Resource.String.Yes, async (sender, args) =>
-					{
-						await MobileService.Instance.DeleteTaskAsync(task.Id);
-						tasks.Remove(task);
-						this.NotifyDataSetChanged();
-					})
-				.SetNegativeButton(Resource.String.No, (sender, args) => { /* Do nothing */ });
-
-			builder.Create().Show();
+			if (task.IsCompleted)
+			{
+				stateImage.SetImageResource(Resource.Drawable.IconCompleted);
+			}
+			else if (task.DateDue < DateTime.Now)
+			{
+				stateImage.SetImageResource(Resource.Drawable.IconPastDue);
+			}
+			else
+			{
+				stateImage.SetImageResource(Resource.Drawable.IconIncomplete);
+			}
 		}
 	}
 }

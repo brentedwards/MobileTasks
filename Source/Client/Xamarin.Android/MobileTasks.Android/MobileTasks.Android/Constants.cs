@@ -1,4 +1,4 @@
-namespace MobileTasks.Android
+namespace MobileTasks.Droid
 {
 	public static class Constants
 	{

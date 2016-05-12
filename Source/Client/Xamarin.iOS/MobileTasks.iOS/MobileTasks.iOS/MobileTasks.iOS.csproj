@@ -96,13 +96,20 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="TaskCell.cs" />
+    <Compile Include="TaskCell.designer.cs">
+      <DependentUpon>TaskCell.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewSources\MobileTaskViewSource.cs" />
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="Info.plist" />
     <Compile Include="Models\MobileTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
     <None Include="packages.config" />
+    <InterfaceDefinition Include="TaskCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\MobileService.cs" />
@@ -143,6 +150,49 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
+    <BundleResource Include="Resources\Icon%402x.png" />
+    <BundleResource Include="Resources\Icon.png" />
+    <BundleResource Include="Resources\IconCompleted%401x.png" />
+    <BundleResource Include="Resources\IconCompleted%402x.png" />
+    <BundleResource Include="Resources\IconCompleted%403x.png" />
+    <BundleResource Include="Resources\IconCompleted%404x.png" />
+    <BundleResource Include="Resources\icon-detail%401x.png" />
+    <BundleResource Include="Resources\icon-detail%402x.png" />
+    <BundleResource Include="Resources\icon-detail%403x.png" />
+    <BundleResource Include="Resources\icon-detail%404x.png" />
+    <BundleResource Include="Resources\IconFacebook%401x.png" />
+    <BundleResource Include="Resources\IconFacebook%402x.png" />
+    <BundleResource Include="Resources\IconFacebook%403x.png" />
+    <BundleResource Include="Resources\IconFacebook%404x.png" />
+    <BundleResource Include="Resources\IconGoogle%401x.png" />
+    <BundleResource Include="Resources\IconGoogle%402x.png" />
+    <BundleResource Include="Resources\IconGoogle%403x.png" />
+    <BundleResource Include="Resources\IconGoogle%404x.png" />
+    <BundleResource Include="Resources\IconIncomplete%401x.png" />
+    <BundleResource Include="Resources\IconIncomplete%402x.png" />
+    <BundleResource Include="Resources\IconIncomplete%403x.png" />
+    <BundleResource Include="Resources\IconIncomplete%404x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%401x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%402x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%403x.png" />
+    <BundleResource Include="Resources\IconMicrosoft%404x.png" />
+    <BundleResource Include="Resources\IconPastDue%401x.png" />
+    <BundleResource Include="Resources\IconPastDue%402x.png" />
+    <BundleResource Include="Resources\IconPastDue%403x.png" />
+    <BundleResource Include="Resources\IconPastDue%404x.png" />
+    <BundleResource Include="Resources\IconTwitter%401x.png" />
+    <BundleResource Include="Resources\IconTwitter%402x.png" />
+    <BundleResource Include="Resources\IconTwitter%403x.png" />
+    <BundleResource Include="Resources\IconTwitter%404x.png" />
+    <BundleResource Include="Resources\Logo%401x.png" />
+    <BundleResource Include="Resources\Logo%402x.png" />
+    <BundleResource Include="Resources\Logo%403x.png" />
+    <BundleResource Include="Resources\Logo%404x.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-72.png" />
+    <BundleResource Include="Resources\Icon-72%402x.png" />
+    <BundleResource Include="Resources\Icon-76.png" />
+    <BundleResource Include="Resources\Icon-76%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

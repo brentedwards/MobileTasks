@@ -1,6 +1,6 @@
 using System;
 
-namespace MobileTasks.Android.Models
+namespace MobileTasks.Droid.Models
 {
 	public class MobileTask
 	{

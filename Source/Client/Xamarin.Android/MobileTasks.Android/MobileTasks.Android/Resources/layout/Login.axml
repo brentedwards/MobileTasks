@@ -2,25 +2,131 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:id="@+id/facebook"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Facebook" />
-    <Button
-        android:id="@+id/microsoft"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Microsoft" />
-    <Button
-        android:id="@+id/twitter"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Twitter" />
-    <Button
-        android:id="@+id/google"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Google" />
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:visibility="invisible" />
+    <ImageView
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:layout_weight="0.4"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:scaleType="fitCenter"
+        android:id="@+id/logo" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:visibility="invisible" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+        <TextView
+            android:text="Sign In:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FFF" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/twitter"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icontwitter"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#FFF"
+                    android:text="@string/Twitter" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/facebook"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/iconfacebook"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#FFF"
+                    android:text="@string/Facebook" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/microsoft"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/iconmicrosoft"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#FFF"
+                    android:text="@string/Microsoft" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/google"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icongoogle"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#FFF"
+                    android:text="@string/Google" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

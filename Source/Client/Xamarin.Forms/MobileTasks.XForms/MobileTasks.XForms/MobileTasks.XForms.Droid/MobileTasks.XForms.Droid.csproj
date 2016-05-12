@@ -219,7 +219,7 @@
     <AndroidResource Include="Resources\Drawable-xxhdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-hdpi\icon-detail.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\IconDetail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-hdpi\IconIncomplete.png" />
@@ -231,7 +231,7 @@
     <AndroidResource Include="Resources\Drawable-mdpi\IconCompleted.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-mdpi\icon-detail.png" />
+    <AndroidResource Include="Resources\Drawable-mdpi\IconDetail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-mdpi\IconIncomplete.png" />
@@ -243,7 +243,7 @@
     <AndroidResource Include="Resources\Drawable-xhdpi\IconCompleted.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-xhdpi\icon-detail.png" />
+    <AndroidResource Include="Resources\Drawable-xhdpi\IconDetail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-xhdpi\IconIncomplete.png" />
@@ -255,13 +255,16 @@
     <AndroidResource Include="Resources\Drawable-xxhdpi\IconCompleted.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable-xxhdpi\icon-detail.png" />
+    <AndroidResource Include="Resources\Drawable-xxhdpi\IconDetail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-xxhdpi\IconIncomplete.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable-xxhdpi\IconPastDue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-mdpi\icon.png" />
   </ItemGroup>
   <Import Project="..\MobileTasks.XForms\MobileTasks.XForms.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

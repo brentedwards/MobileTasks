@@ -1,3 +1,4 @@
+using CoreAnimation;
 using Foundation;
 using Microsoft.WindowsAzure.MobileServices;
 using MobileTasks.iOS.Services;
@@ -37,6 +38,8 @@ namespace MobileTasks.iOS
 			{
 				await this.AuthenticateAsync(MobileServiceAuthenticationProvider.Google);
 			};
+
+			this.SetBackgroundGradient();
 		}
 
 		private async Task AuthenticateAsync(MobileServiceAuthenticationProvider provider)
@@ -45,11 +48,7 @@ namespace MobileTasks.iOS
 			{
 				await MobileService.Instance.LoginAsync(this, provider);
 
-				var tasks = this.Storyboard.InstantiateViewController("TasksController") as TasksController;
-				if (tasks != null)
-				{
-					this.NavigationController.PushViewController(tasks, true);
-				}
+				this.PerformSegue("ToList", this);
 			}
 			catch (InvalidOperationException)
 			{
@@ -57,5 +56,20 @@ namespace MobileTasks.iOS
 				var blah = 0;
 			}
 		}
+
+		private void SetBackgroundGradient()
+		{
+			var startColor = UIColor.FromRGB(0xb4, 0xec, 0x51); //"#B4EC51"
+			var endColor = UIColor.FromRGB(0x42, 0x93, 0xc21); //"#429321"
+ 
+			var gradientLayer = new CAGradientLayer();
+			gradientLayer.Colors = new CoreGraphics.CGColor[] { startColor.CGColor, endColor.CGColor };
+			gradientLayer.Locations = new NSNumber[] { 0.0, 1.0 };
+ 
+ 
+			gradientLayer.Frame = this.View.Bounds;
+			this.View.Layer.InsertSublayer(gradientLayer, 0);
+		}
+
 	}
 }

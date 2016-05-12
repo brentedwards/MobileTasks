@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4" rowHeight="44" customClass="TaskCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4" id="5">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" lineBreakMode="tailTruncation" minimumFontSize="10" id="7" translatesAutoresizingMaskIntoConstraints="NO">
+                        <rect key="frame" x="67" y="2" width="253" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="11" translatesAutoresizingMaskIntoConstraints="NO">
+                        <rect key="frame" x="70" y="22" width="250" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" colorSpace="calibratedRGB" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1"/>
+                        <nil key="highlightedColor"/>
+                        <constraints>
+                            <constraint id="50" firstItem="11" firstAttribute="height" constant="21"/>
+                        </constraints>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25" translatesAutoresizingMaskIntoConstraints="NO">
+                        <rect key="frame" x="12" y="7" width="34" height="30"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <constraints>
+                            <constraint id="28" firstItem="25" firstAttribute="width" constant="34"/>
+                            <constraint id="38" firstAttribute="width" secondItem="25" secondAttribute="height" multiplier="17:15"/>
+                        </constraints>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint id="29" firstItem="25" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="12"/>
+                    <constraint id="34" firstItem="25" firstAttribute="centerY" secondItem="5" secondAttribute="centerY"/>
+                    <constraint id="42" firstItem="7" firstAttribute="top" secondItem="5" secondAttribute="top" constant="2"/>
+                    <constraint id="43" firstItem="7" firstAttribute="leading" secondItem="25" secondAttribute="trailing" constant="21"/>
+                    <constraint id="44" firstItem="7" firstAttribute="trailing" secondItem="5" secondAttribute="trailing"/>
+                    <constraint id="47" firstItem="11" firstAttribute="leading" secondItem="25" secondAttribute="trailing" constant="24"/>
+                    <constraint id="48" firstItem="11" firstAttribute="bottom" secondItem="5" secondAttribute="bottom"/>
+                    <constraint id="49" firstItem="11" firstAttribute="trailing" secondItem="7" secondAttribute="trailing"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-275" y="199.6667"/>
+            <connections>
+                <outlet property="Description" destination="7" id="name-outlet-7"/>
+                <outlet property="DateDue" destination="11" id="name-outlet-11"/>
+                <outlet property="Status" destination="25" id="name-outlet-25"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon-detail.png" width="44" height="44"/>
+        <image name="IconCompleted.png" width="44" height="44"/>
+        <image name="IconFacebook.png" width="100" height="100"/>
+        <image name="IconGoogle.png" width="100" height="100"/>
+        <image name="IconIncomplete.png" width="46" height="46"/>
+        <image name="IconMicrosoft.png" width="100" height="100"/>
+        <image name="IconPastDue.png" width="44" height="44"/>
+        <image name="IconTwitter.png" width="100" height="100"/>
+        <image name="Logo.png" width="479" height="503"/>
+    </resources>
+</document>

@@ -9,11 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MobileTasks.Android.Services;
+using MobileTasks.Droid.Services;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
 
-namespace MobileTasks.Android.Activities
+namespace MobileTasks.Droid.Activities
 {
 	[Activity(Label = "Login", MainLauncher = true, Icon = "@drawable/icon")]
 	public class LoginActivity : Activity
@@ -24,16 +24,16 @@ namespace MobileTasks.Android.Activities
 
 			SetContentView(Resource.Layout.Login);
 
-			var facebook = FindViewById<Button>(Resource.Id.facebook);
+			var facebook = FindViewById<ImageButton>(Resource.Id.facebook);
 			facebook.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Facebook); };
 
-			var microsoft = FindViewById<Button>(Resource.Id.microsoft);
+			var microsoft = FindViewById<ImageButton>(Resource.Id.microsoft);
 			microsoft.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.MicrosoftAccount); };
 
-			var twitter = FindViewById<Button>(Resource.Id.twitter);
+			var twitter = FindViewById<ImageButton>(Resource.Id.twitter);
 			twitter.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Twitter); };
 
-			var google = FindViewById<Button>(Resource.Id.google);
+			var google = FindViewById<ImageButton>(Resource.Id.google);
 			google.Click += async delegate { await AuthenticateAsync(MobileServiceAuthenticationProvider.Google); };
 		}
 

@@ -8,9 +8,13 @@
 		<ResourceDictionary>
 			<converters:TaskImageSourceConverter
 				x:Key="TaskImageSourceConverter"
-				CompletedSource="IconCompleted.png"
-				IncompleteSource="IconIncomplete.png"
-				PastDueSource="IconPastDue.png" />
+				CompletedSource="IconCompleted"
+				IncompleteSource="IconIncomplete"
+				PastDueSource="IconPastDue" />
+
+			<converters:DateDueConverter
+				x:Key="DateDueConverter"
+				NoDateDueText="No Due Date" />
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.ToolbarItems>
@@ -27,7 +31,7 @@
 						</Grid.ColumnDefinitions>
 
 						<!--<Switch IsToggled="{Binding IsCompleted}" />-->
-						<Image Source="{Binding Converter={StaticResource TaskImageSourceConverter}}" HorizontalOptions="CenterAndExpand">
+						<Image Source="{Binding Converter={StaticResource TaskImageSourceConverter}}" HorizontalOptions="CenterAndExpand"  WidthRequest="30" HeightRequest="30" Margin="15,0">
 							<Image.GestureRecognizers>
 								<TapGestureRecognizer Command="{Binding UpdateTaskCommand}" CommandParameter="{Binding}" />
 							</Image.GestureRecognizers>
@@ -39,9 +43,9 @@
 								<RowDefinition />
 							</Grid.RowDefinitions>
 
-							<Label Text="{Binding Description}" FontSize="20" TextColor="Black" />
+							<Label Text="{Binding Description}" FontSize="16" TextColor="Black" />
 
-							<Label Text="{Binding DateDue}" Grid.Row="1" FontSize="16" TextColor="Gray" />
+							<Label Text="{Binding DateDue, Converter={StaticResource DateDueConverter}}" Grid.Row="1" FontSize="12" TextColor="#FFB3B3B3" />
 						</Grid>
 					</Grid>
 				</ViewCell>
