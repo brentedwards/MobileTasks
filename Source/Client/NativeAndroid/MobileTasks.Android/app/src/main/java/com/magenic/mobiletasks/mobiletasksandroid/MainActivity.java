@@ -1,16 +1,15 @@
 package com.magenic.mobiletasks.mobiletasksandroid;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.MenuInflater;
+import android.view.Menu;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -19,35 +18,30 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSerializer;
-import com.google.gson.stream.JsonReader;
-import com.magenic.mobiletasks.mobiletasksandroid.R;
 import com.magenic.mobiletasks.mobiletasksandroid.adapters.TaskAdapter;
 import com.magenic.mobiletasks.mobiletasksandroid.constants.IntentConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
-import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
-import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.utilities.DateDeserializer;
-import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TasksActivity extends ActivityBase {
+public class MainActivity extends ActivityBase {
 
     private List<MobileTask> tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tasks);
-        final AppCompatActivity context = this;
-        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setContentView(R.layout.main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCreateTask);
+        final AppCompatActivity context = this;
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addTask);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,11 +49,18 @@ public class TasksActivity extends ActivityBase {
             }
         });
 
-        RecyclerView lstTasks = (RecyclerView)this.findViewById(R.id.lstTasks);
+        RecyclerView lstTasks = (RecyclerView)this.findViewById(R.id.list);
 
         lstTasks.setLayoutManager(new LinearLayoutManager(this));
 
         lstTasks.setAdapter(new TaskAdapter(this, new ArrayList<MobileTask>(), networkService));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     }
 
     @Override
@@ -114,7 +115,7 @@ public class TasksActivity extends ActivityBase {
     }
 
     private void resetList(List<MobileTask> tasks) {
-        RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.lstTasks);
+        RecyclerView lstRegistrations = (RecyclerView)this.findViewById(R.id.list);
         if (lstRegistrations != null) {
             ((TaskAdapter)lstRegistrations.getAdapter()).setTasks(tasks);
             ((TaskAdapter)lstRegistrations.getAdapter()).notifyDataSetChanged();

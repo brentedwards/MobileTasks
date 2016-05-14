@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:id="@+id/taskRow">
+    <ImageView
+        android:id="@+id/state"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true" />
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/state"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentTop="true"
+        android:textSize="18dp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp" />
+    <TextView
+        android:id="@+id/dateDue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/state"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/description"
+        android:textSize="16dp"
+        android:textColor="#B3B3B3"
+        android:layout_marginBottom="10dp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#C7C7CC"
+        android:layout_below="@id/dateDue"
+        android:layout_toRightOf="@id/state" />
+    <ImageView
+        android:id="@+id/information"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icondetail"/>
+</RelativeLayout>
