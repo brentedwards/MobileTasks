@@ -53,15 +53,6 @@ namespace MobileTasks.Droid.Activities
 			await LoadTasks();
 		}
 
-		public override bool OnCreateOptionsMenu(IMenu menu)
-		{
-			this.MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
-			var newTaskMenuItem = menu.FindItem(Resource.Id.newTask);
-			newTaskMenuItem.SetIntent(new Intent(this, typeof(TaskDetailActivity)));
-
-			return true;
-		}
-
 		private async Task LoadTasks()
 		{
 			try
