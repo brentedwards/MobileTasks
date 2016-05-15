@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MobileTasks.Droid.Activities
 {
-	[Activity(Label = "Login", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity(Label = "MobileTasks.Android", MainLauncher = true, Icon = "@drawable/icon")]
 	public class LoginActivity : Activity
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -49,7 +49,6 @@ namespace MobileTasks.Droid.Activities
 			catch (InvalidOperationException)
 			{
 				// TODO: Show an error;
-				var blah = 0;
 			}
 		}
 	}
