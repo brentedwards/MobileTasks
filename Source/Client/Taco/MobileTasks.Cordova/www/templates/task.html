@@ -1,0 +1,44 @@
+﻿<ion-view view-title="Add New" hide-back-button="isIOS">
+    <ion-nav-buttons side="left">
+        <button class="button nav-button" data-ng-click="close()" data-ng-show="isIOS">Cancel</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button nav-button" data-ng-click="save()">Save</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Task Details" data-ng-model="task.description">
+            </label>
+            <label class="item item-input">
+                <div class="row">
+                    <div class="col"><span class="input-label">Specify a due date</span></div>
+                    <div class="col col-20 col-offset-80">
+                        <label class="toggle">
+                            <input type="checkbox" data-ng-model="specifyDueDate">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </label>
+            <label class="item item-input">
+                <input type="date" style="color: black" data-ng-model="task.dateDue" data-ng-disabled="!specifyDueDate">
+            </label>
+            <label class="item item-input">
+                <div class="row">
+                    <div class="col"><span class="input-label">Mark as completed</span></div>
+                    <div class="col col-20 col-offset-80">
+                        <label class="toggle">
+                            <input type="checkbox" data-ng-model="task.isCompleted">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

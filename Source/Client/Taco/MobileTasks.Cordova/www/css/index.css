@@ -1,0 +1,118 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    background-color:#32383d;
+    font-family: 'RobotoRegular', 'Droid Sans', 'Segoe UI', Segoe, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
+    font-size:12px;
+}
+
+.app {
+    background: url(../images/cordova.png) no-repeat center top; 
+    background-size: contain;
+    position: absolute;             
+    left: 50%;
+    top: 50%;
+    height: 30px;                  
+    width: 250px;                   
+    text-align: center;
+    padding: 200px 0px 0px 0px;     
+    margin: -125px;
+}
+
+.event {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #FFFFFF;
+    margin: 27px;
+    padding: 4px 0px;
+    text-transform: uppercase;
+    background-color: #696969;
+    animation: fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
+}
+
+.ready {
+    background-color: #4B946A;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@media screen and (orientation: portrait) {
+}
+
+@media screen and (orientation: landscape) {
+}
+
+.login {
+    background: linear-gradient(#B4EC51, #429321);
+    background: -webkit-linear-gradient(#B4EC51, #429321); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(#B4EC51, #429321); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login .wrapper {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login .scroll-content {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.login .scroll {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.float-button {
+  color: #429321;
+  position: fixed;
+  font-size: 45px;
+  bottom: 10px;
+  right: 15px;
+  z-index: 9999;
+}
+
+.platform-ios .bar-custom {
+    border-color: #ddd;
+    background-color: white;
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    color: #444;
+}
+
+.platform-android .bar-custom {
+    border-color: #ddd;
+    background-color: #B4EC51;
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    color: #444;
+}
+
+.platform-ios .button.nav-button {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #387ef5; 
+    font-size: 17px;
+}
+
+.platform-android .button.nav-button {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: white; 
+    font-size: 17px;
+}

@@ -1,0 +1,28 @@
+﻿<ion-view view-title="Task List">
+    <div class="float-button" ng-click="addTask()" ng-show="isAndroid">
+        <i class="ion-plus-circled"></i>
+    </div>
+    <ion-nav-buttons side="left">
+        <button class="button nav-button" ng-click="addTask()" ng-show="isIOS">Add New</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button nav-button" ng-click="logout()">Logout</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list style="padding: 0">
+            <ion-item ng-repeat="task in tasks">
+                <div class="row"style="padding: 0">
+                    <div class="col col-10 col-center">
+                        <img src="{{getIconForTask(task.isCompleted, task.dateDue)}}" on-touch="switchIsChanged({{task.id}})" style="width: 100%; height: 100%"/>
+                    </div>
+                    <div class="col">
+                        <div style="font-size: 14pt">{{task.description}}</div><br/><span ng-bind="getFormattedDateDue(task.dateDue)" style="color: lightgray"></span>
+                    </div>
+                    <div class="col col-10 col-center">
+                        <img src="images/icon-detail.png" style="width: 100%; height: 100%"/>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

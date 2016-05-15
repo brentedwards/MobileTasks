@@ -240,3 +240,6 @@ Source/Server/MobileTasks.Server.Database/*.publish.xml
 
 # Private Code files
 *.Private.cs
+
+# Cordova Bower Downloads
+**/bower_components
