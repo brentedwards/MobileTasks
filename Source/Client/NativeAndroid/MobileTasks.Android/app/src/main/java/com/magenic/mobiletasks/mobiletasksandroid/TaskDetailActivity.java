@@ -3,18 +3,18 @@ package com.magenic.mobiletasks.mobiletasksandroid;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Switch;
+import android.widget.ImageButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -22,19 +22,15 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.magenic.mobiletasks.mobiletasksandroid.R;
 import com.magenic.mobiletasks.mobiletasksandroid.constants.IntentConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
-import com.magenic.mobiletasks.mobiletasksandroid.interfaces.INetworkService;
 import com.magenic.mobiletasks.mobiletasksandroid.models.MobileTask;
-import com.magenic.mobiletasks.mobiletasksandroid.services.NetworkService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-public class TaskDetailActivity extends ActivityBase implements View.OnClickListener {
+public class TaskDetailActivity extends ActivityBase implements View.OnClickListener, OnCheckedChangeListener {
 
     private MobileTask task;
 
@@ -44,28 +40,23 @@ public class TaskDetailActivity extends ActivityBase implements View.OnClickList
         setContentView(R.layout.task_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         task = new MobileTask();
 
-        ImageButton changeStartDate = (ImageButton)findViewById(R.id.btnChangeDate);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabSaveTask);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveTask();
-            }
-        });
-
-        RecyclerView lstTasks = (RecyclerView)this.findViewById(R.id.lstTasks);
-
+        ImageButton changeStartDate = (ImageButton)findViewById(R.id.changeDate);
         changeStartDate.setOnClickListener(this);
+        changeStartDate.setEnabled(false);
+        changeStartDate.setClickable(false);
+
+        Switch canChangeDate = (Switch)findViewById(R.id.canChangeDate);
+        canChangeDate.setOnCheckedChangeListener(this);
     }
 
     private void saveTask() {
         final ActivityBase context = this;
-        CheckBox completed = (CheckBox)findViewById(R.id.completed);
-        EditText description = (EditText)findViewById(R.id.taskDescription);
+        Switch completed = (Switch)findViewById(R.id.completed);
+        EditText description = (EditText)findViewById(R.id.description);
         task.isCompleted = completed.isChecked();
         task.setDescription(description.getText().toString());
 
@@ -79,7 +70,7 @@ public class TaskDetailActivity extends ActivityBase implements View.OnClickList
 
                 JsonObject task = networkService.serializeTask(gson, returnedTask);
 
-                Intent myIntent = new Intent(context, TasksActivity.class);
+                Intent myIntent = new Intent(context, MainActivity.class);
                 myIntent.putExtra(IntentConstants.NewTaskKey, gson.toJson(task));
                 context.setResult(RESULT_OK, myIntent);
                 context.finish();
@@ -93,8 +84,31 @@ public class TaskDetailActivity extends ActivityBase implements View.OnClickList
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.save:
+                saveTask();
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnChangeDate) {
+        if (v.getId() == R.id.changeDate) {
             final TextView currentDate = (TextView)findViewById(R.id.currentDate);
             final MobileTask curTask = task;
             int year;
@@ -128,5 +142,14 @@ public class TaskDetailActivity extends ActivityBase implements View.OnClickList
                     }, year, month, day);
             dpd.show();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        ImageButton changeStartDate = (ImageButton)findViewById(R.id.changeDate);
+        Switch canChangeDate = (Switch)findViewById(R.id.canChangeDate);
+
+        changeStartDate.setEnabled(canChangeDate.isChecked());
+        changeStartDate.setClickable(canChangeDate.isChecked());
     }
 }

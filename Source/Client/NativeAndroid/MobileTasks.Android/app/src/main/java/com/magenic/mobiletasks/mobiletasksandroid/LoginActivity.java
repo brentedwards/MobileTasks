@@ -3,7 +3,7 @@ package com.magenic.mobiletasks.mobiletasksandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -24,13 +24,13 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
         login = new Login(this, networkService);
 
-        Button button = (Button) this.findViewById(R.id.btnFacebook);
+        ImageButton button = (ImageButton) this.findViewById(R.id.facebook);
         button.setOnClickListener(this);
-        button = (Button) this.findViewById(R.id.btnGoogle);
+        button = (ImageButton) this.findViewById(R.id.google);
         button.setOnClickListener(this);
-        button = (Button) this.findViewById(R.id.btnMicrosoft);
+        button = (ImageButton) this.findViewById(R.id.microsoft);
         button.setOnClickListener(this);
-        button = (Button) this.findViewById(R.id.btnTwitter);
+        button = (ImageButton) this.findViewById(R.id.twitter);
         button.setOnClickListener(this);
     }
 
@@ -38,7 +38,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     protected void onResume() {
         super.onResume();
         if (login.checkPreviousAuthentication()) {
-            startActivity(new Intent(this, TasksActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -47,16 +47,16 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
         MobileServiceAuthenticationProvider provider = MobileServiceAuthenticationProvider.MicrosoftAccount;
         final ActivityBase context = this;
         switch (v.getId()) {
-            case R.id.btnFacebook:
+            case R.id.facebook:
                 provider = MobileServiceAuthenticationProvider.Facebook;
                 break;
-            case R.id.btnGoogle:
+            case R.id.google:
                 provider = MobileServiceAuthenticationProvider.Google;
                 break;
-            case R.id.btnMicrosoft:
+            case R.id.microsoft:
                 provider = MobileServiceAuthenticationProvider.MicrosoftAccount;
                 break;
-            case R.id.btnTwitter:
+            case R.id.twitter:
                 provider = MobileServiceAuthenticationProvider.Twitter;
                 break;
         }
@@ -66,7 +66,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
         Futures.addCallback(loginFuture, new FutureCallback<MobileServiceUser>() {
             @Override
             public void onSuccess(MobileServiceUser user) {
-                startActivity(new Intent(context, TasksActivity.class));
+                startActivity(new Intent(context, MainActivity.class));
             }
 
             @Override
