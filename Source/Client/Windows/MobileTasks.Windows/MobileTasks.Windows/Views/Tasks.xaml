@@ -10,11 +10,6 @@
 	<local:MobileTasksPage.Resources>
 		<SolidColorBrush x:Key="CompletedBrush" Color="#FFADADAD" />
 		<SolidColorBrush x:Key="UncompletedBrush" Color="Black" />
-		
-		<conv:BoolToBrushConverter
-			x:Key="BoolToBrushConverter"
-			TrueBrush="{StaticResource CompletedBrush}"
-			FalseBrush="{StaticResource UncompletedBrush}" />
 
 		<conv:TaskImageSourceConverter
 			x:Key="TaskImageSourceConverter"
