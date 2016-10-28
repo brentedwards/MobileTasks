@@ -19,11 +19,11 @@ class BaseViewController: UIViewController {
         networkService = NetworkService()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
-    func handleNetworkCallError(error : NSError) -> Void {
+    func handleNetworkCallError(_ error : NSError) -> Void {
         ViewControllerShared.handleNetworkCallError(error, networkService: networkService!, viewController: self)
     }
 }

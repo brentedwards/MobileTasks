@@ -17,15 +17,15 @@ class NetworkService : NetworkProtocol {
         }
     }
     
-    func login(serviceProvider: String, controller: UIViewController, completion: ServiceResponse) {
-            NetworkService.mobileClient?.loginWithProvider(serviceProvider,  controller: controller, animated: false, completion: { (user : MSUser?, error : NSError?) -> Void in
+    func login(_ serviceProvider: String, controller: UIViewController, completion: @escaping ServiceResponse) {
+            NetworkService.mobileClient?.login(withProvider: serviceProvider,  controller: controller, animated: false, completion: { (user : MSUser?, error : NSError?) -> Void in
             if (user != nil) {
                 let currentToken : String = (user?.mobileServiceAuthenticationToken!)!
                 let currentUserId : String = (user?.userId)!
                 
-                NSUserDefaults.standardUserDefaults().setObject(serviceProvider, forKey: LastUsedProvider)
-                NSUserDefaults.standardUserDefaults().setObject(currentUserId, forKey: serviceProvider + UserId)
-                NSUserDefaults.standardUserDefaults().setObject(currentToken, forKey: serviceProvider + Token)
+                UserDefaults.standard.set(serviceProvider, forKey: LastUsedProvider)
+                UserDefaults.standard.set(currentUserId, forKey: serviceProvider + UserId)
+                UserDefaults.standard.set(currentToken, forKey: serviceProvider + Token)
                 
                 completion(nil)
                 return
@@ -37,15 +37,15 @@ class NetworkService : NetworkProtocol {
     
     func hasPreviousAuthentication() -> Bool {
         
-        let userDefaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults : UserDefaults = UserDefaults.standard
         
         
         
-        if (userDefaults.objectForKey(LastUsedProvider) != nil) {
-            let serviceProvider : String = userDefaults.objectForKey(LastUsedProvider) as! String
-            let currenttoken : String = userDefaults.objectForKey(serviceProvider + Token) as! String
-            if (userDefaults.objectForKey(serviceProvider + Token) != nil) {
-                let currentUserId : String = userDefaults.objectForKey(serviceProvider + UserId) as! String
+        if (userDefaults.object(forKey: LastUsedProvider) != nil) {
+            let serviceProvider : String = userDefaults.object(forKey: LastUsedProvider) as! String
+            let currenttoken : String = userDefaults.object(forKey: serviceProvider + Token) as! String
+            if (userDefaults.object(forKey: serviceProvider + Token) != nil) {
+                let currentUserId : String = userDefaults.object(forKey: serviceProvider + UserId) as! String
                 
                 NetworkService.mobileClient?.currentUser = MSUser(userId: currentUserId)
                 NetworkService.mobileClient?.currentUser!.mobileServiceAuthenticationToken = currenttoken
@@ -59,9 +59,9 @@ class NetworkService : NetworkProtocol {
         return NetworkService.mobileClient!
     }
     
-    func getTasks(completion: TaskResponse) -> Void {
-        NetworkService.mobileClient?.invokeAPI("task", body: nil, HTTPMethod: "GET", parameters: nil, headers: nil, completion: {(result : AnyObject?,
-            response : NSHTTPURLResponse?,
+    func getTasks(_ completion: @escaping TaskResponse) -> Void {
+        NetworkService.mobileClient?.invokeAPI("task", body: nil, httpMethod: "GET", parameters: nil, headers: nil, completion: {(result : AnyObject?,
+            response : HTTPURLResponse?,
             error : NSError?) -> Void in
             if (error == nil) {
                 let returnValue : Array<MobileTask> = self.decodeJsonList(result!)
@@ -74,7 +74,7 @@ class NetworkService : NetworkProtocol {
     }
     
 
-    func decodeJsonList(target: AnyObject) -> Array<MobileTask> {
+    func decodeJsonList(_ target: AnyObject) -> Array<MobileTask> {
         var returnValue : Array<MobileTask> = Array<MobileTask>()
         
         let dictionary : [NSDictionary] = target as! [NSDictionary]
@@ -86,19 +86,19 @@ class NetworkService : NetworkProtocol {
         return returnValue;
     }
     
-    func decodeJson(task: NSDictionary) -> MobileTask {
+    func decodeJson(_ task: NSDictionary) -> MobileTask {
         let mobileTask : MobileTask = MobileTask()
         mobileTask.id = task["id"] as! Int
         mobileTask.sid = task["sid"] as! String
         mobileTask.taskDescription = task["description"] as! String
-        mobileTask.dateCreated = task["dateCreated"] as? NSDate
-        mobileTask.dateDue = task["dateDue"] as? NSDate
-        mobileTask.dateCompleted = task["dateCompleted"] as? NSDate
+        mobileTask.dateCreated = task["dateCreated"] as? Date
+        mobileTask.dateDue = task["dateDue"] as? Date
+        mobileTask.dateCompleted = task["dateCompleted"] as? Date
         mobileTask.isCompleted = task["isCompleted"] as! Bool
         return mobileTask
     }
     
-    func encodeJson(source: MobileTask) -> NSMutableDictionary {
+    func encodeJson(_ source: MobileTask) -> NSMutableDictionary {
         let jsonObject: NSMutableDictionary = [
             "id" : source.id,
             "sid" : source.sid,
@@ -118,19 +118,19 @@ class NetworkService : NetworkProtocol {
         return jsonObject
     }
     
-    func logout(completion: ServiceResponse) -> Void {
-        NetworkService.mobileClient?.logoutWithCompletion({ (error: NSError?) in
+    func logout(_ completion: @escaping ServiceResponse) -> Void {
+        NetworkService.mobileClient?.logout(completion: { (error: NSError?) in
             if (error == nil) {
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(LastUsedProvider)
+                UserDefaults.standard.removeObject(forKey: LastUsedProvider)
             }
             completion(error)
         })
     }
     
-    func upsertTask(task: MobileTask, completion: TaskSaveResponse) -> Void {
+    func upsertTask(_ task: MobileTask, completion: @escaping TaskSaveResponse) -> Void {
         
         let jsonTask : NSMutableDictionary = self.encodeJson(task) as NSMutableDictionary
-        NetworkService.mobileClient?.invokeAPI("task", body: jsonTask, HTTPMethod: "POST", parameters: nil, headers: nil, completion: { (result : AnyObject?, response: NSHTTPURLResponse?, error : NSError?) in
+        NetworkService.mobileClient?.invokeAPI("task", body: jsonTask, httpMethod: "POST", parameters: nil, headers: nil, completion: { (result : AnyObject?, response: HTTPURLResponse?, error : NSError?) in
             if (error == nil) {
                 completion(self.decodeJson(result! as! NSDictionary), nil)
             } else {

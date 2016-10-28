@@ -9,15 +9,15 @@
 import Foundation
 
 class ViewControllerShared  {
-    static func handleNetworkCallError(error : NSError, networkService : NetworkProtocol, viewController : UIViewController) -> Void {
+    static func handleNetworkCallError(_ error : NSError, networkService : NetworkProtocol, viewController : UIViewController) -> Void {
         if (error.localizedDescription == "{\"message\":\"Authorization has been denied for this request.\"}") {
             networkService.logout({ (error : NSError?) in
                 if (error == nil) {
                     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
 
-                    let controller : UIViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+                    let controller : UIViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
                     
-                    viewController.presentViewController(controller, animated: false, completion: nil)
+                    viewController.present(controller, animated: false, completion: nil)
                 }
             })
         } else {
@@ -25,9 +25,9 @@ class ViewControllerShared  {
         }
     }
     
-    static func showMessage(title : String, message : String, viewController : UIViewController) -> Void {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-        viewController.presentViewController(alert, animated: true, completion: nil)
+    static func showMessage(_ title : String, message : String, viewController : UIViewController) -> Void {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
