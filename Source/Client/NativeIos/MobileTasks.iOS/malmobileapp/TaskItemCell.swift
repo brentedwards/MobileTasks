@@ -22,7 +22,7 @@ class TaskItemCell : UITableViewCell {
         
     }
     
-    @IBAction func favoriteClicked(sender: UIButton) {
+    @IBAction func favoriteClicked(_ sender: UIButton) {
         if let onButtonTapped = self.onButtonTapped {
             onButtonTapped()
         }

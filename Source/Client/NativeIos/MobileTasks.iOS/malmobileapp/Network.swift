@@ -8,7 +8,7 @@
 
 import Foundation
 
-let ServiceUrl : String = "<Enter Address>"
+let ServiceUrl : String = "https://mobiletasks.azurewebsites.net"
 let DateFormat : String = "yyyy-MM-dd'T'HH:mm:ss.SSSz"
 //let DateFormats : [String] = {DateFormat, "yyyy-MM-dd'T'HH:mm:ssz"}
 let LastUsedProvider : String = "LastUsedProvider"

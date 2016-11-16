@@ -11,11 +11,11 @@ import Foundation
 class MobileTask : NSObject {
     var id : Int = 0
     var sid : String = ""
-    var dateCreated : NSDate? = nil
-    var dateCompleted : NSDate? = nil
+    var dateCreated : Date? = nil
+    var dateCompleted : Date? = nil
     var taskDescription: String = ""
     var isCompleted : Bool = false
-    var dateDue : NSDate? = nil
+    var dateDue : Date? = nil
 }
 
 
