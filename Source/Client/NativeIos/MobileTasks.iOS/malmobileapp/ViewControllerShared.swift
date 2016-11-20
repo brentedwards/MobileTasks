@@ -9,9 +9,9 @@
 import Foundation
 
 class ViewControllerShared  {
-    static func handleNetworkCallError(_ error : NSError, networkService : NetworkProtocol, viewController : UIViewController) -> Void {
+    static func handleNetworkCallError(_ error : Error, networkService : NetworkProtocol, viewController : UIViewController) -> Void {
         if (error.localizedDescription == "{\"message\":\"Authorization has been denied for this request.\"}") {
-            networkService.logout({ (error : NSError?) in
+            networkService.logout({ (error : Error?) in
                 if (error == nil) {
                     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil);
 
