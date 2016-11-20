@@ -48,7 +48,7 @@ class LoginViewController: BaseViewController {
     
     func processLogin(_ provider: String) {
 
-        networkService!.login(provider, controller: self, completion: { (error: NSError?) -> Void in
+        networkService!.login(provider, controller: self, completion: { (error: Error?) -> Void in
             if (error == nil) {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let navigationController = appDelegate.window?.rootViewController as! UINavigationController

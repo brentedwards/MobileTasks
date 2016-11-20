@@ -19,7 +19,7 @@ class BaseTableViewController: UITableViewController {
         networkService = NetworkService()
     }
     
-    func handleNetworkCallError(_ error : NSError) -> Void {
+    func handleNetworkCallError(_ error : Error) -> Void {
         ViewControllerShared.handleNetworkCallError(error, networkService: networkService!, viewController: self)
     }
 }

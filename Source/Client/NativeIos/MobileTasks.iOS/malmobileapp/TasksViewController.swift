@@ -21,8 +21,8 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     
     var Tasks : [MobileTask] = []
     
-    lazy var TasksViewController: NSFetchedResultsController = { //() -> <error type> in
-        let fetchRequest = NSFetchRequest(entityName: "TodoItem")
+    lazy var TasksViewController: NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in  //() -> <error type> in
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
         let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         
         // show only non-completed items
@@ -42,7 +42,7 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
         super.viewDidLoad()
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        networkService?.getTasks({ (results: [MobileTask]?, error: NSError?) -> Void in
+        networkService?.getTasks({ (results: [MobileTask]?, error: Error?) -> Void in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (error == nil) {
                 self.Tasks = results!
@@ -129,7 +129,7 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
         
         if (!task.isCompleted) {
             task.isCompleted = true
-            networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: NSError?) in
+            networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: Error?) in
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 if (error == nil) {
                     myButton.setImage(self.getImage(true, dateDue: task.dateDue), for: UIControlState())
@@ -197,7 +197,7 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     
     func didSaveItem(_ task : MobileTask) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: NSError?) in
+        networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: Error?) in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (error == nil) {
                 self.Tasks.append(task)

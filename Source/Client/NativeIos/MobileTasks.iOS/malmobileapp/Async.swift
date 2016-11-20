@@ -8,6 +8,6 @@
 
 import Foundation
 
-typealias ServiceResponse = (NSError?) -> Void
-typealias TaskResponse = (Array<MobileTask>?, NSError?) -> Void
-typealias TaskSaveResponse = (MobileTask?, NSError?) -> Void
+typealias ServiceResponse = (Error?) -> Void
+typealias TaskResponse = (Array<MobileTask>?, Error?) -> Void
+typealias TaskSaveResponse = (MobileTask?, Error?) -> Void

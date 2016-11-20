@@ -18,7 +18,7 @@ class NetworkService : NetworkProtocol {
     }
     
     func login(_ serviceProvider: String, controller: UIViewController, completion: @escaping ServiceResponse) {
-            NetworkService.mobileClient?.login(withProvider: serviceProvider,  controller: controller, animated: false, completion: { (user : MSUser?, error : NSError?) -> Void in
+        NetworkService.mobileClient?.login(withProvider: serviceProvider,  controller: controller, animated: false, completion: { (user : MSUser?, error : Error?) -> Void in
             if (user != nil) {
                 let currentToken : String = (user?.mobileServiceAuthenticationToken!)!
                 let currentUserId : String = (user?.userId)!
@@ -30,7 +30,7 @@ class NetworkService : NetworkProtocol {
                 completion(nil)
                 return
             }
-            completion(error)
+            completion((error as? NSError)!)
             return
         })
     }
@@ -60,11 +60,11 @@ class NetworkService : NetworkProtocol {
     }
     
     func getTasks(_ completion: @escaping TaskResponse) -> Void {
-        NetworkService.mobileClient?.invokeAPI("task", body: nil, httpMethod: "GET", parameters: nil, headers: nil, completion: {(result : AnyObject?,
+        NetworkService.mobileClient?.invokeAPI("task", body: nil, httpMethod: "GET", parameters: nil, headers: nil, completion: {(result : Any?,
             response : HTTPURLResponse?,
-            error : NSError?) -> Void in
+            error : Error?) in
             if (error == nil) {
-                let returnValue : Array<MobileTask> = self.decodeJsonList(result!)
+                let returnValue : Array<MobileTask> = self.decodeJsonList((result as AnyObject))
                 completion(returnValue, nil)
             } else {
                 completion(nil, error!)
@@ -119,22 +119,22 @@ class NetworkService : NetworkProtocol {
     }
     
     func logout(_ completion: @escaping ServiceResponse) -> Void {
-        NetworkService.mobileClient?.logout(completion: { (error: NSError?) in
+        NetworkService.mobileClient?.logout(completion: { (error: Error?) in
             if (error == nil) {
                 UserDefaults.standard.removeObject(forKey: LastUsedProvider)
             }
-            completion(error)
+            completion((error as? NSError)!)
         })
     }
     
     func upsertTask(_ task: MobileTask, completion: @escaping TaskSaveResponse) -> Void {
         
         let jsonTask : NSMutableDictionary = self.encodeJson(task) as NSMutableDictionary
-        NetworkService.mobileClient?.invokeAPI("task", body: jsonTask, httpMethod: "POST", parameters: nil, headers: nil, completion: { (result : AnyObject?, response: HTTPURLResponse?, error : NSError?) in
+        NetworkService.mobileClient?.invokeAPI("task", body: jsonTask, httpMethod: "POST", parameters: nil, headers: nil, completion: { (result : Any?, response: HTTPURLResponse?, error : Error?) in
             if (error == nil) {
                 completion(self.decodeJson(result! as! NSDictionary), nil)
             } else {
-                completion(nil, error)
+                completion(nil, (error as? NSError)!)
             }
         })
     }
