@@ -3,7 +3,7 @@
     "Microsoft.ApplicationInsights": "1.0.0",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0",
     "Microsoft.ApplicationInsights.WindowsApps": "1.0.0",
-    "Microsoft.Azure.Mobile.Client": "2.0.1",
+    "Microsoft.Azure.Mobile.Client": "3.0.3",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
   },
   "frameworks": {
