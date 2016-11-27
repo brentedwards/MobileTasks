@@ -20,40 +20,40 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
         
         if (networkService!.hasPreviousAuthentication()) {
-            self.performSegueWithIdentifier("sguToList", sender: self)
+            self.performSegue(withIdentifier: "sguToList", sender: self)
         }
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window?.rootViewController as! UINavigationController
-        navigationController.navigationBarHidden = true
+        navigationController.isNavigationBarHidden = true
         
         setBackgroundColor()
     }
     
-    @IBAction func btnMicrosoft_TouchDown(sender: AnyObject) {
+    @IBAction func btnMicrosoft_TouchDown(_ sender: AnyObject) {
         processLogin(MicrosoftProvider)
     }
     
-    @IBAction func btnFacebook_TouchDown(sender: AnyObject) {
+    @IBAction func btnFacebook_TouchDown(_ sender: AnyObject) {
         processLogin(FacebookProvider)
     }
     
-    @IBAction func btnGoogle_TouchDown(sender: AnyObject) {
+    @IBAction func btnGoogle_TouchDown(_ sender: AnyObject) {
         processLogin(GoogleProvider)
     }
     
-    @IBAction func btnTwitter_TouchDown(sender: AnyObject) {
+    @IBAction func btnTwitter_TouchDown(_ sender: AnyObject) {
         processLogin(TwitterProvider)
     }
     
-    func processLogin(provider: String) {
+    func processLogin(_ provider: String) {
 
-        networkService!.login(provider, controller: self, completion: { (error: NSError?) -> Void in
+        networkService!.login(provider, controller: self, completion: { (error: Error?) -> Void in
             if (error == nil) {
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let navigationController = appDelegate.window?.rootViewController as! UINavigationController
-                navigationController.navigationBarHidden = false
-                self.performSegueWithIdentifier("sguToList", sender: self)
+                navigationController.isNavigationBarHidden = false
+                self.performSegue(withIdentifier: "sguToList", sender: self)
             }
         })
     }
@@ -63,24 +63,24 @@ class LoginViewController: BaseViewController {
         let endColor = UIColor(red: (66 / 255), green: (147 / 255), blue: (33 / 255), alpha: 1) //"#429321"
         
         let gl = CAGradientLayer()
-        gl.colors = [startColor.CGColor, endColor.CGColor]
+        gl.colors = [startColor.cgColor, endColor.cgColor]
         gl.locations = [0.0, 1.0]
         
-        self.view.backgroundColor = UIColor.clearColor()
+        self.view.backgroundColor = UIColor.clear
         gl.frame = self.view.bounds
-        self.view.layer.insertSublayer(gl, atIndex: 0)
+        self.view.layer.insertSublayer(gl, at: 0)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window?.rootViewController as! UINavigationController
         
         if (navigationController.viewControllers.count > 1) {
-            for i in (0...navigationController.viewControllers.count - 1).reverse() {
+            for i in (0...navigationController.viewControllers.count - 1).reversed() {
                 let controller = navigationController.viewControllers[i] as? LoginViewController
                 if controller == nil {
-                    navigationController.viewControllers.removeAtIndex(i)
+                    navigationController.viewControllers.remove(at: i)
                 }
             }
         }

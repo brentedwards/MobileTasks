@@ -34,46 +34,46 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
         self.lblTaskDetails.becomeFirstResponder()
     }
     
-    @IBAction func cancelPressed(sender : UIBarButtonItem) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func cancelPressed(_ sender : UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func savePressed(sender : UIBarButtonItem) {
+    @IBAction func savePressed(_ sender : UIBarButtonItem) {
         saveItem()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func showDatePickerPressed(sender: UIButton) {
-        if (self.swDueDate.on) {
+    @IBAction func showDatePickerPressed(_ sender: UIButton) {
+        if (self.swDueDate.isOn) {
             let datePickerView  : UIDatePicker = UIDatePicker()
-            datePickerView.datePickerMode = UIDatePickerMode.Date
+            datePickerView.datePickerMode = UIDatePickerMode.date
             self.lblDateDue.inputView = datePickerView
-            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), for: UIControlEvents.valueChanged)
         }
     }
 
-    @IBAction func startDateEditing(sender: AnyObject) {
-        if (self.swDueDate.on) {
+    @IBAction func startDateEditing(_ sender: AnyObject) {
+        if (self.swDueDate.isOn) {
             let datePickerView  : UIDatePicker = UIDatePicker()
-            datePickerView.datePickerMode = UIDatePickerMode.Date
+            datePickerView.datePickerMode = UIDatePickerMode.date
             self.lblDateDue.inputView = datePickerView
-            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            datePickerView.addTarget(self, action: #selector(TaskViewController.handleDatePicker(_:)), for: UIControlEvents.valueChanged)
         } else {
             self.lblDateDue.resignFirstResponder()
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField)
+    func textFieldDidEndEditing(_ textField: UITextField)
     {
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewController(animated: true);
     }
     
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
     {
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         saveItem()
         
@@ -81,10 +81,10 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
         return true
     }
     
-    func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = NSDateFormatter()
+    func handleDatePicker(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
-        self.lblDateDue.text = dateFormatter.stringFromDate(sender.date)
+        self.lblDateDue.text = dateFormatter.string(from: sender.date)
     }
     
     // Delegate
@@ -94,11 +94,11 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
         if let text = self.lblTaskDetails.text {
             let task : MobileTask = MobileTask()
             task.taskDescription = text
-            task.isCompleted = swCompleted.on
-            if (self.swDueDate.on) {
-                let dateFormatter = NSDateFormatter()
+            task.isCompleted = swCompleted.isOn
+            if (self.swDueDate.isOn) {
+                let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd MMM yyyy"
-                task.dateDue = dateFormatter.dateFromString(self.lblDateDue.text!)
+                task.dateDue = dateFormatter.date(from: self.lblDateDue.text!)
             } else {
                 task.dateDue = nil
             }

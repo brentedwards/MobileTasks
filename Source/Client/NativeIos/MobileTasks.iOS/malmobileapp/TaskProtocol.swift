@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TaskProtocol {
-    func didSaveItem(task : MobileTask)
+    func didSaveItem(_ task : MobileTask)
 }

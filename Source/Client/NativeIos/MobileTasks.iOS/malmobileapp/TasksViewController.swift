@@ -21,9 +21,9 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     
     var Tasks : [MobileTask] = []
     
-    lazy var TasksViewController: NSFetchedResultsController = {
-        let fetchRequest = NSFetchRequest(entityName: "TodoItem")
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    lazy var TasksViewController: NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in  //() -> <error type> in
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TodoItem")
+        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         
         // show only non-completed items
         fetchRequest.predicate = NSPredicate(format: "complete != true")
@@ -41,9 +41,9 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        networkService?.getTasks({ (results: [MobileTask]?, error: NSError?) -> Void in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        networkService?.getTasks({ (results: [MobileTask]?, error: Error?) -> Void in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (error == nil) {
                 self.Tasks = results!
                 self.tableView.reloadData()
@@ -53,21 +53,21 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let navigationController = appDelegate.window?.rootViewController as! UINavigationController
         
         if (navigationController.viewControllers.count > 1 ) {
-            for i in (0...navigationController.viewControllers.count - 1).reverse() {
+            for i in (0...navigationController.viewControllers.count - 1).reversed() {
                 let controller = navigationController.viewControllers[i] as? TaskProtocol
                 if controller == nil {
-                    navigationController.viewControllers.removeAtIndex(i)
+                    navigationController.viewControllers.remove(at: i)
                 }
             }
         }
         
-        navigationController.navigationBarHidden = false
+        navigationController.isNavigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,15 +76,15 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     
     // MARK: Table Controls
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.delete
     }
     
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Complete"
     }
     
@@ -105,34 +105,34 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     //        }
     //    }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return Tasks.count;
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let CellIdentifier = "TaskItemCell"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier, forIndexPath: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         
         let taskCell : TaskItemCell = cell as! TaskItemCell
-        taskCell.btnStatus.addTarget(self, action: #selector (self.switchIsChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        taskCell.btnStatus.addTarget(self, action: #selector (self.switchIsChanged(_:)), for: UIControlEvents.touchUpInside)
         cell = configureCell(cell, indexPath: indexPath)
         
         
         return cell
     }
     
-    func switchIsChanged(myButton: UIButton) {
+    func switchIsChanged(_ myButton: UIButton) {
         let task : MobileTask = Tasks[myButton.tag]
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         if (!task.isCompleted) {
             task.isCompleted = true
-            networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: NSError?) in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: Error?) in
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 if (error == nil) {
-                    myButton.setImage(self.getImage(true, dateDue: task.dateDue), forState: UIControlState.Normal)
+                    myButton.setImage(self.getImage(true, dateDue: task.dateDue), for: UIControlState())
                 } else {
                     task.isCompleted = false
                     self.handleNetworkCallError(error!)
@@ -141,64 +141,64 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
         }
     }
     
-    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) -> UITableViewCell {
-        let item : MobileTask = Tasks[indexPath.item]
+    func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell {
+        let item : MobileTask = Tasks[(indexPath as NSIndexPath).item]
         
         // Set the label on the cell and make sure the label color is black (in case this cell
         // has been reused and was previously greyed out
         
         let taskCell = cell as! TaskItemCell
         taskCell.lblTaskTitle.text = item.taskDescription
-        taskCell.lblDateDue.text = getDueDate(item.dateDue)
-        taskCell.btnStatus.tag = indexPath.item
-        taskCell.btnStatus.setImage(getImage(item.isCompleted, dateDue: item.dateDue), forState: UIControlState.Normal)
+        taskCell.lblDateDue.text = getDueDate(item.dateDue as Date?)
+        taskCell.btnStatus.tag = (indexPath as NSIndexPath).item
+        taskCell.btnStatus.setImage(getImage(item.isCompleted, dateDue: item.dateDue as Date?), for: UIControlState())
         return cell
     }
     
-    func getDueDate(dateInfo : NSDate?) -> String {
+    func getDueDate(_ dateInfo : Date?) -> String {
         if (dateInfo == nil) {
             return "No Due Date";
         } else {
-            let dateFormatter = NSDateFormatter()
+            let dateFormatter = DateFormatter()
             
-            let theDateFormat = NSDateFormatterStyle.MediumStyle
-            let theTimeFormat = NSDateFormatterStyle.ShortStyle
+            let theDateFormat = DateFormatter.Style.medium
+            let theTimeFormat = DateFormatter.Style.short
             
             dateFormatter.dateStyle = theDateFormat
             dateFormatter.timeStyle = theTimeFormat
             
-            return dateFormatter.stringFromDate(dateInfo!)
+            return dateFormatter.string(from: dateInfo!)
         }
     }
     
-    func getImage(completed: Bool, dateDue: NSDate?) -> UIImage {
+    func getImage(_ completed: Bool, dateDue: Date?) -> UIImage {
         if (dateDue == nil) {
             return UIImage(named: "Incomplete")!
         } else if (completed) {
             return UIImage(named: "Completed")!
-        } else if (dateDue!.timeIntervalSinceNow.isSignMinus) {
+        } else if (dateDue!.timeIntervalSinceNow.sign == .minus) {
             return UIImage(named: "PastDue")!
         } else {
             return UIImage(named: "Incomplete")!
         }
     }
     
-    @IBAction func addItem(sender : AnyObject) {
-        self.performSegueWithIdentifier("sguToItemDetail", sender: self)
+    @IBAction func addItem(_ sender : AnyObject) {
+        self.performSegue(withIdentifier: "sguToItemDetail", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!)
     {
         if segue.identifier == "sguToItemDetail" {
-            let taskController = segue.destinationViewController as! TaskViewController
+            let taskController = segue.destination as! TaskViewController
             taskController.delegate = self
         }
     }
     
-    func didSaveItem(task : MobileTask) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: NSError?) in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func didSaveItem(_ task : MobileTask) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        networkService?.upsertTask(task, completion: { (mobileTask :MobileTask?, error: Error?) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (error == nil) {
                 self.Tasks.append(task)
                 self.tableView.reloadData()

@@ -9,10 +9,10 @@
 import Foundation
 
 protocol NetworkProtocol {
-    func login(serviceProvider : String, controller : UIViewController, completion : ServiceResponse) -> Void
+    func login(_ serviceProvider : String, controller : UIViewController, completion : @escaping ServiceResponse) -> Void
     func hasPreviousAuthentication() -> Bool
     func getClient() -> MSClient
-    func getTasks(completion: TaskResponse) -> Void
-    func logout(completion: ServiceResponse) -> Void
-    func upsertTask(task: MobileTask, completion: TaskSaveResponse) -> Void
+    func getTasks(_ completion: @escaping TaskResponse) -> Void
+    func logout(_ completion: @escaping ServiceResponse) -> Void
+    func upsertTask(_ task: MobileTask, completion: @escaping TaskSaveResponse) -> Void
 }
