@@ -11,13 +11,17 @@
 			"type":"radio",
 			"key":"lang",
 			"default": "en-us",
-			"items":[{
-				"value":"en-us",
-				"title":"English (US)"
-			}, {
-				"value":"en-gb",
-				"title":"English (UK)"
-			}]
+      "items": [
+        {
+          ios
+          "value": "en-us",
+          "title": "English (US)"
+        },
+        {
+          "value": "en-gb",
+          "title": "English (UK)"
+        }
+      ]
 		}, {
 			"title":"Debug",
 			"type":"toggle",
