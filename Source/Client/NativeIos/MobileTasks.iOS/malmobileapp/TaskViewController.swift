@@ -35,12 +35,12 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
     }
     
     @IBAction func cancelPressed(_ sender : UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController!.popViewController(animated: true)
     }
     
     @IBAction func savePressed(_ sender : UIBarButtonItem) {
         saveItem()
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController!.popViewController(animated: true)
     }
     
     @IBAction func showDatePickerPressed(_ sender: UIButton) {
@@ -65,7 +65,7 @@ class TaskViewController: UIViewController,  UIBarPositioningDelegate, UITextFie
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
-        self.navigationController?.popViewController(animated: true);
+        self.navigationController!.popViewController(animated: true);
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
