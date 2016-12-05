@@ -1,8 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
+import { Storage } from '@ionic/storage';
 
 declare var WindowsAzure: any;
-declare var plugins : any;
 
 @Injectable()
 export class AzureAppService {
@@ -11,7 +11,10 @@ export class AzureAppService {
     private azureUrl : string = "https://mobiletasks.azurewebsites.net";
     private lastUsedProvider : string = "LastUsedProvider";
     private userId :string = "|UserId";
-    private token :string = "|Token";
+    private token: string = "|Token";
+
+    constructor(private storage: Storage) {
+    }
 
     private getAzureService() : any {
         if (this.azureService == null) {
@@ -24,14 +27,13 @@ export class AzureAppService {
         return new Promise<boolean>((resolve, reject) => {
             this.getAzureService().login(provider).done((results) => {
 
-                var prefs = plugins.appPreferences;
-                prefs.store(() => {
-                    prefs.store(() => {
-                        prefs.store(()  => {
+                this.storage.set(this.lastUsedProvider, provider).then((provider) => {
+                    this.storage.set(provider + this.userId, results.userId).then((provider) => {
+                        this.storage.set(provider + this.token, this.getAzureService().currentUser.mobileServiceAuthenticationToken).then((provider) => {
                             resolve(true);
-                        }, () => { resolve(false); }, provider + this.token, this.getAzureService().currentUser.mobileServiceAuthenticationToken);
-                    }, (error) => { resolve(false); }, provider + this.userId, results.userId);
-                }, (error) => { resolve(false); }, this.lastUsedProvider, provider);
+                        }).catch(error => { resolve(false); });
+                    }).catch(error => { resolve(false); });
+                }).catch(error => { resolve(false); });
             }, (err) => {
                 reject(err.message);
             });
@@ -39,27 +41,24 @@ export class AzureAppService {
     }
 
     public hasPreviousAuthentication() : Promise<boolean> {
-        var prefs = plugins.appPreferences;
 
         return new Promise<boolean>((resolve, reject) => {
-            prefs.fetch((provider) => {
+            this.storage.get(this.lastUsedProvider).then((provider) => {
                 if (provider != null) {
-                    prefs.fetch((uid) => {
-                        prefs.fetch((uToken) => {
+                    this.storage.get(provider + this.userId).then((uid) => {
+                        this.storage.get(provider + this.token).then((uToken) => {
                             this.getAzureService().currentUser = { "userId": uid, "mobileServiceAuthenticationToken": uToken };
-
-                            resolve(true);
-                        }, () => { resolve(false); }, provider + this.token);
-                    }, (error) => { resolve(false); }, provider + this.userId);
-                } else { resolve(false); }
-            }, (error) => { resolve(false); }, this.lastUsedProvider);
+                            resolve(false);
+                        }).catch(error => { resolve(false); });
+                    }).catch(error => { resolve(false); });
+                }
+            }).catch(error => { resolve(false); });
         });
     }
 
     public getTasks(): Promise<Task[]> {
         return new Promise<boolean>((resolve, reject) => {
             this.getAzureService().invokeApi("task", { method: "Get" }).done((results) => {
-                alert(results.response);
                 resolve(JSON.parse(results.response));
             }, (err) => {
                 reject(err.message);
@@ -70,10 +69,9 @@ export class AzureAppService {
     public logout() : Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.getAzureService().logout().done((error, result) => {
-                var prefs = plugins.appPreferences;
-                prefs.remove(() => {
+                this.storage.remove(this.lastUsedProvider).then((provider) => {
                     resolve(true);
-                }, () => { resolve(true); }, this.lastUsedProvider);
+                }).catch(error => { resolve(false); });
             }, (err) => {
                 reject(err.message);
             });
