@@ -10,13 +10,12 @@ import Foundation
 
 class BaseViewController: UIViewController {
     
-    var networkService : NetworkProtocol?
+    lazy var networkService : NetworkProtocol? = NetworkService()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        networkService = NetworkService()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {

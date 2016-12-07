@@ -10,13 +10,12 @@ import Foundation
 
 class BaseTableViewController: UITableViewController {
     
-    var networkService : NetworkProtocol?
+    lazy var networkService : NetworkProtocol? = NetworkService()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        networkService = NetworkService()
     }
     
     func handleNetworkCallError(_ error : Error) -> Void {

@@ -88,22 +88,6 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
         return "Complete"
     }
     
-    //    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
-    //    {
-    //        let record = self.fetchedResultController.objectAtIndexPath(indexPath) as! NSManagedObject
-    //        var item = self.store!.tableItemFromManagedObject(record)
-    //        item["complete"] = true
-    //
-    //        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-    //
-    //        self.table!.update(item) { (error) -> Void in
-    //            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-    //            if error != nil {
-    //                print("Error: \(error!.description)")
-    //                return
-    //            }
-    //        }
-    //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
