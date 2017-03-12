@@ -1,0 +1,40 @@
+﻿<ion-header>
+  <ion-navbar>
+    <ion-title>Task</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home" padding>
+  <ion-grid style="height: 100%; overflow: hidden">
+    <ion-row>
+      <ion-col>
+        <ion-input placeholder="Task Details" [(ngModel)]="task.description"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>Specify due date: </ion-col>
+      <ion-col width-50>
+        <ion-checkbox [(ngModel)]="specifyDueDate"></ion-checkbox>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>
+        Date Due:
+      </ion-col>
+      <ion-col width-50>
+        <ion-datetime displayFormat="MM/DD/YYYY" max="2020-10-31" [(ngModel)]="task.dateDue" [disabled]="!specifyDueDate"></ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>Mark as completed:</ion-col>
+      <ion-col width-50>
+        <ion-checkbox [(ngModel)]="task.isCompleted"></ion-checkbox>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
