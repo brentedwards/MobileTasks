@@ -156,10 +156,10 @@ class TasksViewController: BaseTableViewController, TaskProtocol {
     }
     
     func getImage(_ completed: Bool, dateDue: Date?) -> UIImage {
-        if (dateDue == nil) {
-            return UIImage(named: "Incomplete")!
-        } else if (completed) {
+        if (completed) {
             return UIImage(named: "Completed")!
+        } else if(dateDue == nil) {
+            return UIImage(named: "Incomplete")!
         } else if (dateDue!.timeIntervalSinceNow.sign == .minus) {
             return UIImage(named: "PastDue")!
         } else {
