@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { NavigatorIOS, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Login from './views/login';
+import Tasks from './views/tasks';
 
 export const Root = StackNavigator({
-    Login: {
-      screen: Login,
-    },
+    Login: { screen: Login },
+    Tasks: {screen: Tasks},
   }, {
     mode: 'modal',
-    headerMode: 'none',
+    headerMode: 'float',
   });
 
 export default class Index extends Component {

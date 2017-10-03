@@ -14,22 +14,99 @@ import {
   Button,
   Image,
   Alert,
-  TouchableOpacity
+  TouchableOpacity, 
+  WebView
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FlexImage from 'react-native-flex-image';
-import Auth0 from 'react-native-auth0';
+import { StackNavigator, NavigationActions } from 'react-navigation';
+import { NativeModules } from 'react-native';
+var NetworkService = NativeModules.NetworkService;
 
 export default class Login extends Component {
-    _onMicrosoftTapped() {
-        //Alert.alert('You tapped the button!')
-        var auth0 = new Auth0({ domain: 'vslivemobiletasks.auth0.com', clientId: '9Z4fFNtg66Z1Yy2KWOOgMlLIRP60lIEn' });
-        auth0
-        .webAuth
-        .authorize({scope: 'openid email', audience: 'https://vslivemobiletasks.auth0.com/userinfo'})
-        .then(credentials => Alert.alert(credentials.accessToken))
-        .catch(error => Alert.alert(error.error));
+    static navigationOptions = {
+        header: null,
+      };
+    
+    constructor(props) {
+        super(props);
+        NetworkService.hasPreviousAuthentication((error, hasLogin) => {
+            if (error == "" && hasLogin == 'true') {
+                let resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({ routeName: 'Tasks'})
+                    ]
+                })
+                this.props.navigation.dispatch(resetAction)
+            }
+        })
       }
+
+    _onMicrosoftTapped = () =>  {
+
+        NetworkService.login("MICROSOFTACCOUNT", (error, loginInfo) => {
+            if (error) {
+              console.error(error);
+            } else {
+              console.debug(loginInfo);
+            }
+          })
+        //console.debug(this._image.Text);
+        //Alert.alert('You tapped the button!')
+        //var auth0 = new Auth0({ domain: 'vslivemobiletasks.auth0.com', clientId: '9Z4fFNtg66Z1Yy2KWOOgMlLIRP60lIEn' });
+        //auth0
+        //.webAuth
+        //.authorize({scope: 'openid email', audience: 'https://vslivemobiletasks.auth0.com/userinfo'})
+        //.then(credentials => {
+            //require('../../shim');
+            //var WindowsAzure = require('azure-mobile-apps-client');
+            //var clientRef = new WindowsAzure.MobileServiceClient('https://mobiletasks.azurewebsites.net'); 
+            //clientRef.currentUser = { "mobileServiceAuthenticationToken": credentials.accessToken };  
+            //clientRef.invokeApi("task", { method: "Get" }).done((results) => {
+            //    Alert.alert(JSON.parse(results.response));
+            //}, (err) => {
+            //    Alert.alert(err.message);
+            //}); 
+            //var request = new Request('https://mobiletasks.azurewebsites.net/api/task');
+
+            //request.method = 'Get';
+            //Fetch(request)
+            //.then(function(response) {
+            //    console.debug(response);
+                // ...
+            //})
+            //.catch((error) => {
+            //  console.error(error);
+            //});
+        //})
+        //.catch(error => Alert.alert(error.error)
+        //);
+      }
+      _onGoogleTapped = () =>  {
+        
+                NetworkService.login("GOOGLE", (error, loginInfo) => {
+                    if (error) {
+                      console.error(error);
+                    } else {
+                      console.debug(loginInfo);
+                    }
+                  })
+              }
+
+              _onFacebookTapped = () =>  {
+                
+                        NetworkService.login("FACEBOOK", (error) => {
+                            if (error == "") {
+                                NetworkService.hasPreviousAuthentication((hasLogin) => {
+                                    this.props.navigation.navigate('Tasks');
+                                })
+                            } else {
+                              console.debug(error);
+                            }
+                          })
+                      }
+
   render() {
     return (
         <LinearGradient colors={['#B4EC51', '#429321']} style={{flex: 1, flexDirection: 'column', paddingTop: 18}} >
@@ -46,14 +123,14 @@ export default class Login extends Component {
                 <TouchableOpacity style={{flex: .2}} onPress={this._onMicrosoftTapped}>
                     <FlexImage source={require('../images/IconTwitter.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex: .2}} onPress={this._onMicrosoftTapped}>
+                <TouchableOpacity style={{flex: .2}} onPress={this._onFacebookTapped}>
                     <FlexImage source={require('../images/IconFacebook.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex: .2}} onPress={this._onMicrosoftTapped}>
                     <FlexImage source={require('../images/IconMicrosoft.png')} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{flex: .2}} onPress={this._onMicrosoftTapped}>
-                    <FlexImage source={require('../images/IconGoogle.png')} />
+                <TouchableOpacity style={{flex: .2}} onPress={this._onGoogleTapped}>
+                    <FlexImage ref={component => this._image = component} source={require('../images/IconGoogle.png')} />
                 </TouchableOpacity>
                 <View style={{width: 0}} />
            </View>
