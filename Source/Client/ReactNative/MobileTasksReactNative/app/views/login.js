@@ -32,80 +32,48 @@ export default class Login extends Component {
         super(props);
         NetworkService.hasPreviousAuthentication((error, hasLogin) => {
             if (error == "" && hasLogin == 'true') {
-                let resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [
-                      NavigationActions.navigate({ routeName: 'Tasks'})
-                    ]
-                })
-                this.props.navigation.dispatch(resetAction)
+                this.navigateToTaskList();
             }
         })
-      }
+    }
 
-    _onMicrosoftTapped = () =>  {
+    navigateToTaskList() {
+        let resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'Tasks'})
+            ]
+        })
+        this.props.navigation.dispatch(resetAction);
+    }
 
-        NetworkService.login("MICROSOFTACCOUNT", (error, loginInfo) => {
-            if (error) {
-              console.error(error);
+    processLogin = (provider) => {
+        NetworkService.login(provider, (error, loginInfo) => {
+            if (error == "") {
+                NetworkService.hasPreviousAuthentication((hasLogin) => {
+                    this.navigateToTaskList();
+                })
             } else {
-              console.debug(loginInfo);
+              Alert.alert(error);
             }
           })
-        //console.debug(this._image.Text);
-        //Alert.alert('You tapped the button!')
-        //var auth0 = new Auth0({ domain: 'vslivemobiletasks.auth0.com', clientId: '9Z4fFNtg66Z1Yy2KWOOgMlLIRP60lIEn' });
-        //auth0
-        //.webAuth
-        //.authorize({scope: 'openid email', audience: 'https://vslivemobiletasks.auth0.com/userinfo'})
-        //.then(credentials => {
-            //require('../../shim');
-            //var WindowsAzure = require('azure-mobile-apps-client');
-            //var clientRef = new WindowsAzure.MobileServiceClient('https://mobiletasks.azurewebsites.net'); 
-            //clientRef.currentUser = { "mobileServiceAuthenticationToken": credentials.accessToken };  
-            //clientRef.invokeApi("task", { method: "Get" }).done((results) => {
-            //    Alert.alert(JSON.parse(results.response));
-            //}, (err) => {
-            //    Alert.alert(err.message);
-            //}); 
-            //var request = new Request('https://mobiletasks.azurewebsites.net/api/task');
+    }
 
-            //request.method = 'Get';
-            //Fetch(request)
-            //.then(function(response) {
-            //    console.debug(response);
-                // ...
-            //})
-            //.catch((error) => {
-            //  console.error(error);
-            //});
-        //})
-        //.catch(error => Alert.alert(error.error)
-        //);
-      }
-      _onGoogleTapped = () =>  {
-        
-                NetworkService.login("GOOGLE", (error, loginInfo) => {
-                    if (error) {
-                      console.error(error);
-                    } else {
-                      console.debug(loginInfo);
-                    }
-                  })
-              }
+    _onMicrosoftTapped = () =>  {
+        this.processLogin('MICROSOFTACCOUNT');
+    }
 
-              _onFacebookTapped = () =>  {
-                
-                        NetworkService.login("FACEBOOK", (error) => {
-                            if (error == "") {
-                                NetworkService.hasPreviousAuthentication((hasLogin) => {
-                                    this.props.navigation.navigate('Tasks');
-                                })
-                            } else {
-                              console.debug(error);
-                            }
-                          })
-                      }
+    _onGoogleTapped = () =>  {
+        this.processLogin('GOOGLE');
+    }
+
+    _onFacebookTapped = () =>  {
+        this.processLogin('FACEBOOK');
+    }
+
+    _onTwitterTapped = () =>  {
+        this.processLogin('TWITTER');
+    }
 
   render() {
     return (
@@ -120,7 +88,7 @@ export default class Login extends Component {
            </View>
            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View style={{width: 0}} />
-                <TouchableOpacity style={{flex: .2}} onPress={this._onMicrosoftTapped}>
+                <TouchableOpacity style={{flex: .2}} onPress={this._onTwitterTapped}>
                     <FlexImage source={require('../images/IconTwitter.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex: .2}} onPress={this._onFacebookTapped}>

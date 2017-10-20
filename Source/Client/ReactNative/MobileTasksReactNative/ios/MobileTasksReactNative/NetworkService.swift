@@ -81,34 +81,40 @@ class NetworkService : NSObject {
             if (error == nil) {
                 completion(["", result as! [NSDictionary]])
             } else {
-                completion([error.debugDescription])
+                completion([error.debugDescription, ""])
             }
         })
     }
     
 
-    func decodeJsonList(_ target: AnyObject) -> Array<MobileTask> {
-        var returnValue : Array<MobileTask> = Array<MobileTask>()
+    //func decodeJsonList(_ target: AnyObject) -> NSDictionary {
+        //var returnValue : NSMutableDictionary = NSMutableDictionary<NSDictionary<String>>()
         
-        let dictionary : [NSDictionary] = target as! [NSDictionary]
+      //  let dictionary : [NSDictionary] = target as! [NSDictionary]
         
-        for task in dictionary {
-            let mobileTask = decodeJson(task)
-            returnValue.append(mobileTask)
-        }
-        return returnValue;
-    }
+        //for task in dictionary {
+          //  let mobileTask = decodeJson(task)
+         //   returnValue.append(mobileTask)
+        //}
+       //return returnValue;
+      //return nil;
+   // }
     
-    func decodeJson(_ task: NSDictionary) -> MobileTask {
-        let mobileTask : MobileTask = MobileTask()
-        mobileTask.id = task["id"] as! Int
-        mobileTask.sid = task["sid"] as! String
-        mobileTask.taskDescription = task["description"] as! String
-        mobileTask.dateCreated = task["dateCreated"] as? Date
-        mobileTask.dateDue = task["dateDue"] as? Date
-        mobileTask.dateCompleted = task["dateCompleted"] as? Date
-        mobileTask.isCompleted = task["isCompleted"] as! Bool
-        return mobileTask
+    func decodeJson(_ task: NSDictionary) -> NSDictionary {
+      let jsonObject: NSMutableDictionary = [
+        "id" : task["id"] as! Int,
+        "sid" : task["sid"] as! String,
+        "description" : task["description"] as! String,
+        "isCompleted": task["isCompleted"] as! Bool
+      ]
+      if (task["dateCreated"] as? Date == nil) {
+        jsonObject["dateCreated"] = nil
+      } else {
+        jsonObject["dateCreated"] = nil
+      }
+        jsonObject["dateDue"] = task["dateDue"] as? Date
+        jsonObject["dateCompleted"] = task["dateCompleted"] as? Date
+        return jsonObject
     }
     
     func encodeJson(_ source: MobileTask) -> NSMutableDictionary {
