@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MSBlockDefinitions.h"
+#import "MSInstallation.h"
 
 @class MSClient;
 
@@ -13,7 +14,7 @@
 
 #pragma  mark * Public Initializer Methods
 
-@property (nonatomic, strong, readonly, nonnull) MSClient *client;
+@property (nonatomic, weak, readonly, nullable) MSClient *client;
 
 ///@name Initializing the MSPush Object
 ///@{
@@ -36,6 +37,9 @@
 
 /// Register for notifications with given deviceToken and a template.
 -(void)registerDeviceToken:(nonnull NSData *)deviceToken template:(nullable NSDictionary *)template completion:(nullable MSCompletionBlock)completion;
+
+/// Register for notifications with given installation.
+-(void)registerInstallation:(nonnull MSInstallation *)installation completion:(nullable MSCompletionBlock)completion;
 
 /// Unregister device from all notifications.
 -(void)unregisterWithCompletion:(nullable MSCompletionBlock)completion;

@@ -94,6 +94,9 @@ extern NSString *const MSErrorPushResultKey;
 /// Indicates a sync table operation could not be canceled
 #define MSSyncTableCancelError                  -1156
 
+/// Indicates a sync table operation could not be updated/removed as it no longer exists
+#define MSSyncTableOperationNotFound            -1157
+
 /// Indicates a mobile service sync operation (such as a syncTable insert) failed
 /// because the sync context object was not properly initialized
 #define MSSyncContextInvalid                    -1160
@@ -188,6 +191,24 @@ extern NSString *const MSErrorPushResultKey;
 /// Indicates that the login operation failed because the gateway URL in the client
 /// was invalid.
 #define MSLoginInvalidURL                       -1506
+
+/// Indicates that the login operation failed because
+/// there's another login operation already in progress
+#define MSLoginOperationInProgress              -1507
+
+/// Indicates that the refresh user operation failed because the identity provider
+/// does not support refresh token or user is not logged in with sufficient permission
+#define MSRefreshBadRequest                     -1511
+
+/// Indicates that the refresh user operation failed because credentials are not valid
+#define MSRefreshUnauthorized                   -1512
+
+/// Indicates that the refresh user operation failed because refresh token was revoked
+/// or expired
+#define MSRefreshForbidden                      -1513
+
+/// Indicates that the refresh user operation failed due to an unexpected error
+#define MSRefreshUnexpectedError                -1514
 
 /// Indicates that a required parameter for push operation was not provided
 #define MSPushRequiredParameter                 -1600

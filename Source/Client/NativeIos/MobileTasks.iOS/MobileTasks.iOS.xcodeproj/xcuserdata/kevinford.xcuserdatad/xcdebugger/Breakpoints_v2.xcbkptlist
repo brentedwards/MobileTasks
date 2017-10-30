@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "malmobileapp/TasksViewController.swift"
-            timestampString = "528057528.411121"
+            timestampString = "531084148.47004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "196"
@@ -24,12 +24,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "malmobileapp/NetworkService.swift"
-            timestampString = "528057579.042926"
+            timestampString = "531084148.470127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "getTasks(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "malmobileapp/NetworkService.swift"
+            timestampString = "531084148.470187"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "logout(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MobileTasks_iOS.NetworkService.logout((Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MobileTasks.iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinford/Documents/Projects/MobileTasks/Source/Client/NativeIos/MobileTasks.iOS/malmobileapp/NetworkService.swift"
+                  timestampString = "531084148.86745"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "25">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MobileTasks_iOS.NetworkService.logout((Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MobileTasks.iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinford/Documents/Projects/MobileTasks/Source/Client/NativeIos/MobileTasks.iOS/malmobileapp/NetworkService.swift"
+                  timestampString = "531084148.870096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "25">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "malmobileapp/AppDelegate.swift"
+            timestampString = "531084148.470243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "application(_:openURL:options:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
