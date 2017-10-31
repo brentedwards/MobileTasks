@@ -43,7 +43,7 @@ namespace MobileTasks.XForms.Services
 		public async Task LoginAsync(MobileServiceAuthenticationProvider provider)
 		{
 #if ANDROID
-			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider);
+			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider, "commagenicmobiletasks");
 #else
 #if IOS
 			// Launching from a modal window takes some finesse.
@@ -55,7 +55,7 @@ namespace MobileTasks.XForms.Services
 				rootController = navcontroller.VisibleViewController;
 			}
 
-			await this.Client.LoginAsync(rootController, provider);
+			await this.Client.LoginAsync(rootController, provider, "commagenicmobiletasks");
 #else
 			await this.Client.LoginAsync(provider);
 #endif // IOS
