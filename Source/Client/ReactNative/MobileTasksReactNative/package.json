@@ -12,7 +12,6 @@
     "moment": "^2.19.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.48.3",
-    "react-native-auth0": "^1.2.0",
     "react-native-crypto": "^2.1.1",
     "react-native-flex-image": "^1.1.0",
     "react-native-linear-gradient": "^2.3.0",
