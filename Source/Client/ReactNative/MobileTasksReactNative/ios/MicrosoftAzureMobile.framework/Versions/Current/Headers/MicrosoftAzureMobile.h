@@ -14,7 +14,9 @@
 #if TARGET_OS_IPHONE
 #import "MSLoginController.h"
 #endif
+#import "MSManagedObjectObserver.h"
 #import "MSPullSettings.h"
+#import "MSConnectionConfiguration.h"
 #import "MSPush.h"
 #import "MSQuery.h"
 #import "MSQueryResult.h"
@@ -25,9 +27,11 @@
 #import "MSTableOperation.h"
 #import "MSTableOperationError.h"
 #import "MSUser.h"
+#import "MSInstallation.h"
+#import "MSInstallationTemplate.h"
 
 #define MicrosoftAzureMobileSdkMajorVersion 3
-#define MicrosoftAzureMobileSdkMinorVersion 0
+#define MicrosoftAzureMobileSdkMinorVersion 4
 #define MicrosoftAzureMobileSdkBuildVersion 0
 
 #endif

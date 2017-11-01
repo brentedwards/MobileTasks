@@ -15,13 +15,14 @@ import {
   Image,
   Alert,
   TouchableOpacity, 
-  WebView
+  WebView,
+  ActivityIndicator
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import FlexImage from 'react-native-flex-image';
-import { StackNavigator, NavigationActions } from 'react-navigation';
-import { NativeModules } from 'react-native';
-var NetworkService = NativeModules.NetworkService;
+import LinearGradient from 'react-native-linear-gradient'
+import FlexImage from 'react-native-flex-image'
+import { StackNavigator, NavigationActions } from 'react-navigation'
+import { NativeModules } from 'react-native'
+var NetworkService = NativeModules.NetworkService
 
 export default class Login extends Component {
     static navigationOptions = {
@@ -30,10 +31,25 @@ export default class Login extends Component {
     
     constructor(props) {
         super(props);
-        NetworkService.hasPreviousAuthentication((error, hasLogin) => {
-            if (error == "" && hasLogin == 'true') {
-                this.navigateToTaskList();
-            }
+        this.state = {showProgress: false}
+
+    }
+
+    componentDidMount() {
+        this.setState({
+            showProgress: true
+        },
+        function() {
+            NetworkService.hasPreviousAuthentication((error, hasLogin) => {
+                this.setState({
+                    showProgress: false
+                },
+                function() {
+                    if (error == "" && hasLogin == 'true') {
+                        this.navigateToTaskList();
+                    }
+                })
+            })
         })
     }
 
@@ -48,15 +64,13 @@ export default class Login extends Component {
     }
 
     processLogin = (provider) => {
-        NetworkService.login(provider, (error, loginInfo) => {
+        NetworkService.login(provider, (error) => {
             if (error == "") {
-                NetworkService.hasPreviousAuthentication((hasLogin) => {
-                    this.navigateToTaskList();
-                })
+                this.navigateToTaskList();
             } else {
               Alert.alert(error);
             }
-          })
+        })
     }
 
     _onMicrosoftTapped = () =>  {
@@ -111,6 +125,11 @@ export default class Login extends Component {
                 <View style={{width: 0}} />
            </View>
            <View style={{flex: .2}} />
+           {this.state.showProgress &&
+            <View style={styles.loading}>
+                <ActivityIndicator animating={this.state.showProgress} size="large"/>
+            </View>
+            }
       </LinearGradient>
     );
   }
@@ -130,4 +149,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         textAlign: 'center',
     },
+    loading: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
   });

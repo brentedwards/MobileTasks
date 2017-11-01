@@ -24,61 +24,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "malmobileapp/NetworkService.swift"
-            timestampString = "531084148.470127"
+            timestampString = "531171556.603791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
             landmarkName = "getTasks(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "malmobileapp/NetworkService.swift"
-            timestampString = "531084148.470187"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "logout(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MobileTasks_iOS.NetworkService.logout((Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "MobileTasks.iOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kevinford/Documents/Projects/MobileTasks/Source/Client/NativeIos/MobileTasks.iOS/malmobileapp/NetworkService.swift"
-                  timestampString = "531153578.219859"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "25">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MobileTasks_iOS.NetworkService.logout((Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "MobileTasks.iOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kevinford/Documents/Projects/MobileTasks/Source/Client/NativeIos/MobileTasks.iOS/malmobileapp/NetworkService.swift"
-                  timestampString = "531153578.224056"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "125"
-                  endingLineNumber = "125"
-                  offsetFromSymbolStart = "25">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

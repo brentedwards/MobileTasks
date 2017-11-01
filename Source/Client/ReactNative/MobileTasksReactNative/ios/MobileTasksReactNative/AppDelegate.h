@@ -8,6 +8,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MicrosoftAzureMobile/MicrosoftAzureMobile.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

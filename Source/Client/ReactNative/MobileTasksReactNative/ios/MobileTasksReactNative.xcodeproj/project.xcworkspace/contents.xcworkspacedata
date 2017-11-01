@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/kevinford/Documents/Projects/MobileTasks/Source/Client/ReactNative/MobileTasksReactNative/ios/NetworkService.swift">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

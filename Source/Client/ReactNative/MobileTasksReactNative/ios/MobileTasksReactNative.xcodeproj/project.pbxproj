@@ -14,10 +14,11 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* MobileTasksReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MobileTasksReactNativeTests.m */; };
 		08403DD51F8304DF007CBFE9 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08403DD41F8304DF007CBFE9 /* MicrosoftAzureMobile.framework */; };
-		08403DD91F83052B007CBFE9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08403DD81F83052B007CBFE9 /* NetworkService.swift */; };
 		08403DDC1F8306EE007CBFE9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08403DDB1F8306EE007CBFE9 /* Network.swift */; };
 		08403DDF1F830A4E007CBFE9 /* MobleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08403DDE1F830A4E007CBFE9 /* MobleTask.swift */; };
 		08403DE31F83102F007CBFE9 /* NetworkServiceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 08403DE21F83102F007CBFE9 /* NetworkServiceBridge.m */; };
+		08861A8E1FA8E3190056F616 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08861A8D1FA8E3190056F616 /* NetworkService.swift */; };
+		08861A901FA8E37F0056F616 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08861A8F1FA8E3650056F616 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -37,7 +38,7 @@
 		2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E901DF850E9000B6D8A /* libRCTSettings-tvOS.a */; };
 		2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E941DF850E9000B6D8A /* libRCTText-tvOS.a */; };
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
-		2D02E4C91E0B4AEC006451C7 /* libReact-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact-tvOS.a */; };
+		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* MobileTasksReactNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MobileTasksReactNativeTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6A49298F9E80411B9EFDC9FE /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E07150CBE74E35AE9A9000 /* libBVLinearGradient.a */; };
@@ -116,6 +117,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 64AA15081EF7F30100718508;
 			remoteInfo = "BVLinearGradient-tvOS";
+		};
+		08861A831FA8DF320056F616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7ECE1E25DB7D00323FB7;
+			remoteInfo = "third-party";
+		};
+		08861A851FA8DF320056F616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D3C1EBD27B6005632C8;
+			remoteInfo = "third-party-tvOS";
+		};
+		08861A871FA8DF320056F616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
+			remoteInfo = "double-conversion";
+		};
+		08861A891FA8DF320056F616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
+			remoteInfo = "double-conversion-tvOS";
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -285,10 +314,11 @@
 		00E356F21AD99517003FC87E /* MobileTasksReactNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileTasksReactNativeTests.m; sourceTree = "<group>"; };
 		08403DD41F8304DF007CBFE9 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		08403DD71F83052A007CBFE9 /* MobileTasksReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MobileTasksReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
-		08403DD81F83052B007CBFE9 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = MobileTasksReactNative/NetworkService.swift; sourceTree = "<group>"; };
 		08403DDB1F8306EE007CBFE9 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Network.swift; path = MobileTasksReactNative/Network.swift; sourceTree = "<group>"; };
 		08403DDE1F830A4E007CBFE9 /* MobleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MobleTask.swift; path = MobileTasksReactNative/MobleTask.swift; sourceTree = "<group>"; };
 		08403DE21F83102F007CBFE9 /* NetworkServiceBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkServiceBridge.m; sourceTree = "<group>"; };
+		08861A8D1FA8E3190056F616 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = /Users/kevinford/Documents/Projects/MobileTasks/Source/Client/ReactNative/MobileTasksReactNative/ios/NetworkService.swift; sourceTree = "<absolute>"; };
+		08861A8F1FA8E3650056F616 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* MobileTasksReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileTasksReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08861A901FA8E37F0056F616 /* WebKit.framework in Frameworks */,
 				08403DD51F8304DF007CBFE9 /* MicrosoftAzureMobile.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -347,7 +378,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4C91E0B4AEC006451C7 /* libReact-tvOS.a in Frameworks */,
+				2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */,
 				2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */,
 				2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */,
 				2D02E4C41E0B4AEC006451C7 /* libRCTLinking-tvOS.a in Frameworks */,
@@ -456,6 +487,7 @@
 		08403DD31F8304DE007CBFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08861A8F1FA8E3650056F616 /* WebKit.framework */,
 				08403DD41F8304DF007CBFE9 /* MicrosoftAzureMobile.framework */,
 			);
 			name = Frameworks;
@@ -464,9 +496,9 @@
 		08403DD61F830508007CBFE9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				08861A8D1FA8E3190056F616 /* NetworkService.swift */,
 				08403DDE1F830A4E007CBFE9 /* MobleTask.swift */,
 				08403DDB1F8306EE007CBFE9 /* Network.swift */,
-				08403DD81F83052B007CBFE9 /* NetworkService.swift */,
 				08403DD71F83052A007CBFE9 /* MobileTasksReactNative-Bridging-Header.h */,
 				08403DE21F83102F007CBFE9 /* NetworkServiceBridge.m */,
 			);
@@ -510,13 +542,17 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+				3DAD3EA31DF850E9000B6D8A /* libReact.a */,
 				3DAD3EA51DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA71DF850E9000B6D8A /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
-				3DAD3EA31DF850E9000B6D8A /* libReact-tvOS.a */,
+				08861A841FA8DF320056F616 /* libthird-party.a */,
+				08861A861FA8DF320056F616 /* libthird-party.a */,
+				08861A881FA8DF320056F616 /* libdouble-conversion.a */,
+				08861A8A1FA8DF320056F616 /* libdouble-conversion.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -850,6 +886,34 @@
 			remoteRef = 08403DD11F8304C3007CBFE9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		08861A841FA8DF320056F616 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 08861A831FA8DF320056F616 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		08861A861FA8DF320056F616 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 08861A851FA8DF320056F616 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		08861A881FA8DF320056F616 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 08861A871FA8DF320056F616 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		08861A8A1FA8DF320056F616 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 08861A891FA8DF320056F616 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -913,10 +977,10 @@
 			remoteRef = 3DAD3E981DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3DAD3EA31DF850E9000B6D8A /* libReact-tvOS.a */ = {
+		3DAD3EA31DF850E9000B6D8A /* libReact.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libReact-tvOS.a";
+			path = libReact.a;
 			remoteRef = 3DAD3EA21DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1078,11 +1142,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				08403DD91F83052B007CBFE9 /* NetworkService.swift in Sources */,
 				08403DDF1F830A4E007CBFE9 /* MobleTask.swift in Sources */,
 				08403DDC1F8306EE007CBFE9 /* Network.swift in Sources */,
 				08403DE31F83102F007CBFE9 /* NetworkServiceBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				08861A8E1FA8E3190056F616 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

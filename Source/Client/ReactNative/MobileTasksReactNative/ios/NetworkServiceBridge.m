@@ -13,4 +13,6 @@ RCT_EXTERN_METHOD(getTasks:(RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(upsertTask:(NSString *)task completion:(RCTResponseSenderBlock)callback)
 
+RCT_EXTERN_METHOD(getUserInfo:(RCTResponseSenderBlock)callback)
+
 @end

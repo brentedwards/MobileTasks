@@ -33,6 +33,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
   return YES;
 }
 
@@ -41,6 +42,18 @@
 {
   return [RCTLinkingManager application:application openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  if ([[url.scheme lowercaseString] isEqualToString:@"commagenicmobiletasks"]) {
+    // Resume login flow
+    MSClient *mobileClient = [NetworkService mobileClient];
+    return [mobileClient resumeWithURL:url];
+  }
+  else {
+    return NO;
+  }
 }
 
 @end
