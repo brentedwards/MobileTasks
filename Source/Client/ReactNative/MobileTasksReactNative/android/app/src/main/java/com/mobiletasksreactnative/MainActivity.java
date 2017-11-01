@@ -1,6 +1,9 @@
 package com.mobiletasksreactnative;
 
+import android.content.Intent;
+
 import com.facebook.react.ReactActivity;
+import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
 
 public class MainActivity extends ReactActivity {
 
