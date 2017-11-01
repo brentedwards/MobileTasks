@@ -1,13 +1,10 @@
 using Android.App;
 using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
-using Android.Views;
 using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
+using MobileTasks.Android;
 using MobileTasks.Droid.Adapters;
 using MobileTasks.Droid.Models;
 using MobileTasks.Droid.Services;
@@ -26,12 +23,11 @@ namespace MobileTasks.Droid.Activities
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
-			SetTheme(Resource.Style.MobileTasks);
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.Main);
 
-			this.listView = this.FindViewById<ListView>(Android.Resource.Id.List);
+			this.listView = this.FindViewById<ListView>(global::Android.Resource.Id.List);
 
 			this.listView.ItemClick += (sender, args) =>
 			{
@@ -39,11 +35,11 @@ namespace MobileTasks.Droid.Activities
 				this.Edit(task);
 			};
 
-			var addTaskButton = this.FindViewById<FloatingActionButton>(Resource.Id.addTask);
-			addTaskButton.Click += (sender, args) =>
-			{
-				this.StartActivity(new Intent(this, typeof(TaskDetailActivity)));
-			};
+			//var addTaskButton = this.FindViewById<ImageButton>(Resource.Id.addTask);
+			//addTaskButton.Click += (sender, args) =>
+			//{
+			//	this.StartActivity(new Intent(this, typeof(TaskDetailActivity)));
+			//};
 		}
 
 		protected override async void OnResume()

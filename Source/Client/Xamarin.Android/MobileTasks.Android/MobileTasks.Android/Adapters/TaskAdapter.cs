@@ -1,6 +1,7 @@
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using MobileTasks.Android;
 using MobileTasks.Droid.Models;
 using MobileTasks.Droid.Services;
 using System;

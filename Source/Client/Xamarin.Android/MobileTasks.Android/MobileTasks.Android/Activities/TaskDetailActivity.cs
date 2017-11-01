@@ -1,12 +1,12 @@
 
 using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Java.Util;
+using MobileTasks.Android;
 using MobileTasks.Droid.Models;
 using MobileTasks.Droid.Services;
 using Newtonsoft.Json;
@@ -31,7 +31,7 @@ namespace MobileTasks.Droid.Activities
 
 			SetContentView(Resource.Layout.TaskDetail);
 
-			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+			var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
 			this.SetSupportActionBar(toolbar);
 
 			var isEdit = false;
@@ -101,7 +101,7 @@ namespace MobileTasks.Droid.Activities
 			{
 				deleteButton.Click += delegate
 				{
-					var builder = new Android.App.AlertDialog.Builder(this)
+					var builder = new global::Android.App.AlertDialog.Builder(this)
 					.SetTitle("Are you sure?")
 					.SetMessage("Delete '" + task.Description + "'?")
 					.SetPositiveButton(Resource.String.Yes, async (sender, args) =>

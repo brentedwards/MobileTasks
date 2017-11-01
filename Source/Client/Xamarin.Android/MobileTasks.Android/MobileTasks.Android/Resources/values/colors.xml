@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<item name="primary" type="color">#7ED321</item>
+	<item name="primaryDark" type="color">#1976D2</item>
+	<item name="accent" type="color">#7ED321</item>
+	<item name="controlHighlight" type="color">#64A81A</item>
+</resources>
