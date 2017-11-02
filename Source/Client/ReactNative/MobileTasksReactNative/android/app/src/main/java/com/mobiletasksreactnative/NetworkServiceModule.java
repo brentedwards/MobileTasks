@@ -19,7 +19,7 @@ import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAut
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 
 import java.net.MalformedURLException;
-import java.util.List;
+
 
 
 /**
