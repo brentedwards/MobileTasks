@@ -18,6 +18,8 @@ var NetworkService = NativeModules.NetworkService;
 export default class TaskRow extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.task)
+        console.log(this.props.navigation)
     }
 
     convertDate = (date) => {
@@ -41,7 +43,7 @@ export default class TaskRow extends Component {
             return require("../images/icon-incomplete.png")
         }
     }
-
+    
     switchIsChanged() {
         if (!this.props.task.isCompleted) {
             this.props.task.isCompleted = true;
@@ -56,17 +58,26 @@ export default class TaskRow extends Component {
         }
     }
 
+    editTask(task) {
+        console.log('task to move to ' + task.Id)
+        var navAction = NavigationActions.navigate({
+          routeName: 'Task',
+          params: { task: task, navigation: this.props.navigation }
+        })
+        this.props.navigation.dispatch(navAction)
+      }
+
     render() {
         return (
         <View style={{flex: 1, flexDirection: 'row'}}>
-            <TouchableOpacity style={{flex: .1, justifyContent: 'center', marginLeft: 15}} onPress={this.switchIsChanged()}>
+            <TouchableOpacity style={{flex: .1, justifyContent: 'center', marginLeft: 15}} onPress={() => this.switchIsChanged()}>
                 <FlexImage source={this.getIconForTask(this.props.task.isCompleted, this.props.task.dateDue)} />
             </TouchableOpacity>
-            <View style={{flex: .8, flexDirection: 'column'}}>
+            <TouchableOpacity style={{flex: .8, flexDirection: 'column'}} onPress={() => this.editTask(this.props.task)}>
                 <Text style={styles.headingItem}>{this.props.task.description}</Text>
                 <Text style={styles.detailItem}>{this.convertDate(this.props.task.dateDue)}</Text>
-            </View>
-            <TouchableOpacity style={{flex: .1, justifyContent: 'center', marginRight: 15}}>
+            </TouchableOpacity>
+            <TouchableOpacity style={{flex: .1, justifyContent: 'center', marginRight: 15}} onPress={() => this.editTask(this.props.task)}>
                 <FlexImage source={require("../images/icon-detail.png")} />
             </TouchableOpacity>
         </View>

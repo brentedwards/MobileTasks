@@ -98,6 +98,7 @@ public class NetworkServiceModule extends ReactContextBaseJavaModule {
                 getClient().setCurrentUser(new MobileServiceUser(userId));
                 getClient().getCurrentUser().setAuthenticationToken(currentToken);
                 callBack.invoke("", "true");
+                return;
             }
         }
         callBack.invoke("", "false");
