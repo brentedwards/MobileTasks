@@ -114,39 +114,54 @@ export default class Task extends Component {
     })
   }
 
-  componentWillMount() {
-    this.setNavigationParams();
-  }
+componentWillMount() {
+  this.setNavigationParams();
+}
 
-  goBack = () => {
-    console.log('go back')
-    this.props.navigation.goBack(null)
-  }
+goBack = () => {
+  console.log('go back')
+  this.props.navigation.goBack(null)
+}
 
-  dateChanged = newDate => {
-    this.setState({
-      task: { ...this.state.task, dateDue: newDate }
+dateChanged = newDate => {
+  this.setState({
+    task: { ...this.state.task, dateDue: newDate }
+  })
+}
+
+itemDescriptionChanged = newItemDescription => {
+  this.setState({
+    task: { ...this.state.task, description: newItemDescription }
+  })
+}
+
+specifyDueDateChanged = newSpecifyDueDate => {
+  this.setState({
+    specifyDueDate: newSpecifyDueDate,
+    task: { ...this.state.task, dateDue:  newSpecifyDueDate ? new Date() : null}
+  })
+}
+
+isCompletedChanged = newIsCompletedChanged => {
+  this.setState({
+    task: { ...this.state.task, isCompleted: newIsCompletedChanged, dateCompleted:  newIsCompletedChanged? new Date() : null}
+  })
+}
+
+setDate = async () => {
+  try {
+    const { action, year, month, day } = await DatePickerAndroid.open({
+      date: this.state.task.dateDue
     })
+    if (action !== DatePickerAndroid.dismissedAction) {
+      this.setState({
+        task: { ...this.state.task, dateDue: new Date(year, month, day)}
+      })
+    }
+  } catch ({ code, message }) {
+    console.warn('Cannot open date picker', message)
   }
-
-  itemDescriptionChanged = newItemDescription => {
-    this.setState({
-      task: { ...this.state.task, description: newItemDescription }
-    })
-  }
-
-  specifyDueDateChanged = newSpecifyDueDate => {
-    this.setState({
-      specifyDueDate: newSpecifyDueDate,
-      task: { ...this.state.task, dateDue:  newSpecifyDueDate ? new Date() : null}
-    })
-  }
-
-  isCompletedChanged = newIsCompletedChanged => {
-    this.setState({
-      task: { ...this.state.task, isCompleted: newIsCompletedChanged, dateCompleted:  newIsCompletedChanged? new Date() : null}
-    })
-  }
+}
 
 render() {
     return (

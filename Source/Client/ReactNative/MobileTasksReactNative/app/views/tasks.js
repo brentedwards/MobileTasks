@@ -15,6 +15,7 @@ import { NativeModules } from 'react-native'
 import FlexImage from 'react-native-flex-image'
 import TaskRow from './taskRow';
 import apiService from '../Services/apiServices'
+import ActionButton from 'react-native-action-button'
 
 var NetworkService = NativeModules.NetworkService;
 
@@ -133,7 +134,9 @@ export default class Tasks extends Component {
               refreshing={this.state.listRefreshing}
               onRefresh={this.refreshTaskList}
             />
-
+            {Platform.OS === 'android' && (
+            <ActionButton buttonColor='#7ED321' onPress={this.addTask}/>
+            )}
         </View>
         );
     }

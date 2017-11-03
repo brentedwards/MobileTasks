@@ -123,5 +123,6 @@
     <orderEntry type="library" exported="" name="com.facebook.fbui.textlayoutbuilder:textlayoutbuilder-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="org.webkit:android-jsc-r174650" level="project" />
     <orderEntry type="module" module-name="react-native-linear-gradient" exported="" />
+    <orderEntry type="module" module-name="react-native-randombytes" exported="" />
   </component>
 </module>
