@@ -243,3 +243,15 @@ Source/Server/MobileTasks.Server.Database/*.publish.xml
 
 # Cordova Bower Downloads
 **/bower_components
+
+flow-typed/npm
+**/node_modules/
+.expo/
+**/npm-debug.*
+**/build/
+
+# BUCK
+**/buck-out/
+**/.buckd/
+**/android/app/libs
+*.keystore

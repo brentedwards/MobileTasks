@@ -104,5 +104,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
+    
+    func application(_ application: UIApplication, openURL url: NSURL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme?.lowercased() == "commagenicmobiletasks" {
+            return (NetworkService.mobileClient?.resume(with: url as URL))!
+        }
+        else {
+            return false
+        }
+    }
 }
 

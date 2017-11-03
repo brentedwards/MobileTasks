@@ -1,6 +1,7 @@
 package com.magenic.mobiletasks.mobiletasksandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -8,7 +9,9 @@ import android.widget.ImageButton;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.magenic.mobiletasks.mobiletasksandroid.constants.NetworkConstants;
 import com.magenic.mobiletasks.mobiletasksandroid.models.Login;
+import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 import com.microsoft.windowsazure.mobileservices.MobileServiceException;
@@ -16,6 +19,8 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceException;
 public class LoginActivity extends ActivityBase implements View.OnClickListener {
 
     private Login login;
+    public static final int LOGIN_REQUEST_CODE = 1;
+    private MobileServiceAuthenticationProvider requestedProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,6 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         MobileServiceAuthenticationProvider provider = MobileServiceAuthenticationProvider.MicrosoftAccount;
-        final ActivityBase context = this;
         switch (v.getId()) {
             case R.id.facebook:
                 provider = MobileServiceAuthenticationProvider.Facebook;
@@ -60,23 +64,28 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                 provider = MobileServiceAuthenticationProvider.Twitter;
                 break;
         }
+        requestedProvider = provider;
 
-        ListenableFuture loginFuture = login.authenticate(provider);
+        login.authenticate(provider, LOGIN_REQUEST_CODE);
+    }
 
-        Futures.addCallback(loginFuture, new FutureCallback<MobileServiceUser>() {
-            @Override
-            public void onSuccess(MobileServiceUser user) {
-                startActivity(new Intent(context, MainActivity.class));
-            }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // When request completes
+        if (resultCode == RESULT_OK) {
+            // Check the request code matches the one we send in the login request
+            if (requestCode == LOGIN_REQUEST_CODE) {
+                MobileServiceActivityResult result = this.networkService.getClient().onActivityResult(data);
+                if (result.isLoggedIn()) {
+                    login.setToken(requestedProvider);
+                    startActivity(new Intent(this, MainActivity.class));
+                } else {
+                    // login failed, check the error message
 
-            @Override
-            public void onFailure(Throwable t) {
-                if (t instanceof MobileServiceException && t.getCause().getMessage().equals("User Canceled")) {
-                    return;
                 }
-
-                context.showMessage("Login Failure", "The following error occurred logging in: " + t.getMessage());
             }
-        });
+        } else {
+            this.showMessage("Login Failure", "Error logging in");
+        }
     }
 }
