@@ -15,8 +15,13 @@
 @class MSPush;
 @class MSSyncContext;
 @class MSLoginController;
+#if TARGET_OS_IPHONE
+@class MSLoginSafariViewController;
+#endif
 
 @protocol MSFilter;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma  mark * MSClient Public Interface
 
@@ -44,14 +49,6 @@
 /// For legacy usage, this can be set to 'login'
 @property (nonatomic, strong, nonnull) NSString *loginPrefix;
 
-/// The application key for the Microsoft Azure Mobile Service associated with
-/// the client if one was provided in the creation of the client and nil
-/// otherwise. If non-nil, the application key will be included in all requests
-/// made to the Microsoft Azure Mobile Service, allowing the client to perform
-/// all actions on the Microsoft Azure Mobile Service that require application-key
-/// level permissions.
-@property (nonatomic, copy, readonly, nullable) NSString *applicationKey;
-
 /// A collection of MSFilter instances to apply to use with the requests and
 /// responses sent and received by the client. The property is readonly and the
 /// array is not-mutable. To apply a filter to a client, use the withFilter:
@@ -65,7 +62,7 @@
 /// @name Registering and unregistering for push notifications
 
 /// The property to use for registering and unregistering for notifications via *MSPush*.
-@property (nonatomic, strong, readonly, nullable) MSPush *push;
+@property (nonatomic, strong, readonly, nonnull) MSPush *push;
 
 /// @}
 
@@ -77,6 +74,10 @@
 /// recommended for non-testing use.
 @property (nonatomic, strong, nullable) MSUser *currentUser;
 
+#if TARGET_OS_IPHONE
+/// An instance of |MSLoginSafariViewController|
+@property (nonatomic, strong, nonnull) MSLoginSafariViewController *loginSafariViewController;
+#endif
 /// @}
 
 #pragma  mark * Public Static Constructor Methods
@@ -113,12 +114,58 @@
 -(void)loginWithProvider:(nonnull NSString *)provider
               controller:(nonnull UIViewController *)controller
                 animated:(BOOL)animated
-              completion:(nullable MSClientLoginBlock)completion;
+              completion:(nullable MSClientLoginBlock)completion
+DEPRECATED_MSG_ATTRIBUTE("Deprecated. Use SFSafariViewController-based login method loginWithProvider:urlScheme:controller:animated:completion instead");
+
+/// Logs in the current end user with the given provider by presenting the
+/// MSLoginController with the given controller.
+-(void)loginWithProvider:(nonnull NSString *)provider
+              parameters:(nullable NSDictionary *)parameters
+              controller:(nonnull UIViewController *)controller
+                animated:(BOOL)animated
+              completion:(nullable MSClientLoginBlock)completion
+DEPRECATED_MSG_ATTRIBUTE("Deprecated. Use SFSafariViewController-based login method loginWithProvider:urlScheme:parameters:controller:animated:completion instead");
 
 /// Returns an MSLoginController that can be used to log in the current
 /// end user with the given provider.
 -(nonnull MSLoginController *)loginViewControllerWithProvider:(nonnull NSString *)provider
-                                 completion:(nullable MSClientLoginBlock)completion;
+                                                   completion:(nullable MSClientLoginBlock)completion
+DEPRECATED_MSG_ATTRIBUTE("Deprecated. Use SFSafariViewController-based login method loginWithProvider:urlScheme:controller:animated:completion instead");
+
+/// Thread-safe login method which can be called from any thread.
+/// Logs in the current end user with given provider by presenting the
+/// SFSafariViewController with the given controller. The URL scheme of
+/// the current application is required for completing login.
+/// Login completion will always be called from the main thread.
+/// As SFSafariViewController is only available on iOS 9 or later, on old platforms,
+/// fallback to browser login. Note that there can be various reasons causing browser
+/// fail to complete the login flow (on older platforms) and login flow won't work anymore.
+/// In this case, kill & restart the application should make it work again.
+-(void)loginWithProvider:(nonnull NSString *)provider
+               urlScheme:(nonnull NSString *)urlScheme
+              controller:(nonnull UIViewController *)controller
+                animated:(BOOL)animated
+              completion:(nullable MSClientLoginBlock)completion;
+
+/// Thread-safe login method which can be called from any thread.
+/// Logs in the current end user with given provider and given login parameters by presenting the
+/// SFSafariViewController with the given controller. The URL scheme of
+/// the current application is required for completing login.
+/// Login completion will always be called from the main thread.
+/// As SFSafariViewController is only available on iOS 9 or later, on old platforms,
+/// fallback to browser login. Note that there can be various reasons causing browser
+/// fail to complete the login flow (on older platforms) and login flow won't work anymore.
+/// In this case, kill & restart the application should make it work again.
+-(void)loginWithProvider:(nonnull NSString *)provider
+               urlScheme:(nonnull NSString *)urlScheme
+              parameters:(nullable NSDictionary *)parameters
+              controller:(nonnull UIViewController *)controller
+                animated:(BOOL)animated
+              completion:(nullable MSClientLoginBlock)completion;
+
+/// Thread-safe method which should only be called from the main thread.
+/// Resume login process with the specified URL.
+-(BOOL)resumeWithURL:(NSURL *)URL;
 #endif
 
 /// Logs in the current end user with the given provider and the given token for
@@ -129,6 +176,9 @@
 
 /// Logs out the current end user.
 -(void)logoutWithCompletion:(nullable MSClientLogoutBlock)completion;
+
+/// Refreshes access token with the identity provider for the logged in user.
+-(void)refreshUserWithCompletion:(nullable MSClientLoginBlock)completion;
 
 /// @}
 
@@ -184,3 +234,5 @@
 /// @}
 
 @end
+
+NS_ASSUME_NONNULL_END

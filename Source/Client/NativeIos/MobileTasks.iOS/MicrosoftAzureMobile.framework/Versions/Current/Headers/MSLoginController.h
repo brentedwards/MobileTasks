@@ -27,6 +27,11 @@
 							 provider:(nonnull NSString *)provider
 						   completion:(nullable MSClientLoginBlock)completion;
 
+-(nonnull instancetype)initWithClient:(nonnull MSClient *)client
+                             provider:(nonnull NSString *)provider
+                           parameters:(nullable NSDictionary *)parameters
+                           completion:(nullable MSClientLoginBlock)completion;
+
 ///@}
 
 

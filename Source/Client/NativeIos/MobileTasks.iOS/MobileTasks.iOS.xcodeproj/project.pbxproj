@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		083652101CDA912D0029FDF1 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836520E1CDA910A0029FDF1 /* TasksViewController.swift */; };
 		083652121CDA96730029FDF1 /* TaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083652111CDA96730029FDF1 /* TaskProtocol.swift */; };
+		08565F1D1FA79305007DEBA7 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08565F181FA79296007DEBA7 /* MicrosoftAzureMobile.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		085860A01CAC9C1300851731 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858609F1CAC9C1300851731 /* BaseViewController.swift */; };
 		08685FE11CB73F520063BEDD /* TaskItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08685FE01CB73F520063BEDD /* TaskItemCell.swift */; };
 		08BC7BEF1CB2EC18004E0690 /* MobleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC7BEE1CB2EC18004E0690 /* MobleTask.swift */; };
@@ -24,12 +25,12 @@
 		A2D9CBCE1943C2540017F096 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCD1943C2540017F096 /* Images.xcassets */; };
 		A2E767C6194594DC00869113 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E767C5194594DC00869113 /* TaskViewController.swift */; };
 		A31A89F71BF3FDFA00C7B656 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */; };
-		A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0836520E1CDA910A0029FDF1 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		083652111CDA96730029FDF1 /* TaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskProtocol.swift; sourceTree = "<group>"; };
+		08565F181FA79296007DEBA7 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		0858609F1CAC9C1300851731 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		08685FE01CB73F520063BEDD /* TaskItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskItemCell.swift; sourceTree = "<group>"; };
 		08BC7BEE1CB2EC18004E0690 /* MobleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobleTask.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		A2D9CBE81943D1340017F096 /* malmobileapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "malmobileapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E767C5194594DC00869113 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +56,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */,
+				08565F1D1FA79305007DEBA7 /* MicrosoftAzureMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08565F1C1FA79305007DEBA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		08BC7BED1CB2EBFF004E0690 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,8 +127,10 @@
 		A2D9CBB51943C2540017F096 = {
 			isa = PBXGroup;
 			children = (
+				08565F181FA79296007DEBA7 /* MicrosoftAzureMobile.framework */,
 				A2D9CBC01943C2540017F096 /* MobileTasks.iOS */,
 				A2D9CBBF1943C2540017F096 /* Products */,
+				08565F1C1FA79305007DEBA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,7 +175,6 @@
 		A2D9CBE51943CB520017F096 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */,
 			);
 			name = frameworks;
 			path = ..;
@@ -377,13 +385,14 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = malmobileapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = Magenic.MobileTasks.iOS;
 				PRODUCT_NAME = MobileTasks.iOS;
 				SWIFT_OBJC_BRIDGING_HEADER = "malmobileapp/malmobileapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -398,12 +407,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = malmobileapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = Magenic.MobileTasks.iOS;
 				PRODUCT_NAME = MobileTasks.iOS;
 				SWIFT_OBJC_BRIDGING_HEADER = "malmobileapp/malmobileapp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

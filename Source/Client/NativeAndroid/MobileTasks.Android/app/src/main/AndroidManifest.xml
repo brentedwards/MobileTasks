@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +27,15 @@
             android:name=".TaskDetailActivity"
             android:label="Detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.microsoft.windowsazure.mobileservices.authentication.RedirectUrlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="commagenicmobiletasks"
+                    android:host="easyauth.callback"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

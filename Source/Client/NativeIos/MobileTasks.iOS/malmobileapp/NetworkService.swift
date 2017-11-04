@@ -17,8 +17,9 @@ class NetworkService : NetworkProtocol {
         }
     }
     
+    
     func login(_ serviceProvider: String, controller: UIViewController, completion: @escaping ServiceResponse) {
-        NetworkService.mobileClient?.login(withProvider: serviceProvider,  controller: controller, animated: false, completion: { (user : MSUser?, error : Error?) -> Void in
+        NetworkService.mobileClient?.login(withProvider: serviceProvider, urlScheme: "commagenicmobiletasks", controller: controller, animated: false, completion: { (user : MSUser?, error : Error?) -> Void in
             if (user != nil) {
                 let currentToken : String = (user?.mobileServiceAuthenticationToken!)!
                 let currentUserId : String = (user?.userId)!
@@ -32,6 +33,7 @@ class NetworkService : NetworkProtocol {
             }
             completion((error as? NSError)!)
             return
+        
         })
     }
     

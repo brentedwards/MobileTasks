@@ -22,8 +22,8 @@ public class Login {
 
     private INetworkService networkSerice;
     private Activity currentContext;
-    protected String userId = "|UserId";
-    protected String token = "|Token";
+    private String userId = "|UserId";
+    private String token = "|Token";
 
 
     public Login(Activity context, INetworkService networkService) {
@@ -50,32 +50,20 @@ public class Login {
         return false;
     }
 
-    public ListenableFuture authenticate(MobileServiceAuthenticationProvider provider) {
-        ListenableFuture<MobileServiceUser> userFuture = networkSerice.getClient().login(provider);
-        final MobileServiceAuthenticationProvider requestedProvider = provider;
-        final SettableFuture result = SettableFuture.create();
-        Futures.addCallback(userFuture, new FutureCallback<MobileServiceUser>() {
-            @Override
-            public void onSuccess(MobileServiceUser user) {
-                String currentToken = networkSerice.getClient().getCurrentUser().getAuthenticationToken();
-                String currentUserId = networkSerice.getClient().getCurrentUser().getUserId();
+    public void authenticate(MobileServiceAuthenticationProvider provider, int loginRequestCode) {
 
-                SharedPreferences prefs = currentContext.getSharedPreferences(currentContext.getApplicationContext().getPackageName(), 0);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(NetworkConstants.LastUserProvider, requestedProvider.toString());
-                editor.putString(requestedProvider.toString() + userId, currentUserId);
-                editor.putString(requestedProvider.toString() + token, currentToken);
-                editor.commit();
+        networkSerice.getClient().login(provider, "commagenicmobiletasks", loginRequestCode);
+    }
 
-                result.set(null);
-            }
+    public void setToken(MobileServiceAuthenticationProvider requestedProvider) {
+        String currentToken = networkSerice.getClient().getCurrentUser().getAuthenticationToken();
+        String currentUserId = networkSerice.getClient().getCurrentUser().getUserId();
 
-            @Override
-            public void onFailure(Throwable t) {
-                result.setException(t);
-            }
-        });
-
-        return result;
+        SharedPreferences prefs = currentContext.getSharedPreferences(currentContext.getApplicationContext().getPackageName(), 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(NetworkConstants.LastUserProvider, requestedProvider.toString());
+        editor.putString(requestedProvider.toString() + userId, currentUserId);
+        editor.putString(requestedProvider.toString() + token, currentToken);
+        editor.commit();
     }
 }
