@@ -12,6 +12,7 @@ using Android.Widget;
 using MobileTasks.Droid.Services;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Threading.Tasks;
+using MobileTasks.Android;
 
 namespace MobileTasks.Droid.Activities
 {

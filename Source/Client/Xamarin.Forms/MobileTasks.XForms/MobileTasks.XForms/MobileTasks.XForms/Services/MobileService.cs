@@ -43,9 +43,8 @@ namespace MobileTasks.XForms.Services
 		public async Task LoginAsync(MobileServiceAuthenticationProvider provider)
 		{
 #if ANDROID
-			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider);
-#else
-#if IOS
+			await this.Client.LoginAsync(Xamarin.Forms.Forms.Context, provider, "commagenicmobiletasks");
+#elif IOS
 			// Launching from a modal window takes some finesse.
 			// http://stackoverflow.com/questions/24136464/access-viewcontroller-in-dependencyservice-to-present-mfmailcomposeviewcontrolle
 			var rootController = UIKit.UIApplication.SharedApplication.KeyWindow.RootViewController.PresentedViewController;
@@ -55,11 +54,10 @@ namespace MobileTasks.XForms.Services
 				rootController = navcontroller.VisibleViewController;
 			}
 
-			await this.Client.LoginAsync(rootController, provider);
+			await this.Client.LoginAsync(rootController, provider, "commagenicmobiletasks");
 #else
 			await this.Client.LoginAsync(provider);
-#endif // IOS
-#endif // ANDROID
+#endif
 
 			this.OnUserLoggedIn?.Invoke(this, new EventArgs());
 		}
@@ -94,5 +92,12 @@ namespace MobileTasks.XForms.Services
 		{
 			await this.Client.LogoutAsync();
 		}
+
+#if IOS
+		public bool ResumeWithUrl(Foundation.NSUrl url)
+		{
+			return this.Client.ResumeWithURL(url);
+		}
+#endif
 	}
 }

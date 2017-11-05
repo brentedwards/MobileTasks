@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using MobileTasks.XForms.Services;
 
 namespace MobileTasks.XForms.iOS
 {
@@ -26,6 +27,11 @@ namespace MobileTasks.XForms.iOS
 			LoadApplication (new MobileTasks.XForms.App ());
 
 			return base.FinishedLaunching (app, options);
+		}
+
+		public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+		{
+			return MobileService.Instance.ResumeWithUrl(url);
 		}
 	}
 }

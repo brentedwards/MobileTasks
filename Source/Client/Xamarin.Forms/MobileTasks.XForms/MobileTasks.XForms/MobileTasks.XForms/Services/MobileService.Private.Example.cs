@@ -6,7 +6,7 @@ namespace MobileTasks.XForms.Services
 	{
 		public MobileService()
 		{
-			this.Client = new MobileServiceClient("https://myapp.azurewebsites.net");
+			this.Client = new MobileServiceClient("https://mobiletasks.azurewebsites.net");
 		}
 	}
 }

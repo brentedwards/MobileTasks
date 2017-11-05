@@ -44,7 +44,7 @@ namespace MobileTasks.Droid.Services
 
 		public async Task LoginAsync(Context context, MobileServiceAuthenticationProvider provider)
 		{
-			await this.Client.LoginAsync(context, provider);
+			await this.Client.LoginAsync(context, provider, "commagenicmobiletasks");
 		}
 
 		public async Task<IEnumerable<MobileTask>> GetTasksAsync()

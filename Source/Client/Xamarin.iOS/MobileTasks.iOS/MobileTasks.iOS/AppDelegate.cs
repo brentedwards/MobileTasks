@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using MobileTasks.iOS.Services;
 using UIKit;
 
 namespace MobileTasks.iOS
@@ -23,6 +24,11 @@ namespace MobileTasks.iOS
 			// If not required for your application you can safely delete this method
 
 			return true;
+		}
+
+		public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+		{
+			return MobileService.Instance.ResumeWithUrl(url);
 		}
 
 		public override void OnResignActivation(UIApplication application)
