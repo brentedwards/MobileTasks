@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿using Foundation;
+using Microsoft.WindowsAzure.MobileServices;
 using MobileTasks.iOS.Models;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -35,7 +36,7 @@ namespace MobileTasks.iOS.Services
 
 		public async Task LoginAsync(UIViewController controller, MobileServiceAuthenticationProvider provider)
 		{
-			await this.Client.LoginAsync(controller, provider);
+			await this.Client.LoginAsync(controller, provider, "commagenicmobiletasks");
 		}
 
 		public async Task<IEnumerable<MobileTask>> GetTasksAsync()
@@ -67,6 +68,11 @@ namespace MobileTasks.iOS.Services
 		public async Task LogoutAsync()
 		{
 			await this.Client.LogoutAsync();
+		}
+
+		public bool ResumeWithUrl(NSUrl url)
+		{
+			return this.Client.ResumeWithURL(url);
 		}
 	}
 }

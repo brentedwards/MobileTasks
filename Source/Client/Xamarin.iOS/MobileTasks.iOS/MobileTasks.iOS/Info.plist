@@ -51,5 +51,16 @@
 		<string>Icon-76.png</string>
 		<string>Icon-76@2x.png</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>MobileTasks</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>commagenicmobiletasks</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
